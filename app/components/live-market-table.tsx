@@ -85,7 +85,7 @@ export default function LiveMarketTable({ variant }: Props) {
 
   if (variant === "home") {
     return <>
-      <div className="market-feed-status" role="status" aria-live="polite">{statusText}</div>
+      <div className={`market-feed-status ${status}`} role="status" aria-live="polite">{statusText}</div>
       <div className="market-table">
         <div className="market-row table-head"><span>Asset</span><span>Price</span><span>24h change</span><span/></div>
         {markets.map((market) => {
@@ -102,7 +102,7 @@ export default function LiveMarketTable({ variant }: Props) {
   }
 
   return <>
-    <div className="market-feed-status" role="status" aria-live="polite">{statusText}</div>
+    <div className={`market-feed-status ${status}`} role="status" aria-live="polite">{statusText}</div>
     <div className="table-scroll"><table className="trading-table">
       <thead><tr><th>Asset</th><th>Pair</th><th>Price</th><th>24h change</th></tr></thead>
       <tbody>{markets.map((market) => <tr key={market.symbol}>
