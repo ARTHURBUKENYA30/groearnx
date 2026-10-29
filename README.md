@@ -28,7 +28,7 @@ Implemented: responsive public landing page, account forms, protected dashboard,
 
 Preview only: portfolio totals, market prices, bot status, signal rows, and strategy cards are illustrative. The current UI does not place orders, execute bots, connect exchange APIs, or provide live market data. Do not enter exchange API keys into this preview.
 
-Not yet production trading software: live public market-data integration, persistent bot configuration, exchange adapters and encrypted secret storage, signal generation, order/position reconciliation, risk-limit enforcement, emergency-stop execution, and financial audit operations require dedicated implementation and testing.
+Not yet production trading software: live market quotes are fetched from a public Binance ticker endpoint for five pairs and refreshed periodically, with clearly labeled illustrative fallback values. The feed still needs runtime smoke testing. Persistent bot configuration, exchange adapters and encrypted secret storage, signal generation, order/position reconciliation, risk-limit enforcement, emergency-stop execution, and financial audit operations require dedicated implementation and testing.
 
 ## Production checklist
 
