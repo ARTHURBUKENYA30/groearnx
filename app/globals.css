@@ -57,3 +57,5 @@
 .trading-intro+.notice{margin-bottom:14px}
 @media(max-width:1000px){.strategy-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.trading-cards{grid-template-columns:1fr}}
 @media(max-width:680px){.trading-intro{display:block}.demo-pill{margin-top:12px}.strategy-grid{grid-template-columns:1fr}.trading-cards{grid-template-columns:1fr}.trading-table th,.trading-table td{padding:11px 8px}.risk-row{align-items:flex-start}.risk-row span{max-width:65%}.panel-title{align-items:flex-start}.demo-tag{margin-top:2px}.signal-score{gap:6px}}
+
+.forgot-link{align-self:flex-end;margin:10px 0 0;font-size:11px}.forgot-link a{color:var(--lime);font-weight:700}.forgot-link a:hover{text-decoration:underline}
