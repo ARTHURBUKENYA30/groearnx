@@ -24,7 +24,7 @@ Password reset and confirmation flows require the production URL and redirect al
 
 ## Current product status
 
-Implemented: responsive public landing page, account forms, protected dashboard, dashboard feature catalogue, password recovery UI/actions, and user-scoped Supabase portfolio/watchlist tables with RLS enabled.
+Implemented: responsive public landing page, account forms, protected dashboard, password recovery UI/actions, user-scoped watchlist add/remove, and portfolio quantity create/update/remove using existing Supabase tables and RLS policies.
 
 Preview only: portfolio totals, market prices, bot status, signal rows, and strategy cards are illustrative. The current UI does not place orders, execute bots, connect exchange APIs, or provide live market data. Do not enter exchange API keys into this preview.
 
