@@ -2,6 +2,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { Activity, ArrowDownRight, ArrowUpRight, Bot, CircleHelp, Clock3, Coins, Gauge, Link2, ListChecks, LockKeyhole, Play, RadioTower, ShieldAlert, ShieldCheck, Signal, Square, TrendingUp, WalletCards, Zap } from "lucide-react";
+import { addWatchlistAsset, removeWatchlistAsset, savePortfolioHolding, removePortfolioHolding } from "./actions";
 
 const markets = [
   ["Bitcoin", "BTC/USDT", "$67,482.10", "+2.41%", "positive"],
@@ -18,10 +19,17 @@ const strategies = [
   ["Momentum", "Trend continuation", "Looks for strength and continuation after a breakout."],
   ["Custom strategy", "Your rules", "A future workspace for configuring your own conditions."],
 ];
-export default async function Dashboard() {
+export default async function Dashboard({ searchParams }: { searchParams: Promise<{ message?: string; error?: string }> }) {
+  const params = await searchParams;
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) redirect("/login");
+  const [{ data: holdingsData }, { data: watchlistData }] = await Promise.all([
+    supabase.from("portfolio_holdings").select("asset_id,quantity,updated_at").eq("user_id", user.id).order("asset_id"),
+    supabase.from("watchlist_assets").select("asset_id,created_at").eq("user_id", user.id).order("asset_id"),
+  ]);
+  const holdings = holdingsData ?? [];
+  const watchlist = watchlistData ?? [];
   const name = user.user_metadata?.full_name || user.email?.split("@")[0] || "there";
   return <main className="dash">
     <aside className="sidebar">
@@ -51,6 +59,8 @@ export default async function Dashboard() {
           <span className="demo-pill"><span/> Preview mode · No exchange connected</span>
         </section>
         <div className="notice" role="status">Trading features are shown as a product preview. No orders are sent, no exchange keys are stored here, and all figures below are illustrative until live data and a trading engine are configured.</div>
+        {params.error && <div className="notice error" role="alert">{params.error}</div>}
+        {params.message && <div className="notice" role="status">{params.message}</div>}
         <div className="stats">
           <article className="stat"><span>Demo portfolio value</span><WalletCards/><h2>$12,773.01</h2><small className="positive">↗ +1.82% <i>sample data</i></small></article>
           <article className="stat"><span>Active bots</span><Bot/><h2>0 <small>running</small></h2><small className="muted">Connect an execution engine</small></article>
@@ -90,6 +100,27 @@ export default async function Dashboard() {
           <div className="panel-title"><div><h2><Activity size={17}/> Open positions & orders</h2><p>Live position, entry price, unrealized P/L and order status will appear here.</p></div><span className="demo-tag">NO LIVE ORDERS</span></div>
           <div className="empty-state"><div className="mini-icon"><WalletCards/></div><b>No connected positions</b><p>Connect a supported exchange and configure a verified execution service to populate this table.</p></div>
         </section>
+        <div className="dash-grid user-data-grid">
+          <section className="panel" id="watchlist">
+            <div className="panel-title"><div><h2><TrendingUp size={16}/> Your watchlist</h2><p>Saved to your signed-in account</p></div><span className="demo-tag">{watchlist.length}/20 ASSETS</span></div>
+            <form className="data-form" action={addWatchlistAsset}>
+              <label htmlFor="watchlist-asset">Asset or pair</label>
+              <div className="data-form-row"><input id="watchlist-asset" name="asset_id" maxLength={40} required placeholder="e.g. BTC/USDT"/><button className="button small" type="submit">Add asset</button></div>
+            </form>
+            {watchlist.length === 0 ? <div className="empty-state compact"><b>Your watchlist is empty</b><p>Add symbols such as BTC, ETH, or BTC/USDT to keep them here.</p></div> :
+              <div className="asset-management-list">{watchlist.map((item) => <div className="asset-management-row" key={item.asset_id}><span><b>{item.asset_id}</b><small>Saved asset</small></span><form action={removeWatchlistAsset}><input type="hidden" name="asset_id" value={item.asset_id}/><button className="remove-button" type="submit" aria-label={`Remove ${item.asset_id} from watchlist`}>Remove</button></form></div>)}</div>}
+          </section>
+          <section className="panel" id="portfolio">
+            <div className="panel-title"><div><h2><WalletCards size={16}/> Your portfolio holdings</h2><p>Asset quantities saved privately to your account</p></div><span className="demo-tag">{holdings.length} HOLDINGS</span></div>
+            <form className="data-form" action={savePortfolioHolding}>
+              <label htmlFor="holding-asset">Asset symbol</label>
+              <div className="data-form-row"><input id="holding-asset" name="asset_id" maxLength={40} required placeholder="e.g. BTC"/><input aria-label="Quantity" name="quantity" type="number" min="0.00000001" max="1000000000000" step="any" required placeholder="Quantity"/><button className="button small" type="submit">Save</button></div>
+              <p className="hint">Saving an existing symbol updates its quantity. Values and profit/loss are not calculated without verified prices.</p>
+            </form>
+            {holdings.length === 0 ? <div className="empty-state compact"><b>No holdings saved</b><p>Add a symbol and quantity to create your personal portfolio list.</p></div> :
+              <div className="asset-management-list">{holdings.map((item) => <div className="asset-management-row" key={item.asset_id}><span><b>{item.asset_id}</b><small>Quantity: {String(item.quantity)}</small></span><form action={removePortfolioHolding}><input type="hidden" name="asset_id" value={item.asset_id}/><button className="remove-button" type="submit" aria-label={`Remove ${item.asset_id} holding`}>Remove</button></form></div>)}</div>}
+          </section>
+        </div>
         <div className="dash-grid">
           <section className="panel" id="exchanges">
             <div className="panel-title"><div><h2><Link2 size={16}/> Exchange connections</h2><p>Connect an exchange using restricted API credentials.</p></div></div>
