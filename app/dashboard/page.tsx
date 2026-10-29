@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { Activity, ArrowDownRight, ArrowUpRight, Bot, CircleHelp, Clock3, Coins, Gauge, Link2, ListChecks, LockKeyhole, Play, RadioTower, ShieldAlert, ShieldCheck, Signal, Square, TrendingUp, WalletCards, Zap } from "lucide-react";
 import { addWatchlistAsset, removeWatchlistAsset, savePortfolioHolding, removePortfolioHolding } from "./actions";
+import LiveMarketTable from "@/app/components/live-market-table";
 
 const markets = [
   ["Bitcoin", "BTC/USDT", "$67,482.10", "+2.41%", "positive"],
@@ -138,8 +139,8 @@ export default async function Dashboard({ searchParams }: { searchParams: Promis
           <div className="strategy-grid">{strategies.map(([title,kind,desc])=><article className="strategy-card" key={title}><span className="strategy-symbol">◇</span><div><b>{title}</b><small>{kind}</small><p>{desc}</p></div></article>)}</div>
         </section>
         <section className="panel wide-panel" id="markets">
-          <div className="panel-title"><div><h2><TrendingUp size={17}/> Market watch</h2><p>Illustrative high-liquidity pairs. Live exchange data is not connected.</p></div><span className="demo-tag">SAMPLE PRICES</span></div>
-          <div className="table-scroll"><table className="trading-table"><thead><tr><th>Asset</th><th>Pair</th><th>Price</th><th>24h change</th></tr></thead><tbody>{markets.map(([name,pair,price,change,tone])=><tr key={pair}><td>{name}</td><td>{pair}</td><td>{price}</td><td className={tone}>{change}</td></tr>)}</tbody></table></div>
+          <div className="panel-title"><div><h2><TrendingUp size={17}/> Market watch</h2><p>Public quotes refresh about once per minute.</p></div></div>
+          <LiveMarketTable variant="dashboard"/>
         </section>
         <div className="setup-footer"><CircleHelp size={15}/> This release includes the trading dashboard surfaces, not a live trading service. No real trades, deposits, withdrawals or custody are enabled.</div>
         <footer>© {new Date().getFullYear()} GROEARNX · Demo figures only · Trading involves risk · Not financial advice</footer>
