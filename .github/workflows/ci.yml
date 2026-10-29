@@ -35,3 +35,12 @@ jobs:
           NEXT_PUBLIC_SUPABASE_ANON_KEY: ci-placeholder-publishable-key
           NEXT_PUBLIC_SITE_URL: http://localhost:3000
         run: npm run build
+      - name: Package source archive
+        run: zip -r GROEARNX.zip . -x "GROEARNX.zip" ".git/*" "node_modules/*" ".next/*" "a.zip" ".env" ".env.local" ".env.production" ".env.development"
+      - name: Upload source archive
+        uses: actions/upload-artifact@v4
+        with:
+          name: GROEARNX-source
+          path: GROEARNX.zip
+          if-no-files-found: error
+          retention-days: 14
