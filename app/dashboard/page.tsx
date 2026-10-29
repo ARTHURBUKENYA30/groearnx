@@ -5,13 +5,6 @@ import { Activity, ArrowDownRight, ArrowUpRight, Bot, CircleHelp, Clock3, Coins,
 import { addWatchlistAsset, removeWatchlistAsset, savePortfolioHolding, removePortfolioHolding } from "./actions";
 import LiveMarketTable from "@/app/components/live-market-table";
 
-const markets = [
-  ["Bitcoin", "BTC/USDT", "$67,482.10", "+2.41%", "positive"],
-  ["Ethereum", "ETH/USDT", "$3,521.84", "+1.08%", "positive"],
-  ["Solana", "SOL/USDT", "$174.26", "-0.63%", "negative"],
-  ["BNB", "BNB/USDT", "$598.20", "+0.86%", "positive"],
-  ["XRP", "XRP/USDT", "$0.6241", "+0.42%", "positive"],
-];
 const strategies = [
   ["Grid trading", "Range-bound markets", "Places staggered orders inside a defined price range."],
   ["DCA", "Staged entries", "Splits entries into smaller purchases at configured intervals."],
