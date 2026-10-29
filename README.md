@@ -15,3 +15,9 @@ Signup, password login, email callback, session refresh, protected dashboard rou
 
 ## Production checklist
 Configure environment variables and redirect URLs, SMTP, recovery and rate limits; add database tables and Row Level Security before storing user data; run production build and end-to-end tests. Real financial operations require audited backend services, ledgering, authorization, reconciliation, and security review.
+
+## Deployment notes
+- Vercel must use the **Next.js** framework with Output Directory set to **Automatic** (leave it blank; do not set `public`).
+- Set `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY` (a Supabase publishable key is accepted), and `NEXT_PUBLIC_SITE_URL` in Vercel for production, preview, and development.
+- In Supabase Authentication → URL Configuration, set the Site URL to `https://groearnx-bukenya-arthurs-projects.vercel.app` and add `https://groearnx-bukenya-arthurs-projects.vercel.app/auth/callback` to Redirect URLs. Add `http://localhost:3000/auth/callback` for local development.
+- In Supabase Auth settings, enable leaked-password protection and configure production SMTP before relying on email confirmations.
