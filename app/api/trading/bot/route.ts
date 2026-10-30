@@ -12,12 +12,12 @@ export async function GET() {
   const id = await userId();
   if (!id) return NextResponse.json({ error: "Sign in required." }, { status: 401 });
   const db = adminDb();
-  const [{ data: settings }, { data: events }, { data: orders }] = await Promise.all([
+  const [{ data: settings }, { data: events }, { data: orders }, { data: trades }, { data: position }] = await Promise.all([
     db.from("bot_settings").select("enabled,mode,symbol,quote_order_qty,max_daily_loss_usdt,stop_loss_pct,take_profit_pct,updated_at").eq("user_id", id).maybeSingle(),
     db.from("bot_events").select("id,level,event,details,created_at").eq("user_id", id).order("created_at", { ascending: false }).limit(20),
-    db.from("bot_orders").select("id,symbol,side,quantity,quote_quantity,status,mode,created_at").eq("user_id", id).order("created_at", { ascending: false }).limit(20),
+    db.from("bot_orders").select("id,symbol,side,quantity,quote_quantity,status,mode,created_at").eq("user_id", id).order("created_at", { ascending: false }).limit(20),\n    db.from("bot_trades").select("id,symbol,side,quantity,price,quote_amount,realized_pnl,strategy_signal,created_at").eq("user_id", id).order("created_at", { ascending: false }).limit(50),\n    db.from("bot_positions").select("symbol,quantity,entry_price,opened_at").eq("user_id", id).maybeSingle(),
   ]);
-  return NextResponse.json({ settings, events: events ?? [], orders: orders ?? [] });
+  const realizedPnl=(trades??[]).reduce((n,t)=>n+Number(t.realized_pnl||0),0);\n  return NextResponse.json({ settings, events: events ?? [], orders: orders ?? [], trades: trades ?? [], position, realizedPnl });
 }
 export async function PUT(request: Request) {
   const id = await userId();
@@ -47,9 +47,15 @@ export async function POST() {
   const id = await userId();
   if (!id) return NextResponse.json({ error: "Sign in required." }, { status: 401 });
   const db = adminDb();
-  await db.from("bot_settings").upsert({ user_id: id, enabled: false, mode: "testnet", updated_at: new Date().toISOString() });
-  await db.from("bot_events").insert({ user_id: id, level: "warning", event: "Bot start blocked: automatic execution worker is not installed; live trading is disabled" });
-  return NextResponse.json({ error: "The bot is safely stopped. Background execution must be installed and verified before it can start." }, { status: 409 });
+  if (!process.env.GROEARNX_WORKER_SECRET) return NextResponse.json({error:"Worker secret is not configured."},{status:503});
+  const {data:cred}=await db.from("exchange_credentials").select("user_id,environment").eq("user_id",id).maybeSingle();
+  if(!cred||cred.environment!=="testnet")return NextResponse.json({error:"Connect a verified Binance Spot Testnet account first."},{status:400});
+  const {data:settings}=await db.from("bot_settings").select("symbol,quote_order_qty,max_daily_loss_usdt,stop_loss_pct,take_profit_pct").eq("user_id",id).maybeSingle();
+  if(!settings)return NextResponse.json({error:"Save bot risk settings first."},{status:400});
+  const {error}=await db.from("bot_settings").upsert({user_id:id,enabled:true,mode:"testnet",...settings,paused_reason:null,updated_at:new Date().toISOString()});
+  if(error)return NextResponse.json({error:"Could not start testnet bot."},{status:500});
+  await db.from("bot_events").insert({user_id:id,level:"warning",event:"Testnet bot started. EMA 9/21 strategy active; test funds only."});
+  return NextResponse.json({enabled:true,mode:"testnet",message:"Testnet bot started. The scheduled worker checks signals once per minute."});
 }
 export async function DELETE() {
   const id = await userId();
