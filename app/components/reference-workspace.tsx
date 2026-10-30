@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import TradingControlPanel from "@/app/components/trading-control-panel";
 import { useState } from "react";
 import {
   Activity, ArrowDownToLine, ArrowLeft, ArrowRight, ArrowUpRight, Bell,
