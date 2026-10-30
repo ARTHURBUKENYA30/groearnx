@@ -1,14 +1,10 @@
-"use client";
-
 import Link from "next/link";
-import { useState } from "react";
 import { loginAction } from "@/app/auth/actions";
-import { ShieldCheck, LockKeyhole, Mail, Eye, EyeOff } from "lucide-react";
+import { ShieldCheck, Mail } from "lucide-react";
+import PasswordField from "@/app/components/password-field";
 
-export default function Login({ searchParams }: { searchParams: Promise<{ error?: string; message?: string; next?: string }> }) {
-  const [visible, setVisible] = useState(false);
-  const [params, setParams] = useState<{error?:string;message?:string;next?:string}>({});
-  // searchParams are supplied by Next.js; resolve them through the server page wrapper.
+export default async function Login({ searchParams }: { searchParams: Promise<{ error?: string; message?: string; next?: string }> }) {
+  const params = await searchParams;
   const next = params.next?.startsWith("/") && !params.next.startsWith("//") ? params.next : "/dashboard";
   return <main className="trx-auth trx-login-exact">
     <section className="trx-auth-wrap">
@@ -20,7 +16,7 @@ export default function Login({ searchParams }: { searchParams: Promise<{ error?
         <form action={loginAction} className="trx-auth-form">
           <input type="hidden" name="next" value={next}/>
           <label htmlFor="email">EMAIL</label><div className="trx-input-wrap"><Mail/><input id="email" name="email" type="email" autoComplete="email" required placeholder="you@email.com"/></div>
-          <label htmlFor="password">PASSWORD</label><div className="trx-input-wrap"><LockKeyhole/><input id="password" name="password" type={visible ? "text" : "password"} autoComplete="current-password" required placeholder="••••••••"/><button className="trx-password-toggle" type="button" aria-label={visible ? "Hide password" : "Show password"} onClick={()=>setVisible(!visible)}>{visible ? <EyeOff/> : <Eye/>}</button></div>
+          <label htmlFor="password">PASSWORD</label><PasswordField/>
           <button className="trx-button trx-submit" type="submit">Sign In</button>
         </form>
         <p className="trx-auth-switch">New to GROEANRX? <Link href="/signup">Create account</Link></p>
