@@ -8,7 +8,7 @@ export default async function Login({ searchParams }: { searchParams: Promise<{ 
   const next = params.next?.startsWith("/") && !params.next.startsWith("//") ? params.next : "/dashboard";
   return <main className="trx-auth trx-login-exact">
     <section className="trx-auth-wrap">
-      <Link href="/" className="trx-brand trx-auth-brand"><img src="https://trxcryptobot.com/images/favicon.png" alt="" /><span>GROEANRX</span></Link>
+      <Link href="/" className="trx-brand trx-auth-brand"><span className="trx-auth-logo-mark" aria-hidden="true">G</span><span>GROEANRX</span></Link>
       <div className="trx-auth-card">
         <h1>Welcome back</h1><p className="trx-auth-sub">Sign in to your trading dashboard</p>
         {params.error && <p className="trx-auth-error" role="alert">{params.error}</p>}
