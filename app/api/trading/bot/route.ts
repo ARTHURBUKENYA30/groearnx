@@ -51,8 +51,8 @@ export async function POST() {
   if (!id) return NextResponse.json({ error: "Sign in required." }, { status: 401 });
   const db = adminDb();
   if (!process.env.GROEARNX_WORKER_SECRET) return NextResponse.json({error:"Worker secret is not configured."},{status:503});
-  const {data:cred}=await db.from("exchange_credentials").select("user_id,environment").eq("user_id",id).maybeSingle();
-  if(!cred||cred.environment!=="testnet")return NextResponse.json({error:"Connect a verified Binance Spot Testnet account first."},{status:400});
+  const {data:cred}=await db.from("exchange_credentials").select("user_id,environment,last_verified_at").eq("user_id",id).maybeSingle();
+  if(!cred||cred.environment!=="testnet"||!cred.last_verified_at)return NextResponse.json({error:"Connect and verify a Binance Spot Testnet account first."},{status:400});
   const {data:settings}=await db.from("bot_settings").select("symbol,quote_order_qty,max_daily_loss_usdt,stop_loss_pct,take_profit_pct").eq("user_id",id).maybeSingle();
   if(!settings)return NextResponse.json({error:"Save bot risk settings first."},{status:400});
   const {error}=await db.from("bot_settings").upsert({user_id:id,enabled:true,mode:"testnet",...settings,paused_reason:null,updated_at:new Date().toISOString()});
