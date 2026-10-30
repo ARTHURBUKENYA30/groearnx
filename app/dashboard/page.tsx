@@ -51,6 +51,9 @@ export default async function Dashboard({ searchParams }: { searchParams: Promis
         <span className="crumb">Trading workspace / <b>Overview</b></span>
         <span className="account"><span className="avatar">{String(name).charAt(0).toUpperCase()}</span>{name}</span>
       </header>
+      <nav className="mobile-section-nav" aria-label="Dashboard sections">
+        <a href="#overview">Overview</a><a href="#bots">Bots</a><a href="#signals">Signals</a><a href="#positions">Positions</a><a href="#watchlist">Watchlist</a><a href="#portfolio">Portfolio</a><a href="#markets">Markets</a><a href="#exchanges">Exchanges</a><a href="#strategies">Strategies</a><a href="#risk">Risk</a><a href="#activity">Activity</a>
+      </nav>
       <div className="dash-content">
         <section id="overview" className="trading-intro">
           <div><div className="eyebrow">YOUR TRADING WORKSPACE</div><h1>Welcome back, {name}.</h1><p className="muted">Monitor the market, review strategies and manage your trading setup.</p></div>
