@@ -8,9 +8,9 @@ export default async function Login({ searchParams }: { searchParams: Promise<{ 
   return <main className="trx-auth">
     <div className="trx-auth-glow"/>
     <section className="trx-auth-wrap">
-      <Link href="/" className="trx-brand trx-auth-brand"><span className="trx-mark">G</span><span>GROEARN<span className="trx-gold">X</span></span></Link>
+      <Link href="/" className="trx-brand trx-auth-brand"><span className="trx-mark">T</span><span>TrxCryptobot</span></Link>
       <div className="trx-auth-card">
-        <h1>Welcome back</h1><p className="trx-auth-sub">Sign in to your GROEARNX workspace.</p>
+        <h1>Welcome back</h1><p className="trx-auth-sub">Sign in to your trading dashboard.</p>
         {params.error && <p className="trx-auth-error" role="alert">{params.error}</p>}
         {params.message && <p className="trx-auth-notice" role="status">{params.message}</p>}
         <form action={loginAction} className="trx-auth-form">
@@ -19,10 +19,10 @@ export default async function Login({ searchParams }: { searchParams: Promise<{ 
           <label htmlFor="password">PASSWORD</label><div className="trx-input-wrap"><LockKeyhole/><input id="password" name="password" type="password" autoComplete="current-password" required placeholder="Your password"/></div>
           <button className="trx-button trx-submit" type="submit">Sign in <ArrowRight size={16}/></button>
         </form>
-        <p className="trx-auth-switch">New to GROEARNX? <Link href="/signup">Create an account</Link></p>
+        <p className="trx-auth-switch">New to TrxCryptobot? <Link href="/signup">Create an account</Link></p>
       </div>
       <p className="trx-auth-foot"><ShieldCheck size={14}/> Secure account access · Exchange API keys are managed separately</p>
-      <Link href="/" className="trx-auth-back">Back to GROEARNX</Link>
+      <Link href="/" className="trx-auth-back">Back to TrxCryptobot</Link>
     </section>
   </main>;
 }
