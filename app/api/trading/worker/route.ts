@@ -67,6 +67,14 @@ export async function GET(req:Request){
     if(qty<=0)throw new Error("Position quantity is below the exchange minimum.");
     params.quantity=qty.toFixed(Math.min(12,Math.max(0,(String(step).split(".")[1]||"").length)));
    }
+   // Re-read the authoritative enabled flag immediately before submitting to Binance.
+   // This lets an emergency stop cancel a signal computed earlier in this worker pass.
+   const {data:latestSettings,error:latestSettingsError}=await db.from("bot_settings").select("enabled,mode").eq("user_id",s.user_id).maybeSingle();
+   if(latestSettingsError)throw new Error("Could not confirm bot state before order submission.");
+   if(!latestSettings||latestSettings.enabled!==true||latestSettings.mode!=="testnet"){
+    results.push({user_id:s.user_id,status:"stopped_before_order"});
+    continue;
+   }
    const order=await binanceSigned<Order>(key,secret,"/api/v3/order",params,"POST");
    const qty=Number(order.executedQty),quote=Number(order.cummulativeQuoteQty),fill=avgFill(order);
    if(qty<=0||fill<=0)throw new Error("Exchange returned an order with no completed fills.");
