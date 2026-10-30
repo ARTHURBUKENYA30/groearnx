@@ -23,7 +23,7 @@ export default async function Signup({ searchParams }: { searchParams: Promise<{
         <p className="trx-auth-switch">Already a trader? <Link href="/login">Sign in</Link></p>
       </div>
       <p className="trx-auth-foot"><ShieldCheck size={14}/> Secure account access · Exchange API keys are managed separately</p>
-      <Link href="/" className="trx-auth-back"><ArrowLeft size={14}/> Back to GROEARNX</Link>
+      <Link href="/" className="trx-auth-back"><ArrowLeft size={14}/> Back to GROEANRX</Link>
     </section>
   </main>;
 }
