@@ -29,13 +29,17 @@ export default async function Dashboard({ searchParams }: { searchParams: Promis
     <aside className="sidebar">
       <Link href="/" className="brand"><span className="mark">G</span> GROEARN<span className="lime">X</span></Link>
       <p className="side-label">TRADING WORKSPACE</p>
-      <a className="side-item active" href="#overview">▦ &nbsp; Overview</a>
-      <a className="side-item" href="#bots">◈ &nbsp; Trading bots</a>
-      <a className="side-item" href="#signals">⌁ &nbsp; Signals</a>
-      <a className="side-item" href="#positions">▤ &nbsp; Positions & orders</a>
-      <a className="side-item" href="#exchanges">↔ &nbsp; Exchanges</a>
-      <a className="side-item" href="#strategies">◇ &nbsp; Strategies</a>
-      <a className="side-item" href="#activity">◷ &nbsp; Activity log</a>
+      <a className="side-item active" href="#overview"><Gauge size={16}/> Overview</a>
+      <a className="side-item" href="#bots"><Bot size={16}/> Trading bots</a>
+      <a className="side-item" href="#signals"><Signal size={16}/> Signals</a>
+      <a className="side-item" href="#positions"><Activity size={16}/> Positions &amp; orders</a>
+      <a className="side-item" href="#watchlist"><TrendingUp size={16}/> Watchlist</a>
+      <a className="side-item" href="#portfolio"><WalletCards size={16}/> Portfolio</a>
+      <a className="side-item" href="#markets"><ArrowUpRight size={16}/> Market watch</a>
+      <a className="side-item" href="#exchanges"><Link2 size={16}/> Exchanges</a>
+      <a className="side-item" href="#strategies"><Zap size={16}/> Strategies</a>
+      <a className="side-item" href="#risk"><ShieldAlert size={16}/> Risk controls</a>
+      <a className="side-item" href="#activity"><Clock3 size={16}/> Activity log</a>
       <div className="side-bottom">
         <p className="security-box"><ShieldCheck size={15}/> Account protected<br/><small>Private dashboard session.</small></p>
         <form action="/auth/logout" method="post"><button className="side-item" type="submit">↗ &nbsp; Sign out</button></form>
