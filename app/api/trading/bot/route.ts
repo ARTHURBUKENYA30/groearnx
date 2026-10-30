@@ -15,9 +15,12 @@ export async function GET() {
   const [{ data: settings }, { data: events }, { data: orders }, { data: trades }, { data: position }] = await Promise.all([
     db.from("bot_settings").select("enabled,mode,symbol,quote_order_qty,max_daily_loss_usdt,stop_loss_pct,take_profit_pct,updated_at").eq("user_id", id).maybeSingle(),
     db.from("bot_events").select("id,level,event,details,created_at").eq("user_id", id).order("created_at", { ascending: false }).limit(20),
-    db.from("bot_orders").select("id,symbol,side,quantity,quote_quantity,status,mode,created_at").eq("user_id", id).order("created_at", { ascending: false }).limit(20),\n    db.from("bot_trades").select("id,symbol,side,quantity,price,quote_amount,realized_pnl,strategy_signal,created_at").eq("user_id", id).order("created_at", { ascending: false }).limit(50),\n    db.from("bot_positions").select("symbol,quantity,entry_price,opened_at").eq("user_id", id).maybeSingle(),
+    db.from("bot_orders").select("id,symbol,side,quantity,quote_quantity,status,mode,created_at").eq("user_id", id).order("created_at", { ascending: false }).limit(20),
+    db.from("bot_trades").select("id,symbol,side,quantity,price,quote_amount,realized_pnl,strategy_signal,created_at").eq("user_id", id).order("created_at", { ascending: false }).limit(50),
+    db.from("bot_positions").select("symbol,quantity,entry_price,opened_at").eq("user_id", id).maybeSingle(),
   ]);
-  const realizedPnl=(trades??[]).reduce((n,t)=>n+Number(t.realized_pnl||0),0);\n  return NextResponse.json({ settings, events: events ?? [], orders: orders ?? [], trades: trades ?? [], position, realizedPnl });
+  const realizedPnl=(trades??[]).reduce((n,t)=>n+Number(t.realized_pnl||0),0);
+  return NextResponse.json({ settings, events: events ?? [], orders: orders ?? [], trades: trades ?? [], position, realizedPnl });
 }
 export async function PUT(request: Request) {
   const id = await userId();
