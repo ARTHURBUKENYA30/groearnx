@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { signupAction } from "@/app/auth/actions";
-import { ShieldCheck, UserRound, Mail, LockKeyhole, ArrowLeft, Eye } from "lucide-react";
+import { ShieldCheck, UserRound, Mail, LockKeyhole, ArrowLeft, ArrowRight } from "lucide-react";
 
 export default async function Signup({ searchParams }: { searchParams: Promise<{ error?: string; ref?: string }> }) {
   const params = await searchParams;
