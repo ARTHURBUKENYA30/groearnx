@@ -4,6 +4,7 @@ import { createClient } from "@/lib/supabase/server";
 import { Activity, ArrowDownRight, ArrowUpRight, Bot, CircleHelp, Clock3, Coins, Gauge, Link2, ListChecks, LockKeyhole, Play, RadioTower, ShieldAlert, ShieldCheck, Signal, Square, TrendingUp, WalletCards, Zap } from "lucide-react";
 import { addWatchlistAsset, removeWatchlistAsset, savePortfolioHolding, removePortfolioHolding } from "./actions";
 import LiveMarketTable from "@/app/components/live-market-table";
+import TradingControlPanel from "@/app/components/trading-control-panel";
 
 const strategies = [
   ["Grid trading", "Range-bound markets", "Places staggered orders inside a defined price range."],
@@ -62,6 +63,7 @@ export default async function Dashboard({ searchParams }: { searchParams: Promis
         <div className="notice" role="status">Trading features are shown as a product preview. No orders are sent, no exchange keys are stored here, and all figures below are illustrative until live data and a trading engine are configured.</div>
         {params.error && <div className="notice error" role="alert">{params.error}</div>}
         {params.message && <div className="notice" role="status">{params.message}</div>}
+        <TradingControlPanel />
         <div className="stats">
           <article className="stat"><span>Demo portfolio value</span><WalletCards/><h2>$12,773.01</h2><small className="positive">↗ +1.82% <i>sample data</i></small></article>
           <article className="stat"><span>Active bots</span><Bot/><h2>0 <small>running</small></h2><small className="muted">Connect an execution engine</small></article>
