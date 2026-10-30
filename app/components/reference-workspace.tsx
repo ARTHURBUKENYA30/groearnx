@@ -42,7 +42,7 @@ const bots = [
   ["TRX Sniper Bot", "FUTURES · 15 MIN · AUTO", "Trend and breakout monitoring"],
   ["TRX SmartFlow", "SPOT + FUTURES · MULTI SIGNAL", "Multi-signal strategy with risk controls"],
 ];
-function Brand() { return <span className="rw-brand"><span className="rw-mark">T</span><b>TrxCryptobot</b></span>; }
+function Brand() { return <span className="rw-brand"><span className="rw-mark">G</span><b>GROEANRX</b></span>; }
 function Exchange() { return <div className="rw-exchange"><button className="selected">◈ Ava AI</button><button>● Live</button><button aria-label="More settings"><Settings size={13}/></button></div>; }
 function MarketRows({ query = "" }: { query?: string }) {
   const filtered = markets.filter((m) => m[0].toLowerCase().includes(query.toLowerCase()));
@@ -124,10 +124,10 @@ export default function ReferenceWorkspace({ activeTab, userName }: { activeTab:
         <section className="rw-profile-card"><span className="rw-profile-avatar">{userName.slice(0,1).toUpperCase() || "B"}</span><div><b>{userName}</b><small>♙ Trader · Not active</small></div><ChevronRight size={15}/></section>
         <section className="rw-profile-section"><b>☎ Phone Number</b><div className="rw-profile-input">+1 555 000 1234 <button disabled>Save</button></div></section>
         <section className="rw-profile-section"><b>♧ YOUR SPONSOR / UPLINE</b><p>COACH HASSAN</p></section>
-        <section className="rw-profile-section"><b>♙ Referral Code</b><div className="rw-profile-input">3RCPFCB <button><Copy size={13}/></button></div><small>YOUR REFERRAL LINK</small><div className="rw-profile-input">https://trxcryptobot.com/auth?ref=3RCPFCB <button><Copy size={13}/></button></div></section>
+        <section className="rw-profile-section"><b>♙ Referral Code</b><div className="rw-profile-input">3RCPFCB <button><Copy size={13}/></button></div><small>YOUR REFERRAL LINK</small><div className="rw-profile-input">https://groearnx.vercel.app/signup?ref=3RCPFCB <button><Copy size={13}/></button></div></section>
         <section className="rw-profile-section"><b>♧ Referral Wallet</b><h2>$0.00</h2><small>Earned from your 3-level referral tree. USD withdrawal from $10.</small></section>
         <Exchange/>
-        <section className="rw-menu-list">{[["Download App","Install TrxCryptobot on your phone"],["API Binding","Connect your exchange API key"],["My Referrals","View your invited people & levels"],["Change Password","Update your account password"],["Security","Manage account security"],["Support","Get help and feedback"],["About Us","About TrxCryptobot trading tools"]].map(([a,b])=><div key={a}><span><b>{a}</b><small>{b}</small></span><ChevronRight size={14}/></div>)}</section>
+        <section className="rw-menu-list">{[["Download App","Install GROEANRX on your phone"],["API Binding","Connect your exchange API key"],["My Referrals","View your invited people & levels"],["Change Password","Update your account password"],["Security","Manage account security"],["Support","Get help and feedback"],["About Us","About GROEANRX trading tools"]].map(([a,b])=><div key={a}><span><b>{a}</b><small>{b}</small></span><ChevronRight size={14}/></div>)}</section>
         <form action="/auth/logout" method="post"><button className="rw-signout" type="submit">↗ Sign Out</button></form>
       </>}
       {notice && <div className="rw-toast" role="status">{notice}<button onClick={()=>setNotice("")}>×</button></div>}
