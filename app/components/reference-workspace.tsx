@@ -127,7 +127,7 @@ export default function ReferenceWorkspace({ activeTab, userName }: { activeTab:
         <section className="rw-profile-section"><b>♧ Referral Wallet</b><h2>$0.00</h2><small>Earned from your 3-level referral tree. USD withdrawal from $10.</small></section>
         <Exchange/>
         <section className="rw-menu-list">{[["Download App","Install TrxCryptobot on your phone"],["API Binding","Connect your exchange API key"],["My Referrals","View your invited people & levels"],["Change Password","Update your account password"],["Security","Manage account security"],["Support","Get help and feedback"],["About Us","About TrxCryptobot trading tools"]].map(([a,b])=><div key={a}><span><b>{a}</b><small>{b}</small></span><ChevronRight size={14}/></div>)}</section>
-        <Link className="rw-signout" href="/auth/logout">↗ Sign Out</Link>
+        <form action="/auth/logout" method="post"><button className="rw-signout" type="submit">↗ Sign Out</button></form>
       </>}
       {notice && <div className="rw-toast" role="status">{notice}<button onClick={()=>setNotice("")}>×</button></div>}
     </div>
