@@ -1,1 +1,59 @@
-import Link from "next/link";import {ArrowUpRight,ShieldCheck,ChartNoAxesCombined,WalletCards} from "lucide-react";import LiveMarketTable from "@/app/components/live-market-table";export default function Home(){return <main><nav className="topbar wrap"><Link href="/" className="brand"><span className="mark">G</span> GROEARN<span className="lime">X</span></Link><div className="navlinks"><a href="#markets">Markets</a><a href="#features">Why GROEARNX</a></div><div className="nav-actions"><Link href="/login">Log in</Link><Link className="button small" href="/signup">Get started <ArrowUpRight size={16}/></Link></div></nav><section className="hero wrap"><div><div className="eyebrow"><span className="live"/> YOUR CRYPTO, IN CLEAR VIEW</div><h1>Make your next move<br/>with <span className="lime">confidence.</span></h1><p className="hero-sub">A calmer way to follow crypto markets, keep an eye on your watchlist, and make informed decisions.</p><div className="hero-actions"><Link className="button" href="/signup">Create your account <ArrowUpRight size={17}/></Link><a className="text-link" href="#markets">Explore markets ↓</a></div><p className="trust"><ShieldCheck size={16}/> Server-managed authentication</p></div><div className="chart-wrap"><div className="chart-card"><div className="chart-head"><span><small>BTC / USD</small><b>$67,482.10</b></span><strong>↗ 2.41%</strong></div><div className="periods">1H　24H　<b>1W</b>　1M　1Y</div><svg viewBox="0 0 520 180" role="img" aria-label="Illustrative rising market chart"><defs><linearGradient id="area" x1="0" x2="0" y1="0" y2="1"><stop offset="0%" stopColor="#b7f36a" stopOpacity=".28"/><stop offset="100%" stopColor="#b7f36a" stopOpacity="0"/></linearGradient></defs><path d="M0 145 L35 128 L65 139 L90 100 L120 115 L150 76 L180 93 L210 58 L238 77 L265 47 L295 60 L330 31 L355 49 L390 20 L420 38 L455 15 L485 28 L520 10 L520 180 L0 180Z" fill="url(#area)"/><path d="M0 145 L35 128 L65 139 L90 100 L120 115 L150 76 L180 93 L210 58 L238 77 L265 47 L295 60 L330 31 L355 49 L390 20 L420 38 L455 15 L485 28 L520 10" fill="none" stroke="#b7f36a" strokeWidth="3" strokeLinejoin="round" strokeLinecap="round"/></svg><div className="chart-foot"><span>Oct 20</span><span>Oct 22</span><span>Oct 24</span><span>Oct 26</span></div></div><div className="float-card">₿ &nbsp; <span><b>Bitcoin</b><small>BTC · +2.41%</small></span></div></div></section><section className="wrap market-section" id="markets"><div className="eyebrow">MARKET SNAPSHOT</div><h2>Markets at a glance</h2><LiveMarketTable variant="home"/><p className="hint">Public exchange quotes are indicative only and are not investment advice. If the feed is unavailable, illustrative fallback values are clearly labeled.</p></section><section className="wrap features" id="features"><div className="eyebrow">BUILT FOR CLARITY</div><h2>Everything in its right place.</h2><div className="feature-grid"><article><ChartNoAxesCombined/><h3>Market overview</h3><p>Scan asset prices and movement in one readable view.</p></article><article><WalletCards/><h3>Your account, protected</h3><p>Server-managed sessions and authenticated dashboard routes.</p></article><article><ShieldCheck/><h3>Ready to grow</h3><p>A responsive foundation for verified market feeds and account features.</p></article></div></section><section className="wrap cta"><div><div className="eyebrow">START WITH A CLEAR VIEW</div><h2>Your dashboard starts here.</h2><p>Create an account to access your private dashboard.</p></div><Link className="button" href="/signup">Get started <ArrowUpRight size={17}/></Link></section><footer className="wrap footer"><Link href="/" className="brand"><span className="mark">G</span> GROEARN<span className="lime">X</span></Link><span>© {new Date().getFullYear()} GROEARNX</span><span>Sample market data only.</span></footer></main>}
+import Link from "next/link";
+import { ArrowRight, ArrowUpRight, Activity, Bot, ShieldCheck, Smartphone, Lock, ChartNoAxesCombined, CircleCheck, Globe, WalletCards, Zap, Landmark } from "lucide-react";
+
+const features = [
+  { icon: Bot, title: "Automated trading bots", body: "Spot and Futures bot workflows with clear controls and activity visibility." },
+  { icon: ShieldCheck, title: "Your funds stay yours", body: "Connect your own exchange account. API keys should never have withdrawal permission." },
+  { icon: Activity, title: "Liquid markets", body: "Follow actively traded markets and review price movement in one place." },
+  { icon: ChartNoAxesCombined, title: "Trade activity", body: "Review orders, positions and profit-and-loss information from your dashboard." },
+  { icon: Globe, title: "Multiple exchanges", body: "A unified workspace for supported exchange connections." },
+  { icon: Smartphone, title: "Mobile ready", body: "Use the trading workspace from your phone, tablet or desktop." },
+  { icon: Lock, title: "Account security", body: "Keep access protected with secure sign-in and careful API-key permissions." },
+  { icon: Zap, title: "Live controls", body: "Manage bot activity with visible status and clear controls." },
+];
+const steps = [
+  ["01", "Create your account", "Register with your email and a strong password."],
+  ["02", "Connect an exchange", "Add an API key with only the permissions your chosen features require."],
+  ["03", "Configure your strategy", "Review the settings and risk controls before enabling any live trading."],
+];
+export default function Home() {
+  return <main className="trx-home">
+    <header className="trx-nav">
+      <Link href="/" className="trx-brand"><span className="trx-mark">G</span><span>GROEARN<span className="trx-gold">X</span></span></Link>
+      <nav><a href="#features">Platform</a><a href="#exchanges">Exchanges</a><a href="#how">How it works</a></nav>
+      <div className="trx-nav-actions"><Link href="/login">Sign in</Link><Link className="trx-button trx-button-small" href="/signup">Get started <ArrowUpRight size={15}/></Link></div>
+    </header>
+
+    <section className="trx-hero">
+      <div className="trx-hero-glow"/>
+      <div className="trx-hero-copy">
+        <span className="trx-eyebrow"><span className="trx-pulse"/> AUTOMATED CRYPTO WORKSPACE</span>
+        <h1>Trade smarter.<br/><span className="trx-gold">Stay in control.</span></h1>
+        <p>GROEARNX brings automated trading tools, market signals and exchange activity into one clear dashboard. Connect your own exchange account and stay in control of your trading decisions.</p>
+        <div className="trx-hero-actions"><Link className="trx-button" href="/signup">Create your account <ArrowRight size={17}/></Link><Link className="trx-outline-button" href="/login">Open dashboard</Link></div>
+        <div className="trx-trust"><ShieldCheck size={15}/> Your exchange account. Your API permissions. Your control.</div>
+      </div>
+      <div className="trx-preview">
+        <div className="trx-preview-top"><span><i/> WORKSPACE OVERVIEW</span><span className="trx-live">● DEMO PREVIEW</span></div>
+        <div className="trx-balance"><div><small>PORTFOLIO OVERVIEW</small><strong>$12,840.56</strong><em>Illustrative interface preview</em></div><span className="trx-balance-icon">↗</span></div>
+        <div className="trx-chart-label"><span>ACCOUNT PERFORMANCE</span><b>+8.42%</b></div>
+        <svg className="trx-chart" viewBox="0 0 540 175" role="img" aria-label="Illustrative account performance chart"><defs><linearGradient id="trxArea" x1="0" x2="0" y1="0" y2="1"><stop offset="0%" stopColor="#d6b65d" stopOpacity=".28"/><stop offset="100%" stopColor="#d6b65d" stopOpacity="0"/></linearGradient></defs><path d="M0 142 L35 126 68 135 103 99 139 111 175 81 210 91 245 57 279 74 315 48 350 62 385 29 420 44 455 19 490 34 540 9 L540 175 L0 175Z" fill="url(#trxArea)"/><path d="M0 142 L35 126 68 135 103 99 139 111 175 81 210 91 245 57 279 74 315 48 350 62 385 29 420 44 455 19 490 34 540 9" fill="none" stroke="#d6b65d" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/></svg>
+        <div className="trx-chart-dates"><span>MON</span><span>TUE</span><span>WED</span><span>THU</span><span>FRI</span><span>SAT</span><span>SUN</span></div>
+        <div className="trx-preview-stats"><div><small>ACTIVE BOTS</small><b>02</b><span>Illustrative</span></div><div><small>OPEN ORDERS</small><b>04</b><span>Illustrative</span></div><div><small>EXCHANGE</small><b>Connected</b><span>Demo state</span></div></div>
+        <div className="trx-floating">✦ <span><b>Risk controls</b><small>Review before live trading</small></span></div>
+      </div>
+    </section>
+
+    <section className="trx-proof"><div><b>Spot &amp; Futures</b><span>Trading modes</span></div><div><b>24 / 7</b><span>Market monitoring</span></div><div><b>Multi-exchange</b><span>One workspace</span></div><div><b>Risk first</b><span>Visible controls</span></div></section>
+
+    <section className="trx-feature-intro" id="features"><span className="trx-eyebrow">TOOLS FOR ACTIVE TRADERS</span><h2>Everything in its right place.</h2><p>One workspace to connect, monitor and manage your trading activity.</p></section>
+    <section className="trx-feature-grid">{features.map(({icon:Icon,title,body})=><article key={title}><div className="trx-feature-icon"><Icon size={21}/></div><h3>{title}</h3><p>{body}</p></article>)}</section>
+
+    <section className="trx-exchanges" id="exchanges"><span className="trx-eyebrow">EXCHANGE CONNECTIONS</span><h2>Work with the exchanges you use.</h2><div className="trx-exchange-list"><b>BINANCE</b><b>BYBIT</b><b>HTX</b><b>OKX</b></div><p>Availability depends on the exchange, account type and enabled API permissions.</p></section>
+
+    <section className="trx-how" id="how"><div><span className="trx-eyebrow">GET STARTED</span><h2>From setup to strategy in three steps.</h2><p>Take time to understand each permission and risk setting before enabling live trading.</p></div><div className="trx-steps">{steps.map(([n,title,body])=><article key={n}><b>{n}</b><div><h3>{title}</h3><p>{body}</p></div></article>)}</div></section>
+
+    <section className="trx-cta"><div className="trx-cta-icon"><Landmark size={26}/></div><span className="trx-eyebrow">YOUR TRADING WORKSPACE</span><h2>Build your trading routine with clarity.</h2><p>Create an account to explore the GROEARNX dashboard and available tools.</p><Link className="trx-button" href="/signup">Create your account <ArrowRight size={17}/></Link></section>
+    <footer className="trx-footer"><Link href="/" className="trx-brand"><span className="trx-mark">G</span><span>GROEARN<span className="trx-gold">X</span></span></Link><span>© {new Date().getFullYear()} GROEARNX</span><span>Crypto trading involves risk. No returns are guaranteed.</span></footer>
+  </main>;
+}
