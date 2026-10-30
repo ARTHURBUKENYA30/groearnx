@@ -26,9 +26,11 @@ Password reset and confirmation flows require the production URL and redirect al
 
 Implemented: responsive public landing page, account forms, protected dashboard, password recovery UI/actions, user-scoped watchlist add/remove, and portfolio quantity create/update/remove using existing Supabase tables and RLS policies.
 
-Preview only: portfolio totals, market prices, bot status, signal rows, and strategy cards are illustrative. The current UI does not place orders, execute bots, connect exchange APIs, or provide live market data. Do not enter exchange API keys into this preview.
+Live market display: the dashboard requests 24-hour ticker data for BTC, ETH, SOL, BNB, and XRP from Binance's public market-data endpoint. The server route validates the response, times out after five seconds, and returns a clear unavailable response rather than presenting stale sample prices as live. The feed is cached briefly and still requires a production runtime smoke test.
 
-Not yet production trading software: live market quotes are fetched from a public Binance ticker endpoint for five pairs and refreshed periodically, with clearly labeled illustrative fallback values. The feed still needs runtime smoke testing. Persistent bot configuration, exchange adapters and encrypted secret storage, signal generation, order/position reconciliation, risk-limit enforcement, emergency-stop execution, and financial audit operations require dedicated implementation and testing.
+Preview only: portfolio valuation, bot status, signal rows, strategy cards, and exchange/risk controls are illustrative or non-operational. The app does not place orders, execute trading bots, connect exchange accounts, generate actionable trading signals, or reconcile live positions. Do not enter exchange API keys into this preview.
+
+Not yet production trading software: persistent bot configuration, exchange adapters and encrypted secret storage, signal generation, order/position reconciliation, risk-limit enforcement, emergency-stop execution, financial audit operations, and independent security review require dedicated implementation and testing.
 
 ## Production checklist
 
