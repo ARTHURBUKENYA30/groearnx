@@ -240,3 +240,5 @@ body:has(.rw-app){background:#090a09;color:#f2f1ed}
 .trx-login-exact .trx-auth-foot svg{color:#24ad82}
 .trx-login-exact .trx-auth-error,.trx-login-exact .trx-auth-notice{font-size:11px}
 @media(max-width:600px){.trx-login-exact{padding:40px 18px}.trx-login-exact .trx-auth-card{padding:25px 20px}.trx-login-exact .trx-auth-brand{margin-bottom:19px}}
+
+.trx-login-exact .trx-auth-logo-mark{width:38px;height:38px;display:grid;place-items:center;border:1px solid #55451f;border-radius:5px;background:linear-gradient(145deg,#f1d47e,#a77e2d);color:#17130a;font-size:21px;font-weight:900;box-shadow:0 0 15px #d5ae4a36}
