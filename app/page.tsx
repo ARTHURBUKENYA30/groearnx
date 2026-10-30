@@ -19,7 +19,7 @@ const steps = [
 export default function Home() {
   return <main className="trx-home">
     <header className="trx-nav">
-      <Link href="/" className="trx-brand"><span className="trx-mark">G</span><span>GROEARN<span className="trx-gold">X</span></span></Link>
+      <Link href="/" className="trx-brand"><span className="trx-mark">G</span><span>GROEANR<span className="trx-gold">X</span></span></Link>
       <nav><a href="#features">Platform</a><a href="#exchanges">Exchanges</a><a href="#how">How it works</a></nav>
       <div className="trx-nav-actions"><Link href="/login">Sign in</Link><Link className="trx-button trx-button-small" href="/signup">Get started <ArrowUpRight size={15}/></Link></div>
     </header>
@@ -54,6 +54,6 @@ export default function Home() {
     <section className="trx-how" id="how"><div><span className="trx-eyebrow">GET STARTED</span><h2>From setup to strategy in three steps.</h2><p>Take time to understand each permission and risk setting before enabling live trading.</p></div><div className="trx-steps">{steps.map(([n,title,body])=><article key={n}><b>{n}</b><div><h3>{title}</h3><p>{body}</p></div></article>)}</div></section>
 
     <section className="trx-cta"><div className="trx-cta-icon"><Landmark size={26}/></div><span className="trx-eyebrow">YOUR TRADING WORKSPACE</span><h2>Build your trading routine with clarity.</h2><p>Create an account to explore the GROEANRX dashboard and available tools.</p><Link className="trx-button" href="/signup">Create your account <ArrowRight size={17}/></Link></section>
-    <footer className="trx-footer"><Link href="/" className="trx-brand"><span className="trx-mark">G</span><span>GROEARN<span className="trx-gold">X</span></span></Link><span>© {new Date().getFullYear()} GROEANRX</span><span>Crypto trading involves risk. No returns are guaranteed.</span></footer>
+    <footer className="trx-footer"><Link href="/" className="trx-brand"><span className="trx-mark">G</span><span>GROEANR<span className="trx-gold">X</span></span></Link><span>© {new Date().getFullYear()} GROEANRX</span><span>Crypto trading involves risk. No returns are guaranteed.</span></footer>
   </main>;
 }
