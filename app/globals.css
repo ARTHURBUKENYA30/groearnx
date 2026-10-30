@@ -213,3 +213,30 @@ body:has(.rw-app){background:#090a09;color:#f2f1ed}
 @media(max-width:380px){.rw-content{padding-inline:9px}.rw-market-row{grid-template-columns:14px minmax(0,1fr) 75px 48px 15px}.rw-balances b{font-size:17px}.rw-exchange button{padding:0 7px}}
 
 .rw-advanced{margin-top:12px;border:1px solid #3b3525;border-radius:7px;background:#11120f;padding:9px}.rw-advanced summary{color:#d6b65d;font-size:8px;cursor:pointer}.rw-advanced[open] summary{margin-bottom:9px}.rw-advanced .panel{padding:10px;background:#0d0e0c;border-color:#2b2a22}.rw-advanced .panel-title h2{font-size:10px}.rw-advanced .panel-title p,.rw-advanced .hint,.rw-advanced .notice{font-size:8px}.rw-advanced .data-form input,.rw-advanced .strategy-grid input{width:100%;min-width:0;background:#090a09;color:#eee;border:1px solid #302f27;border-radius:5px;padding:8px;font-size:9px}.rw-advanced .strategy-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}.rw-advanced .strategy-grid label{font-size:8px;color:#aaa}
+
+
+/* Final sign-in reference match + GROEANRX identity */
+.trx-login-exact{background:#0b0b0b;padding:55px 18px;min-height:100svh}
+.trx-login-exact .trx-auth-wrap{width:min(100%,448px)}
+.trx-login-exact .trx-auth-glow{display:none}
+.trx-login-exact .trx-auth-brand{align-self:center;display:flex;align-items:center;gap:10px;margin:0 0 22px;color:#d8bd73;font-size:14px;font-weight:750;letter-spacing:-.2px}
+.trx-login-exact .trx-auth-brand img{width:38px;height:38px;object-fit:cover;border:1px solid #55451f;border-radius:5px;box-shadow:0 0 15px #d5ae4a36}
+.trx-login-exact .trx-auth-card{width:100%;padding:28px;border:1px solid #2b2b2b;border-radius:15px;background:#121212;box-shadow:none;backdrop-filter:none}
+.trx-login-exact .trx-auth-card h1{font:750 23px/1.25 Inter,system-ui,sans-serif;letter-spacing:-.65px;color:#f2f1ee}
+.trx-login-exact .trx-auth-sub{font-size:13px;color:#a5a29d;margin:6px 0 20px}
+.trx-login-exact .trx-auth-form label{font-size:11px;letter-spacing:.65px;color:#aaa7a0;margin:0 0 8px}
+.trx-login-exact .trx-input-wrap{height:44px;gap:10px;padding:0 11px;border:1px solid #303030;border-radius:5px;background:#0e0e0e;margin-bottom:19px}
+.trx-login-exact .trx-input-wrap svg{width:15px;height:15px;color:#aaa69d}
+.trx-login-exact .trx-input-wrap input{font-size:12px;color:#f2f1ee}
+.trx-login-exact .trx-input-wrap input::placeholder{color:#9b9993;opacity:1}
+.trx-login-exact .trx-input-wrap:focus-within{border-color:#c9a64f;box-shadow:0 0 0 2px #c9a64f18}
+.trx-login-exact .trx-password-toggle{width:24px;height:26px;flex:none;display:grid;place-items:center;border:0;background:transparent;color:#aaa69d;padding:0;cursor:pointer}
+.trx-login-exact .trx-password-toggle svg{width:15px;height:15px}
+.trx-login-exact .trx-submit{height:41px;min-height:41px;margin-top:-3px;border:0;border-radius:13px;background:linear-gradient(105deg,#b58d3d 0%,#e7cc7e 55%,#c7a64d 100%);color:#17130a;font-size:13px;font-weight:650;box-shadow:0 3px 18px #d0ad5540}
+.trx-login-exact .trx-submit:hover{filter:brightness(1.05)}
+.trx-login-exact .trx-auth-switch{font-size:13px;color:#aaa69d;margin:19px 0 0}
+.trx-login-exact .trx-auth-switch a{color:#d5b55d;font-weight:750}
+.trx-login-exact .trx-auth-foot{justify-content:center;gap:8px;color:#9a978d;font-size:11px;margin:15px 0 0}
+.trx-login-exact .trx-auth-foot svg{color:#24ad82}
+.trx-login-exact .trx-auth-error,.trx-login-exact .trx-auth-notice{font-size:11px}
+@media(max-width:600px){.trx-login-exact{padding:40px 18px}.trx-login-exact .trx-auth-card{padding:25px 20px}.trx-login-exact .trx-auth-brand{margin-bottom:19px}}
