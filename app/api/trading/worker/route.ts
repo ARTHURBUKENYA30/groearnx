@@ -16,7 +16,12 @@ export async function GET(req:Request){
  if(error)return NextResponse.json({error:"Could not load bot settings."},{status:500});
  const results=[];
  for(const s of settings??[]){
+  let lockAcquired=false;
   try{
+   const lock=await db.rpc("try_acquire_bot_lock",{p_user_id:s.user_id,p_symbol:s.symbol,p_lock_seconds:50});
+   if(lock.error)throw new Error("Could not acquire worker safety lock.");
+   if(lock.data!==true){results.push({user_id:s.user_id,status:"already_running"});continue;}
+   lockAcquired=true;
    const {data:cred}=await db.from("exchange_credentials").select("api_key_ciphertext,api_secret_ciphertext,environment").eq("user_id",s.user_id).maybeSingle();
    if(!cred||cred.environment!=="testnet")throw new Error("Testnet credentials are missing.");
    const key=decryptSecret(cred.api_key_ciphertext),secret=decryptSecret(cred.api_secret_ciphertext);
@@ -65,22 +70,32 @@ export async function GET(req:Request){
    const order=await binanceSigned<Order>(key,secret,"/api/v3/order",params,"POST");
    const qty=Number(order.executedQty),quote=Number(order.cummulativeQuoteQty),fill=avgFill(order);
    if(qty<=0||fill<=0)throw new Error("Exchange returned an order with no completed fills.");
+   if(!["FILLED","PARTIALLY_FILLED"].includes(order.status))throw new Error("Exchange order did not reach a fill state.");
    let realized=0;
+   if(side==="SELL")realized=(fill-Number(position.entry_price))*qty;
+   const {error:orderSaveError}=await db.from("bot_orders").insert({user_id:s.user_id,exchange_order_id:String(order.orderId),symbol:s.symbol,side,order_type:"MARKET",quantity:qty,quote_quantity:quote,status:order.status,mode:"testnet",client_order_id:cid,response:{signal,avg_price:fill,realized_pnl:realized}});
+   if(orderSaveError)throw new Error("Exchange accepted an order but its order record could not be saved; reconcile this order before restarting.");
    if(side==="BUY"){
-    await db.from("bot_positions").upsert({user_id:s.user_id,symbol:s.symbol,quantity:qty,entry_price:fill,entry_quote:quote,opened_at:new Date().toISOString()});
+    const {error:positionError}=await db.from("bot_positions").upsert({user_id:s.user_id,symbol:s.symbol,quantity:qty,entry_price:fill,entry_quote:quote,opened_at:new Date().toISOString()});
+    if(positionError)throw new Error("Buy order filled but position update failed; reconcile the exchange order before restarting.");
    }else{
-    realized=(fill-Number(position.entry_price))*qty;
-    await db.from("bot_positions").delete().eq("user_id",s.user_id).eq("symbol",s.symbol);
+    const remaining=Math.max(0,Number(position.quantity)-qty);
+    const positionWrite=remaining>1e-12
+      ? await db.from("bot_positions").update({quantity:remaining}).eq("user_id",s.user_id).eq("symbol",s.symbol)
+      : await db.from("bot_positions").delete().eq("user_id",s.user_id).eq("symbol",s.symbol);
+    if(positionWrite.error)throw new Error("Sell order filled but position update failed; reconcile the exchange order before restarting.");
    }
-   await db.from("bot_orders").insert({user_id:s.user_id,exchange_order_id:String(order.orderId),symbol:s.symbol,side,order_type:"MARKET",quantity:qty,quote_quantity:quote,status:order.status,mode:"testnet",client_order_id:cid,response:{signal,avg_price:fill,realized_pnl:realized}});
-   await db.from("bot_trades").insert({user_id:s.user_id,symbol:s.symbol,side,quantity:qty,price:fill,quote_amount:quote,realized_pnl:realized,exchange_order_id:String(order.orderId),strategy_signal:signal,mode:"testnet"});
-   await db.from("bot_events").insert({user_id:s.user_id,level:"info",event:`Testnet ${side} order filled`,details:{symbol:s.symbol,quantity:qty,price:fill,signal,realized_pnl:realized}});
+   const {error:tradeError}=await db.from("bot_trades").insert({user_id:s.user_id,symbol:s.symbol,side,quantity:qty,price:fill,quote_amount:quote,realized_pnl:realized,exchange_order_id:String(order.orderId),strategy_signal:signal,mode:"testnet"});
+   if(tradeError)throw new Error("Order filled but trade ledger update failed; reconcile this order before restarting.");
+   await db.from("bot_events").insert({user_id:s.user_id,level:"info",event:`Testnet ${side} order ${order.status.toLowerCase()}`,details:{symbol:s.symbol,quantity:qty,price:fill,signal,realized_pnl:realized}});
    await db.from("bot_settings").update({last_run_at:new Date().toISOString(),last_signal:signal}).eq("user_id",s.user_id);
-   results.push({user_id:s.user_id,status:"order_filled",side,symbol:s.symbol,quantity:qty,price:fill,realized_pnl:realized});
+   results.push({user_id:s.user_id,status:order.status.toLowerCase(),side,symbol:s.symbol,quantity:qty,price:fill,realized_pnl:realized});
   }catch(e){
    const message=e instanceof Error?e.message:"Worker error";
    await db.from("bot_events").insert({user_id:s.user_id,level:"error",event:"Trading worker error",details:{message:message.slice(0,180)}});
    results.push({user_id:s.user_id,status:"error",message:message.slice(0,180)});
+  } finally {
+   if(lockAcquired) await db.rpc("release_bot_lock",{p_user_id:s.user_id,p_symbol:s.symbol});
   }
  }
  return NextResponse.json({processed:results.length,results,mode:"testnet"});
