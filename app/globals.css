@@ -73,3 +73,70 @@
 /* Mobile dashboard section navigation */
 .mobile-section-nav{display:none}
 @media(max-width:680px){.mobile-section-nav{display:flex;position:sticky;top:0;z-index:20;gap:7px;overflow-x:auto;padding:9px 14px;background:#0d1912f5;border-bottom:1px solid #28392c;scrollbar-width:none}.mobile-section-nav::-webkit-scrollbar{display:none}.mobile-section-nav a{flex:0 0 auto;padding:7px 10px;border:1px solid #2b3c30;border-radius:7px;color:#b8c6b9;font-size:10px;font-weight:700;white-space:nowrap}.mobile-section-nav a:focus-visible{outline:2px solid var(--lime);outline-offset:2px}.mobile-section-nav a:active{background:#b7f36a18;color:var(--lime)}.dash-content section[id]{scroll-margin-top:58px}}
+
+/* Modern fintech visual system */
+:root{--bg:#080d0b;--surface:#0e1712;--surface-raised:#121f17;--line:#26372c;--text:#edf4ed;--muted:#94a598;--lime:#b9f477;--red:#ff8188}
+html{background:var(--bg);scroll-padding-top:84px}
+body{background:radial-gradient(ellipse at 78% -12%,#1a3525 0,transparent 34%),radial-gradient(ellipse at 8% 38%,#102218 0,transparent 30%),var(--bg);color:var(--text);letter-spacing:-.012em}
+::selection{background:#b9f47745;color:#fff}
+a,button,.panel,.stat,.feature-grid article,.strategy-card,.chart-card{transition:background-color .2s ease,border-color .2s ease,box-shadow .2s ease,transform .2s ease}
+.brand{letter-spacing:-.7px}
+.mark{border-radius:10px;box-shadow:0 0 24px #b9f47735}
+.topbar{border-bottom-color:#ffffff12}
+.navlinks a,.nav-actions>a:not(.button){font-weight:600}
+.button{border-radius:9px;box-shadow:0 5px 20px #b9f47716}
+.button:hover{transform:translateY(-1px);box-shadow:0 8px 26px #b9f47727}
+.hero{padding-top:84px;padding-bottom:86px}
+.hero h1{font-weight:780;letter-spacing:-3.6px}
+.hero-sub{color:#a8b6aa}
+.chart-card{background:linear-gradient(145deg,#17291eeb,#0d1712f2);border-color:#3a5140;border-radius:20px;box-shadow:0 28px 90px #0008,0 0 0 1px #ffffff05 inset;transform:none}
+.chart-card:hover{transform:translateY(-3px)}
+.float-card{background:#17251c;border-color:#3a5140;backdrop-filter:blur(14px)}
+.market-table,.auth-card,.panel,.stat,.feature-grid article,.cta{border-color:#2a3c30;box-shadow:0 12px 38px #0002}
+.market-table{border-radius:15px;background:#0d1711}
+.market-row{border-bottom-color:#ffffff0b}
+.market-row:not(.table-head):hover{background:#ffffff06}
+.feature-grid article{background:linear-gradient(145deg,#14231a,#0d1711);border-radius:15px}
+.feature-grid article:hover,.strategy-card:hover{transform:translateY(-2px);border-color:#526c4d;box-shadow:0 14px 35px #0004}
+.cta{background:radial-gradient(ellipse at 90% 0%,#b9f47712,transparent 48%),linear-gradient(110deg,#14251a,#0d1912);border-radius:18px}
+.auth{background:radial-gradient(ellipse at 50% 0%,#203d29 0,transparent 48%),var(--bg)}
+.auth-card{background:linear-gradient(145deg,#142219,#0d1711);border-color:#344a39;border-radius:20px;box-shadow:0 30px 100px #0008}
+.auth-card input,.data-form input{background:#09110c;border-color:#314336;border-radius:9px}
+.auth-card input:focus,.data-form input:focus{border-color:var(--lime);box-shadow:0 0 0 3px #b9f4771c}
+.dash{background:transparent}
+.sidebar{background:#0a120dce;border-right-color:#ffffff10;backdrop-filter:blur(18px)}
+.sidebar .brand{padding-bottom:38px}
+.side-item{display:flex;align-items:center;gap:10px;border:1px solid transparent;border-radius:9px;font-weight:600}
+.side-item.active,.side-item:hover{background:linear-gradient(90deg,#b9f47718,#b9f47708);border-color:#b9f47720;color:var(--lime)}
+.side-item svg{width:15px;height:15px;opacity:.9}
+.security-box{background:linear-gradient(135deg,#17291d,#101b14);border-color:#344a38;border-radius:12px;line-height:1.8}
+.dash-top{background:#0a120ddd;border-bottom-color:#ffffff10;backdrop-filter:blur(18px)}
+.avatar{background:#b9f4771d;border:1px solid #b9f47730}
+.dash-content{padding-top:36px}
+.dash-content h1{font-weight:760;letter-spacing:-1.25px}
+.stat{background:linear-gradient(145deg,#142219,#0d1711);border-radius:15px;position:relative;overflow:hidden}
+.stat:after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(120deg,#ffffff06,transparent 38%)}
+.stat>svg{color:var(--lime)}
+.stat h2{font-weight:760;letter-spacing:-1.25px}
+.panel{background:linear-gradient(145deg,#111e16,#0c1510);border-radius:15px}
+.panel-title{margin-bottom:17px}
+.panel-title h2{font-size:14px;font-weight:750;letter-spacing:-.2px}
+.demo-pill{background:#1b291c;border-color:#4b5135}
+.demo-tag{background:#172219;border-color:#334536}
+.signal-score{background:#0a130d;border-color:#26392b;border-radius:11px}
+.trading-table th{background:#0c1710;color:#8b9b8d}
+.trading-table th,.trading-table td{border-bottom-color:#ffffff0c}
+.trading-table tbody tr:hover{background:#ffffff05}
+.status-chip{border-radius:7px;background:#172219;border-color:#354638}
+.mini-icon,.strategy-symbol{border:1px solid #b9f47720;border-radius:10px;background:linear-gradient(145deg,#b9f47720,#b9f47708)}
+.strategy-card{background:#0b1510;border-color:#293b2e;border-radius:12px}
+.empty-state{border:1px dashed #334638;border-radius:12px;background:#0b151080}
+.notice{background:#18291b;border-color:#3a5538;border-radius:10px}
+.notice.error{background:#321d20;border-color:#67363c}
+.mobile-section-nav{background:#0a120df2!important;border-bottom-color:#ffffff12!important;backdrop-filter:blur(16px)}
+.mobile-section-nav a{border-radius:8px!important;background:#111d15}
+.mobile-section-nav a:active{background:#b9f47718!important}
+.dash-content footer,.footer{border-top-color:#ffffff10}
+@media(min-width:1101px){.dash{grid-template-columns:238px minmax(0,1fr)}.sidebar{padding:28px 17px}.dash-content{max-width:1480px;padding:38px 42px}.stats{gap:16px}.dash-grid{gap:16px}.panel{padding:21px}.stat{padding:21px}}
+@media(max-width:680px){.hero{padding-top:55px;padding-bottom:48px}.hero h1{letter-spacing:-2.7px}.dash-content{padding-top:22px}.panel{border-radius:13px}.stat{border-radius:13px}.mobile-section-nav a{background:#111d15}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
