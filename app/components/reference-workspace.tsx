@@ -3,7 +3,7 @@
 import Link from "next/link";
 import TradingControlPanel from "@/app/components/trading-control-panel";
 import LiveMarketTable from "@/app/components/live-market-table";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Activity, ArrowDownToLine, ArrowLeft, ArrowRight, ArrowUpRight, Bell,
   Bot, Check, ChevronDown, ChevronRight, CircleHelp, Copy, Eye, EyeOff,
@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 
 type Tab = "home" | "trade" | "bots" | "manual" | "market" | "profile";
+type BotSnapshot = { settings?: { enabled?: boolean; symbol?: string } | null; realizedPnl?: number; trades?: unknown[]; position?: { symbol: string; quantity: number } | null };
 const nav: { id: Tab; label: string; icon: typeof House }[] = [
   { id: "home", label: "Home", icon: House },
   { id: "trade", label: "Trade", icon: Activity },
@@ -67,11 +68,11 @@ export default function ReferenceWorkspace({ activeTab, userName }: { activeTab:
         <div className="rw-alert"><span>◎</span><div><b>Binance Spot Testnet only</b><small>Use test funds only. Connect your test account in the Bots tab.</small></div><ChevronRight size={15}/></div>
         <section className="rw-balance-card">
           <div className="rw-card-head"><small>TESTNET OVERVIEW <span>⌄</span></small><div className="rw-tabs"><button className="active">Spot Testnet</button><button>◎</button></div></div>
-          <div className="rw-balances"><div><small>◉ REALIZED P/L</small><b className="rw-green">{showBalance ? "$0.00" : "••••"}</b><small>No testnet trades recorded yet</small></div><div><small>◉ ACCOUNT</small><b>{showBalance ? "Not linked" : "••••"}</b><small>Connect a Binance Testnet account</small></div></div>
+          <div className="rw-balances"><div><small>◉ REALIZED P/L</small><b className="rw-green">{showBalance ? (botSnapshot ? pnlLabel : "—") : "••••"}</b><small>{botSnapshot?.trades?.length ? "Recent recorded testnet trades" : "No testnet trades recorded yet"}</small></div><div><small>◉ ACCOUNT</small><b>{showBalance ? (botRunning ? "Bot running" : botSnapshot?.settings ? "Bot stopped" : "Not configured") : "••••"}</b><small>Manage connection in Bots</small></div></div>
           <div className="rw-money-actions"><Link href="/dashboard?tab=bots"><Plus size={14}/> Connect Testnet</Link><button disabled><LockKeyhole size={14}/> Withdrawals disabled</button></div>
-          <div className="rw-mini-stats"><span>Environment <b>Testnet</b></span><span>Strategy <b>EMA 9/21</b></span><span>Live funds <b>Off</b></span><span>Bot <b>Stopped</b></span></div>
+          <div className="rw-mini-stats"><span>Environment <b>Testnet</b></span><span>Strategy <b>EMA 9/21</b></span><span>Live funds <b>Off</b></span><span>Bot <b>{botSnapshot ? (botRunning ? "Running" : "Stopped") : "—"}</b></span></div>
         </section>
-        <section className="rw-auto-card"><div><b>Binance Spot Testnet Bot</b><small>One-minute EMA strategy with configurable risk limits.</small></div><span className="rw-switch"/><small>Stopped</small></section>
+        <section className="rw-auto-card"><div><b>Binance Spot Testnet Bot</b><small>One-minute EMA strategy with configurable risk limits.</small></div><span className="rw-switch"/><small>{botSnapshot ? (botRunning ? "Running" : "Stopped") : "—"}</small></section>
         <section className="rw-shortcuts">{[["Share","↗"],["Earning","⌁"],["Orders","◷"],["Charts","⌗"],["Assets","▣"],["Invite","♧"],["API","⌘"],["More","•••"]].map(([label, icon])=><button key={label}><b>{icon}</b><span>{label}</span></button>)}</section>
         <div className="rw-section-head"><b>Market Movers</b><span>See all <ChevronRight size={12}/></span></div>
         <section className="rw-panel">
