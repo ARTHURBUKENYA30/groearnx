@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { loginAction } from "@/app/auth/actions";
+import { loginAction, resendConfirmationAction } from "@/app/auth/actions";
 import { ShieldCheck, Mail } from "lucide-react";
 import PasswordField from "@/app/components/password-field";
 
@@ -18,6 +18,11 @@ export default async function Login({ searchParams }: { searchParams: Promise<{ 
           <label htmlFor="email">EMAIL</label><div className="trx-input-wrap"><Mail/><input id="email" name="email" type="email" autoComplete="email" required placeholder="you@email.com"/></div>
           <label htmlFor="password">PASSWORD</label><PasswordField/>
           <button className="trx-button trx-submit" type="submit">Sign In</button>
+        </form>
+        <form action={resendConfirmationAction} className="trx-auth-form trx-resend-form">
+          <label htmlFor="resend-email">DIDN'T RECEIVE YOUR CONFIRMATION EMAIL?</label>
+          <div className="trx-input-wrap"><Mail/><input id="resend-email" name="email" type="email" autoComplete="email" required placeholder="you@email.com"/></div>
+          <button className="trx-button" type="submit">Resend confirmation email</button>
         </form>
         <p className="trx-auth-switch">New to GROEANRX? <Link href="/signup">Create account</Link></p>
       </div>
