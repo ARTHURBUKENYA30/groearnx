@@ -10,7 +10,7 @@ export default async function Signup({ searchParams }: { searchParams: Promise<{
     <section className="trx-auth-wrap">
       <Link href="/" className="trx-brand trx-auth-brand"><span className="trx-mark">G</span><span>GROEANRX</span></Link>
       <div className="trx-auth-card">
-        <h1>Create account</h1><p className="trx-auth-sub">Start building your trading workspace.</p>
+        <h1>Create account</h1><p className="trx-auth-sub">Start building your trading workspace. Confirm your email before signing in.</p>
         {params.error && <p className="trx-auth-error" role="alert">{params.error}</p>}
         <form action={signupAction} className="trx-auth-form">
           <label htmlFor="name">FULL NAME</label><div className="trx-input-wrap"><UserRound/><input id="name" name="name" autoComplete="name" placeholder="Your full name"/></div>
