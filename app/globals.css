@@ -245,3 +245,4 @@ body:has(.rw-app){background:#090a09;color:#f2f1ed}
 
 /* Explicit, accessible environment selector for the isolated trading engines */
 .mode-picker{display:grid;gap:7px;margin:12px 0;color:var(--muted,#aaa);font-size:12px;font-weight:650}.mode-picker select{width:100%;min-height:42px;padding:9px 12px;border:1px solid #39362b;border-radius:8px;background:#11120f;color:var(--foreground,#eee);font:inherit}.mode-picker select:focus-visible{outline:2px solid #c9a64f;outline-offset:2px}
+\n.trx-auth-form label{text-transform:uppercase}\n.trx-auth:not(.trx-login-exact) .trx-auth-logo-mark{width:36px;height:36px;display:grid;place-items:center;border:1px solid #55451f;border-radius:5px;background:linear-gradient(145deg,#f1d47e,#a77e2d);color:#17130a;font-size:20px;font-weight:900;box-shadow:0 0 15px #d5ae4a36}\n
