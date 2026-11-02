@@ -1,4 +1,4 @@
-# GROEARNX
+# GROEANRX
 
 A responsive Next.js application with Supabase server-side authentication and a clearly labeled crypto-trading product preview.
 
