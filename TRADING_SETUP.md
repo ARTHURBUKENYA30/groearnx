@@ -1,38 +1,37 @@
-# GROEARNX trading foundation
+# GROEANRX testnet trading engine
 
 ## Current safety state
-- Binance Spot **Testnet only**.
-- Bot starts disabled and the API refuses to start it until a background execution worker is installed.
-- No live-money order endpoint exists in this release.
-- Exchange keys are encrypted with AES-256-GCM on the server. They are never returned by an API route.
-- The database stores only encrypted credentials. Do not add credentials to Git, browser storage, chat, or screenshots.
+- Binance Spot **Testnet only**. No live-money endpoint is enabled.
+- The scheduled worker runs once per minute through the Supabase Edge Function `groearnx-trading`.
+- The worker uses server-side Supabase credentials supplied by the Edge Function runtime; no service-role key is stored in Vercel or GitHub.
+- Exchange API credentials are encrypted using AES-256-GCM. The encryption key and worker authorization secret are stored in Supabase Vault and are readable only through a service-role-only SQL function.
+- Trade records include commission values. Realized P/L deducts quote-asset fees and includes base-asset commissions in the position cost basis / quantity consumed.
+- Bot settings are saved stopped by default. Starting requires a verified Binance Spot Testnet connection.
 
-## Required Vercel environment variables
-1. `NEXT_PUBLIC_SUPABASE_URL` (already configured for the app)
-2. `NEXT_PUBLIC_SUPABASE_ANON_KEY` (already configured for the app)
-3. `SUPABASE_SERVICE_ROLE_KEY` (server-only; never prefix with NEXT_PUBLIC)
-4. `GROEARNX_ENCRYPTION_KEY` (server-only 64-character hexadecimal value)
+## User setup required before test trades
+1. Create a Binance Spot Testnet account at https://testnet.binance.vision/.
+2. Generate a **Testnet** API key.
+3. Enable Spot trading only and keep withdrawals disabled.
+4. Sign in to GROEANRX and enter the Testnet key and secret in the Binance trading panel. Never paste exchange secrets into chat or GitHub.
+5. Save conservative risk settings and start the testnet bot only after confirming the connection.
 
-Generate the encryption key locally with:
-```bash
-openssl rand -hex 32
-```
-Add it in Vercel Project → Settings → Environment Variables for Production and Preview as needed. Never commit the value. Back it up securely; losing it makes saved exchange credentials unrecoverable.
-
-## Connect Binance Spot Testnet
-1. Create a Spot Testnet account at https://testnet.binance.vision/
-2. Generate a testnet API key.
-3. Enable spot trading only. Disable withdrawals.
-4. Enter the key and secret only into the authenticated GROEARNX exchange connection form (once the form is deployed).
-5. The connection API verifies the account, encrypts the credentials, and stores them server-side.
-
-## API
-- `GET /api/trading/connection`: connection metadata only.
-- `POST /api/trading/connection`: verifies and stores testnet credentials.
-- `DELETE /api/trading/connection`: disconnects and stops the bot.
-- `GET /api/trading/bot`: settings, recent audit events, and orders.
-- `PUT /api/trading/bot`: validates and saves conservative testnet settings; always leaves bot stopped.
+## Runtime
+- `GET /api/trading/connection`: authenticated connection metadata.
+- `POST /api/trading/connection`: verifies and encrypts testnet credentials.
+- `DELETE /api/trading/connection`: disables the bot and disconnects the exchange.
+- `GET /api/trading/bot`: settings, recent events, orders, trades, position and realized P/L.
+- `PUT /api/trading/bot`: validates and saves settings; leaves the bot stopped.
+- `POST /api/trading/bot`: starts the testnet worker for the account.
 - `DELETE /api/trading/bot`: emergency stop.
+- Supabase cron calls `/functions/v1/groearnx-trading?action=worker` every minute. The Edge Function validates the Vault-stored worker secret.
 
-## Not yet enabled
-A recurring worker, strategy evaluation, position reconciliation, exchange order placement, realized-P/L accounting, daily loss enforcement against exchange fills, and full end-to-end test coverage still need implementation and verification. Do not enable live trading before these pass on testnet.
+## Strategy and risk notes
+- EMA 9/21 crossover on completed one-minute candles.
+- Stop-loss and take-profit are checked by the recurring worker; they are not guaranteed exchange-native stop orders and can slip between checks.
+- Daily loss limit is calculated from realized net P/L, including recorded trading fees, and pauses the bot when the configured limit is reached.
+- Only USDT-quoted pairs are accepted for the worker so the daily loss limit and fee accounting share a consistent quote currency.
+- Worker locks and deterministic Binance client order IDs reduce concurrent and retry duplicate-order risk.
+- The database is the bot's ledger; after any exchange/database error, reconcile exchange order history and balances before restarting.
+
+## Not yet verified
+No user Binance Testnet API credentials were present during this deployment session, so real BUY/SELL fills, account-balance reconciliation, stop-loss/take-profit triggers, daily-loss auto-pause and emergency-stop behavior still require end-to-end tests with a funded Testnet account. Real-money trading remains disabled.
