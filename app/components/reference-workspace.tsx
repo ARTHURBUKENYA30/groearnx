@@ -108,7 +108,13 @@ export default function ReferenceWorkspace({ activeTab, userName }: { activeTab:
         <section className="rw-risk"><b>Pro Features</b><label><span>Smart Exit</span><input type="checkbox" disabled/></label><label><span>Smart DCA</span><input type="checkbox" disabled/></label></section>
         <div className="rw-warning">Select a trading pair to continue.</div><button className="rw-wide-gold" disabled>Place {side} Order</button>
         <button className="rw-history"><History size={13}/> MANUAL TRADE HISTORY</button>\n        
-      </>}      {activeTab === "profile" && <>
+      </>}
+      {activeTab === "market" && <>
+        <div className="rw-page-title"><h1>Markets</h1><Search size={16}/></div>
+        <div className="rw-filter-pills"><button className="active">Spot</button></div>
+        <section className="rw-panel"><LiveMarketTable variant="dashboard"/></section>
+      </>}
+      {activeTab === "profile" && <>
         <section className="rw-profile-card"><span className="rw-profile-avatar">{userName.slice(0,1).toUpperCase() || "T"}</span><div><b>{userName}</b><small>GROEANRX account</small></div><ChevronRight size={15}/></section>
         <section className="rw-profile-section"><b>Trading environment</b><p>Binance Spot Testnet only</p><small>Live-money trading and withdrawals are disabled in this release.</small></section>
         <section className="rw-profile-section"><b>Exchange API connection</b><p>Manage your encrypted Testnet API connection in the Bots tab.</p><Link href="/dashboard?tab=bots">Open bot settings →</Link></section>
@@ -116,4 +122,9 @@ export default function ReferenceWorkspace({ activeTab, userName }: { activeTab:
         <section className="rw-profile-section"><b>Support</b><p>Support chat is not connected yet.</p></section>
         <form action="/auth/logout" method="post"><button className="rw-signout" type="submit">↗ Sign Out</button></form>
       </>}
-
+      {notice && <div className="rw-toast" role="status">{notice}<button onClick={()=>setNotice("")}>×</button></div>}
+    </div>
+    <button className="rw-chat" aria-label="Support chat" onClick={()=>setNotice("Support chat is not connected in this preview.")}>●</button>
+    <nav className="rw-bottom-nav">{nav.map((item)=>{const Icon=item.icon;return <Link key={item.id} href={`/dashboard?tab=${item.id}`} className={activeTab===item.id?"active":""}><Icon size={17}/><small>{item.label}</small></Link>;})}</nav>
+  </main>;
+}
