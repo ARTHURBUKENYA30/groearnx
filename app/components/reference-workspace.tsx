@@ -13,7 +13,7 @@ import {
 } from "lucide-react";
 
 type Tab = "home" | "trade" | "bots" | "manual" | "market" | "profile";
-type BotSnapshot = { settings?: { enabled?: boolean; symbol?: string } | null; realizedPnl?: number; trades?: unknown[]; position?: { symbol: string; quantity: number } | null };
+type BotSnapshot = { settings?: { enabled?: boolean; symbol?: string } | null; realizedPnl?: number; trades?: unknown[]; orders?: { id: string | number; side: string; symbol: string; status: string; quantity: number; created_at: string }[]; position?: { symbol: string; quantity: number } | null };
 const nav: { id: Tab; label: string; icon: typeof House }[] = [
   { id: "home", label: "Home", icon: House },
   { id: "trade", label: "Trade", icon: Activity },
@@ -60,6 +60,24 @@ export default function ReferenceWorkspace({ activeTab, userName }: { activeTab:
   const [marketType, setMarketType] = useState<"Futures" | "Spot">("Futures");
   const [leverage, setLeverage] = useState("20x");
   const [notice, setNotice] = useState("");
+  const [botSnapshot, setBotSnapshot] = useState<BotSnapshot | null>(null);
+  useEffect(() => {
+    let active = true;
+    const load = async () => {
+      try {
+        const response = await fetch("/api/trading/bot", { cache: "no-store" });
+        if (!response.ok) return;
+        const data = await response.json();
+        if (active) setBotSnapshot(data);
+      } catch { /* Dashboard remains usable when trading status is unavailable. */ }
+    };
+    void load();
+    const timer = window.setInterval(() => void load(), 30000);
+    return () => { active = false; window.clearInterval(timer); };
+  }, []);
+  const botRunning = botSnapshot?.settings?.enabled === true;
+  const pnl = Number(botSnapshot?.realizedPnl ?? 0);
+  const pnlLabel = (pnl >= 0 ? "+" : "-") + "$" + Math.abs(pnl).toFixed(2);
   const tabTitle = nav.find((n) => n.id === activeTab)?.label ?? "Home";
   return <main className="rw-app">
     <header className="rw-topbar"><Brand/><div className="rw-top-actions"><Exchange/><button className="rw-icon-btn" aria-label="Notifications"><Bell size={15}/></button><button className="rw-icon-btn" aria-label="Menu"><Menu size={15}/></button></div></header>
@@ -82,10 +100,10 @@ export default function ReferenceWorkspace({ activeTab, userName }: { activeTab:
         </section>
       </>}
       {activeTab === "trade" && <>
-        <div className="rw-page-title"><h1>Trades <span className="rw-dot"/></h1><Link href="/dashboard?tab=manual" className="rw-gold-btn"><Plus size={13}/> New Trade</Link></div>
-        <div className="rw-filter-pills"><button className="active">All</button><button>Futures</button><button>Spot</button></div>
-        <div className="rw-open-close"><button className="active">Open <small>0</small></button><button>Closed <small>0</small></button></div>
-        <div className="rw-empty"><span>◷</span><b>No open positions.</b><small>Place a trade to start</small><Link href="/dashboard?tab=manual">Place a trade</Link></div>
+        <div className="rw-page-title"><h1>Testnet Orders</h1><Link href="/dashboard?tab=bots" className="rw-gold-btn"><Plus size={13}/> Bot controls</Link></div>
+        <div className="rw-filter-pills"><button className="active">All</button><button>Spot Testnet</button></div>
+        <div className="rw-open-close"><button className="active">Recent orders <small>{botSnapshot?.orders?.length ?? 0}</small></button><button>Recent trades <small>{botSnapshot?.trades?.length ?? 0}</small></button></div>
+        {botSnapshot?.orders?.length ? <section className="rw-panel">{botSnapshot.orders.map(order=><div className="rw-market-row" key={order.id}><b>{order.side} · {order.symbol}</b><span>{Number(order.quantity).toFixed(6)}</span><span className="rw-change">{order.status}</span><small>{new Date(order.created_at).toLocaleString()}</small></div>)}</section> : <div className="rw-empty"><span>◷</span><b>No testnet orders recorded.</b><small>Connect Binance Spot Testnet and start the bot to test orders.</small><Link href="/dashboard?tab=bots">Open testnet bot controls</Link></div>}
       </>}
       {activeTab === "bots" && <>
         <div className="rw-page-title"><div><h1>Testnet Trading Bot</h1><p>Connect Binance Spot Testnet and manage the real bot controls.</p></div></div>
