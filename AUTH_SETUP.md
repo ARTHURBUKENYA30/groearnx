@@ -4,7 +4,7 @@ The application uses Supabase email/password authentication with server-side ses
 
 ## 1. Configure production email delivery
 
-The Supabase built-in mailer is for development/testing only. It is limited to 2 emails per hour per project and is not suitable for public signups. Configure a custom SMTP provider such as Resend, Brevo, Postmark, SendGrid, or AWS SES.
+The Supabase built-in mailer is for development/testing only: it sends only to addresses belonging to the Supabase project team and is limited to 2 emails per hour per project. That is why public visitors cannot reliably receive confirmation emails. Configure a custom SMTP provider such as Resend, Brevo, Postmark, SendGrid, or AWS SES.
 
 In the Supabase Dashboard for project `dxpprprcmgjvjpvyorbm`:
 
@@ -46,6 +46,7 @@ Vercel SSO protection is configured for Preview deployments only. The Production
 
 ## 5. Troubleshooting
 
+- `email_address_not_authorized`: the recipient is not a member of the Supabase project team. Configure custom SMTP to allow public addresses.
 - `over_email_send_rate_limit` / HTTP 429: the built-in mailer limit has been reached. Configure custom SMTP and wait for the current rate-limit window to reset.
 - `email_not_confirmed`: the user must complete the confirmation link before password sign-in.
 - Invalid or already-used confirmation link: request a fresh email and open the newest link only once.
