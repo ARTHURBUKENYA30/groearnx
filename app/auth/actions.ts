@@ -25,7 +25,7 @@ function authError(error: { code?: string; status?: number }, context: "login" |
     return "Please confirm your email using the link we sent before signing in. If the link expired, create a fresh confirmation email.";
   }
   if (error.code === "over_email_send_rate_limit" || error.status === 429) {
-    return "Email confirmation is temporarily rate-limited. Wait at least 60 seconds before trying again. The site owner must configure a dedicated SMTP provider for reliable public registration.";
+    return "Email confirmation is temporarily rate-limited. Wait for the mailer rate-limit window to reset (up to an hour). The site owner must configure a dedicated SMTP provider for reliable public registration.";
   }
   if (context === "login" && error.code === "invalid_credentials") {
     return "The email or password is incorrect. If you just registered, confirm your email first.";
@@ -54,7 +54,7 @@ export async function signupAction(formData: FormData) {
   const password = String(formData.get("password") ?? "");
   const name = String(formData.get("name") ?? "").trim().slice(0, 100);
   const referral = String(formData.get("referral") ?? "").trim().replace(/[^a-zA-Z0-9_-]/g, "").slice(0, 32);
-  if (!/^\S+@\S+\.\S+$/.test(email) || password.length < 8) {
+  if (!/^\S+@\S+\.\S+$/.test(email) || password.length < 10) {
     redirect("/signup?error=Enter%20a%20valid%20email%20and%20a%20password%20of%20at%20least%208%20characters");
   }
   const supabase = await createClient();
@@ -84,7 +84,7 @@ export async function resendConfirmationAction(formData: FormData) {
     const message = error.code === "email_address_not_authorized"
       ? "This project can only email team addresses until custom SMTP is configured. Please contact the site owner."
       : error.code === "over_email_send_rate_limit"
-      ? "Email sending is temporarily rate-limited. Wait at least 60 seconds and try again."
+      ? "Email sending is temporarily rate-limited. Wait for the mailer rate-limit window to reset (up to an hour), then try again."
       : "We could not resend the confirmation email. Check the address and try again later.";
     redirect(`/login?error=${encodeURIComponent(message)}`);
   }
