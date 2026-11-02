@@ -12,7 +12,8 @@ In the Supabase Dashboard for project `dxpprprcmgjvjpvyorbm`:
 2. Enable custom SMTP.
 3. Enter the provider's SMTP host, port, username, password, and a verified sender address such as `no-reply@your-domain.example`.
 4. Save and send a test confirmation email.
-5. In **Authentication → Rate Limits**, review the email sending limit after custom SMTP is enabled.\n6. In **Authentication → Settings → Password Security**, enable leaked-password protection (Have I Been Pwned) and require a minimum of 10 characters.
+5. In **Authentication → Rate Limits**, review the email sending limit after custom SMTP is enabled.
+6. In **Authentication → Settings → Password Security**, enable leaked-password protection (Have I Been Pwned) and require a minimum of 10 characters.
 
 Never put SMTP credentials in this repository, browser code, or a public environment variable. Enter them only in the Supabase dashboard.
 
