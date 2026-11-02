@@ -76,8 +76,8 @@ export default function ReferenceWorkspace({ activeTab, userName }: { activeTab:
         <div className="rw-section-head"><b>Market Movers</b><span>See all <ChevronRight size={12}/></span></div>
         <section className="rw-panel">
           <div className="rw-market-tabs"><button className="active">Spot</button><button>Futures</button><Search size={14}/></div>
-          <div className="rw-signal-banner"><span>♧</span><div><b>AUTOMATED CRYPTO</b><small>Tracked by the Spot Momentum Bot</small></div><span className="rw-auto-tag">AI AUTO</span></div>
-          <MarketRows/>
+          <div className="rw-signal-banner"><span>◈</span><div><b>BINANCE PUBLIC MARKET DATA</b><small>Indicative prices; not trading signals</small></div></div>
+          <LiveMarketTable variant="home"/>
         </section>
       </>}
       {activeTab === "trade" && <>
