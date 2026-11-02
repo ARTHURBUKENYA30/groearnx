@@ -101,7 +101,7 @@ export async function requestPasswordResetAction(formData: FormData) {
   if (error) {
     const message = error.code === "email_address_not_authorized"
       ? "This project can only email team addresses until custom SMTP is configured. Please contact the site owner."
-      : error.code === "over_email_send_rate_limit"
+      : (error.code === "over_email_send_rate_limit" || error.status === 429)
       ? "Email sending is temporarily rate-limited. Wait for the mailer rate-limit window to reset (up to an hour), then try again."
       : "We could not send the reset email right now. Please try again later.";
     redirect(`/forgot-password?error=${encodeURIComponent(message)}`);
