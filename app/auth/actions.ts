@@ -18,6 +18,9 @@ function siteUrl() {
 }
 
 function authError(error: { code?: string; status?: number }, context: "login" | "signup") {
+  if (error.code === "email_address_not_authorized") {
+    return "Supabase is currently configured with its test email service, which only sends to project-team addresses. Public registration needs a verified custom SMTP sender. Please do not keep retrying; the owner must finish email setup.";
+  }
   if (error.code === "email_not_confirmed") {
     return "Please confirm your email using the link we sent before signing in. If the link expired, create a fresh confirmation email.";
   }
@@ -78,7 +81,9 @@ export async function resendConfirmationAction(formData: FormData) {
     options: { emailRedirectTo: `${siteUrl()}/auth/callback?next=/dashboard` },
   });
   if (error) {
-    const message = error.code === "over_email_send_rate_limit"
+    const message = error.code === "email_address_not_authorized"
+      ? "This project can only email team addresses until custom SMTP is configured. Please contact the site owner."
+      : error.code === "over_email_send_rate_limit"
       ? "Email sending is temporarily rate-limited. Wait at least 60 seconds and try again."
       : "We could not resend the confirmation email. Check the address and try again later.";
     redirect(`/login?error=${encodeURIComponent(message)}`);
