@@ -91,7 +91,7 @@ export default function ReferenceWorkspace({ activeTab, userName }: { activeTab:
           <div className="rw-mini-stats"><span>Environment <b>Testnet</b></span><span>Strategy <b>EMA 9/21</b></span><span>Live funds <b>Off</b></span><span>Bot <b>{botSnapshot ? (botRunning ? "Running" : "Stopped") : "—"}</b></span></div>
         </section>
         <section className="rw-auto-card"><div><b>Binance Spot Testnet Bot</b><small>One-minute EMA strategy with configurable risk limits.</small></div><span className="rw-switch"/><small>{botSnapshot ? (botRunning ? "Running" : "Stopped") : "—"}</small></section>
-        <section className="rw-shortcuts">{[["Share","↗"],["Earning","⌁"],["Orders","◷"],["Charts","⌗"],["Assets","▣"],["Invite","♧"],["API","⌘"],["More","•••"]].map(([label, icon])=><button key={label}><b>{icon}</b><span>{label}</span></button>)}</section>
+        <section className="rw-shortcuts"><Link href="/dashboard?tab=bots"><b>♙</b><span>Bot</span></Link><Link href="/dashboard?tab=trade"><b>◷</b><span>Orders</span></Link><Link href="/dashboard?tab=market"><b>⌗</b><span>Markets</span></Link><Link href="/dashboard?tab=profile"><b>♙</b><span>Profile</span></Link></section>
         <div className="rw-section-head"><b>Market Movers</b><span>See all <ChevronRight size={12}/></span></div>
         <section className="rw-panel">
           <div className="rw-market-tabs"><button className="active">Spot Testnet market reference</button><Search size={14}/></div>
