@@ -8,7 +8,7 @@ export default async function Signup({ searchParams }: { searchParams: Promise<{
   return <main className="trx-auth">
     <div className="trx-auth-glow"/>
     <section className="trx-auth-wrap">
-      <Link href="/" className="trx-brand trx-auth-brand"><span className="trx-mark">G</span><span>GROEARN<span className="trx-gold">X</span></span></Link>
+      <Link href="/" className="trx-brand trx-auth-brand"><span className="trx-mark">G</span><span>GROEANRX</span></Link>
       <div className="trx-auth-card">
         <h1>Create account</h1><p className="trx-auth-sub">Start building your trading workspace.</p>
         {params.error && <p className="trx-auth-error" role="alert">{params.error}</p>}
