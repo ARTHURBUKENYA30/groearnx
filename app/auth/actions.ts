@@ -54,7 +54,7 @@ export async function signupAction(formData: FormData) {
   const password = String(formData.get("password") ?? "");
   const name = String(formData.get("name") ?? "").trim().slice(0, 100);
   const referral = String(formData.get("referral") ?? "").trim().replace(/[^a-zA-Z0-9_-]/g, "").slice(0, 32);
-  if (!/^\S+@\S+\.\S+$/.test(email) || password.length < 10) {
+  if (!/^\S+@\S+\.\S+$/.test(email) || password.length < 10 || !/[a-z]/.test(password) || !/[A-Z]/.test(password) || !/[^A-Za-z0-9]/.test(password)) {
     redirect("/signup?error=Enter%20a%20valid%20email%20and%20a%20strong%20password%20with%20lowercase%2C%20uppercase%2C%20a%20symbol%20and%20at%20least%2010%20characters");
   }
   const supabase = await createClient();
