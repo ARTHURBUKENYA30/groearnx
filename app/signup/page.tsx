@@ -16,7 +16,7 @@ export default async function Signup({ searchParams }: { searchParams: Promise<{
           <label htmlFor="name">FULL NAME</label><div className="trx-input-wrap"><UserRound/><input id="name" name="name" autoComplete="name" placeholder="Your full name"/></div>
           <label htmlFor="email">EMAIL</label><div className="trx-input-wrap"><Mail/><input id="email" name="email" type="email" autoComplete="email" required placeholder="you@email.com"/></div>
           <label htmlFor="password">PASSWORD</label><div className="trx-input-wrap"><LockKeyhole/><input id="password" name="password" type="password" autoComplete="new-password" minLength={10} required placeholder="Create a strong password"/></div>
-          <div className="trx-password-rules"><b>Password requirements:</b><span>At least 10 characters</span><span>Use a mix of letters, numbers and symbols</span></div>
+          <div className="trx-password-rules"><b>Password requirements:</b><span>At least 10 characters</span><span>Use a unique password you do not use on other sites</span></div>
           <label htmlFor="referral">REFERRAL CODE (OPTIONAL)</label><div className="trx-input-wrap"><ShieldCheck/><input id="referral" name="referral" defaultValue={referral} placeholder="Enter referral code"/></div>
           <button className="trx-button trx-submit" type="submit">Create account <ArrowRight size={16}/></button>
         </form>
