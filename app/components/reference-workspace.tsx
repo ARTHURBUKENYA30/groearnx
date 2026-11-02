@@ -91,7 +91,7 @@ export default function ReferenceWorkspace({ activeTab, userName }: { activeTab:
           <div className="rw-mini-stats"><span>Environment <b>Testnet</b></span><span>Strategy <b>EMA 9/21</b></span><span>Live funds <b>Off</b></span><span>Bot <b>{botSnapshot ? (botRunning ? "Running" : "Stopped") : "—"}</b></span></div>
         </section>
         <section className="rw-auto-card"><div><b>Binance Spot Testnet Bot</b><small>One-minute EMA strategy with configurable risk limits.</small></div><span className="rw-switch"/><small>{botSnapshot ? (botRunning ? "Running" : "Stopped") : "—"}</small></section>
-        <section className="rw-shortcuts"><button onClick={()=>setNotice("Share offering is not enabled in GROEANRX.")}><b>♜</b><span>Shares</span></button><button onClick={()=>setNotice("Verified signal feed is not connected yet.")}><b>∿</b><span>Signals</span></button><button onClick={()=>setNotice("Earnings and referral payouts are not enabled.")}><b>↗</b><span>Earnings</span></button><Link href="/dashboard?tab=trade"><b>⇄</b><span>Orders</span></Link><button onClick={()=>setNotice("Wallet assets are limited to test balances.")}><b>▣</b><span>Assets</span></button><Link href="/dashboard?tab=profile"><b>♧</b><span>Invite</span></Link><Link href="/dashboard?tab=bots"><b>⌘</b><span>API Bind</span></Link><Link href="/dashboard?tab=profile"><b>···</b><span>More</span></Link></section>
+        <section className="rw-shortcuts"><Link href="/dashboard/shares"><b>♜</b><span>Shares</span></Link><Link href="/dashboard/signals"><b>∿</b><span>Signals</span></Link><Link href="/dashboard/earnings"><b>↗</b><span>Earnings</span></Link><Link href="/dashboard/orders"><b>⇄</b><span>Orders</span></Link><Link href="/dashboard/assets"><b>▣</b><span>Assets</span></Link><Link href="/dashboard/referrals"><b>♧</b><span>Invite</span></Link><Link href="/dashboard?tab=bots#bot-controls"><b>⌘</b><span>API Bind</span></Link><Link href="/dashboard/settings"><b>···</b><span>More</span></Link></section>
         <div className="rw-section-head"><b>Market Movers</b><span>See all <ChevronRight size={12}/></span></div>
         <section className="rw-panel">
           <div className="rw-market-tabs"><button className="active">Spot Testnet market reference</button><Search size={14}/></div>
@@ -151,11 +151,16 @@ export default function ReferenceWorkspace({ activeTab, userName }: { activeTab:
         <section className="rw-profile-section rw-wallet"><div><b>Test wallet</b><span>Paper Trading / Spot Testnet</span></div><strong>$0.00</strong><small>Simulated or exchange test funds only · Not withdrawable</small></section>
         <section className="rw-profile-menu">
           <Link href="/dashboard?tab=market"><span>⌁</span><div><b>Market</b><small>Browse public market data</small></div><ChevronRight/></Link>
-          <Link href="/dashboard?tab=bots"><span>⌑</span><div><b>API Binding</b><small>Connect Binance Spot Testnet</small></div><ChevronRight/></Link>
-          <Link href="/forgot-password"><span>♧</span><div><b>Change Password</b><small>Update your account password</small></div><ChevronRight/></Link>
-          <Link href="/dashboard?tab=bots"><span>◇</span><div><b>Security</b><small>Exchange keys and test environment controls</small></div><ChevronRight/></Link>
-          <Link href="/dashboard?tab=trade"><span>ⓘ</span><div><b>Orders & Trade History</b><small>Review recorded test orders</small></div><ChevronRight/></Link>
-          <Link href="/disclaimer"><span>ⓘ</span><div><b>About GROEANRX</b><small>Platform information and trading risk</small></div><ChevronRight/></Link>
+          <Link href="/dashboard/assets"><span>▣</span><div><b>Assets</b><small>Paper and testnet balances</small></div><ChevronRight/></Link>
+          <Link href="/dashboard?tab=bots#bot-controls"><span>⌑</span><div><b>API Binding</b><small>Connect Binance Spot Testnet</small></div><ChevronRight/></Link>
+          <Link href="/dashboard/settings"><span>⚙</span><div><b>Settings</b><small>Workspace preferences</small></div><ChevronRight/></Link>
+          <Link href="/dashboard/security"><span>◇</span><div><b>Security</b><small>Account and API key protection</small></div><ChevronRight/></Link>
+          <Link href="/dashboard/referrals"><span>♧</span><div><b>Referrals</b><small>Referral tools and status</small></div><ChevronRight/></Link>
+          <Link href="/dashboard/notifications"><span>♢</span><div><b>Notifications</b><small>Account and trading updates</small></div><ChevronRight/></Link>
+          <Link href="/dashboard/support"><span>ⓘ</span><div><b>Support</b><small>Help and technical information</small></div><ChevronRight/></Link>
+          <Link href="/dashboard/faqs"><span>?</span><div><b>FAQs</b><small>Common questions</small></div><ChevronRight/></Link>
+          <Link href="/dashboard/about"><span>ⓘ</span><div><b>About GROEANRX</b><small>Platform information and trading risk</small></div><ChevronRight/></Link>
+          <Link href="/dashboard/change-password"><span>♧</span><div><b>Change Password</b><small>Update your account password</small></div><ChevronRight/></Link>
         </section>
         <form action="/auth/logout" method="post"><button className="rw-signout" type="submit">↗ Sign Out</button></form>
       </>}
