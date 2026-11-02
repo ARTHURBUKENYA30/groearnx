@@ -55,7 +55,7 @@ export async function signupAction(formData: FormData) {
   const name = String(formData.get("name") ?? "").trim().slice(0, 100);
   const referral = String(formData.get("referral") ?? "").trim().replace(/[^a-zA-Z0-9_-]/g, "").slice(0, 32);
   if (!/^\S+@\S+\.\S+$/.test(email) || password.length < 10) {
-    redirect("/signup?error=Enter%20a%20valid%20email%20and%20a%20password%20of%20at%20least%208%20characters");
+    redirect("/signup?error=Enter%20a%20valid%20email%20and%20a%20password%20of%20at%20least%2010%20characters");
   }
   const supabase = await createClient();
   const { data, error } = await supabase.auth.signUp({
@@ -102,7 +102,7 @@ export async function requestPasswordResetAction(formData: FormData) {
     const message = error.code === "email_address_not_authorized"
       ? "This project can only email team addresses until custom SMTP is configured. Please contact the site owner."
       : error.code === "over_email_send_rate_limit"
-      ? "Email sending is temporarily rate-limited. Wait at least 60 seconds and try again."
+      ? "Email sending is temporarily rate-limited. Wait for the mailer rate-limit window to reset (up to an hour), then try again."
       : "We could not send the reset email right now. Please try again later.";
     redirect(`/forgot-password?error=${encodeURIComponent(message)}`);
   }
