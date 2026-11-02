@@ -68,6 +68,24 @@ export async function signupAction(formData: FormData) {
   redirect("/login?message=Account%20created.%20Check%20your%20email%20to%20confirm%20your%20account");
 }
 
+export async function resendConfirmationAction(formData: FormData) {
+  const email = String(formData.get("email") ?? "").trim().toLowerCase();
+  if (!/^\S+@\S+\.\S+$/.test(email)) redirect("/login?error=Enter%20a%20valid%20email%20address");
+  const supabase = await createClient();
+  const { error } = await supabase.auth.resend({
+    type: "signup",
+    email,
+    options: { emailRedirectTo: `${siteUrl()}/auth/callback?next=/dashboard` },
+  });
+  if (error) {
+    const message = error.code === "over_email_send_rate_limit"
+      ? "Email sending is temporarily rate-limited. Wait at least 60 seconds and try again."
+      : "We could not resend the confirmation email. Check the address and try again later.";
+    redirect(`/login?error=${encodeURIComponent(message)}`);
+  }
+  redirect("/login?message=If%20an%20unconfirmed%20account%20exists%2C%20a%20fresh%20confirmation%20email%20has%20been%20sent");
+}
+
 export async function requestPasswordResetAction(formData: FormData) {
   const email = String(formData.get("email") ?? "").trim().toLowerCase();
   if (!/^\S+@\S+\.\S+$/.test(email)) redirect("/forgot-password?error=Enter%20a%20valid%20email%20address");
