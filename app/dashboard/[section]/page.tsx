@@ -1,8 +1,6 @@
-"use client";
-
 import Link from "next/link";
-import { useMemo, useState } from "react";
-import { useParams } from "next/navigation";
+import { redirect } from "next/navigation";
+import { createClient } from "@/lib/supabase/server";
 import {
   ArrowLeft, ArrowRight, Bell, BookOpen, CircleHelp, Copy, FileText,
   Gift, Headphones, Landmark, LockKeyhole, Megaphone, RefreshCw,
@@ -145,18 +143,20 @@ const pages: Record<string, PageConfig> = {
   },
 };
 
-export default function DashboardSectionPage() {
-  const params = useParams<{ section: string }>();
-  const section = String(params.section || "").toLowerCase();
+export default async function DashboardSectionPage({ params }: { params: Promise<{ section: string }> }) {
+  const supabase = await createClient();
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) redirect("/login");
+  const { section: rawSection } = await params;
+  const section = String(rawSection || "").toLowerCase();
   const page = pages[section];
-  const [copied, setCopied] = useState(false);
   const Icon = page?.icon ?? FileText;
-  const links = useMemo(() => [
+  const links = [
     { href: "/dashboard", label: "Home" },
     { href: "/dashboard?tab=bots", label: "Bots" },
     { href: "/dashboard?tab=trade", label: "Trades" },
     { href: "/dashboard?tab=profile", label: "Profile" },
-  ], []);
+  ];
 
   if (!page) return <main className="extra-shell"><div className="extra-card"><h1>Page not found</h1><Link href="/dashboard">Return to dashboard</Link></div></main>;
 
