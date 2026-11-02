@@ -2,19 +2,19 @@ import Link from "next/link";
 import { ArrowRight, ArrowUpRight, Activity, Bot, ShieldCheck, Smartphone, Lock, ChartNoAxesCombined, CircleCheck, Globe, WalletCards, Zap, Landmark } from "lucide-react";
 
 const features = [
-  { icon: Bot, title: "Automated trading bots", body: "Spot and Futures bot workflows with clear controls and activity visibility." },
+  { icon: Bot, title: "Testnet trading bot", body: "Configure a Binance Spot Testnet strategy, monitor orders and test risk controls without live funds." },
   { icon: ShieldCheck, title: "Your funds stay yours", body: "Connect your own exchange account. API keys should never have withdrawal permission." },
   { icon: Activity, title: "Liquid markets", body: "Follow actively traded markets and review price movement in one place." },
   { icon: ChartNoAxesCombined, title: "Trade activity", body: "Review orders, positions and profit-and-loss information from your dashboard." },
-  { icon: Globe, title: "Multiple exchanges", body: "A unified workspace for supported exchange connections." },
+  { icon: Globe, title: "Binance Spot Testnet", body: "Connect a test account with trading-only API permissions and withdrawals disabled." },
   { icon: Smartphone, title: "Mobile ready", body: "Use the trading workspace from your phone, tablet or desktop." },
   { icon: Lock, title: "Account security", body: "Keep access protected with secure sign-in and careful API-key permissions." },
   { icon: Zap, title: "Live controls", body: "Manage bot activity with visible status and clear controls." },
 ];
 const steps = [
   ["01", "Create your account", "Register with your email and a strong password."],
-  ["02", "Connect an exchange", "Add an API key with only the permissions your chosen features require."],
-  ["03", "Configure your strategy", "Review the settings and risk controls before enabling any live trading."],
+  ["02", "Connect Binance Testnet", "Add a Spot Testnet API key with trading permission and withdrawals disabled."],
+  ["03", "Configure your strategy", "Set order size, stop-loss, take-profit and daily loss limits before starting the test bot."],
 ];
 export default function Home() {
   return <main className="trx-home">
@@ -44,12 +44,12 @@ export default function Home() {
       </div>
     </section>
 
-    <section className="trx-proof"><div><b>Spot &amp; Futures</b><span>Trading modes</span></div><div><b>24 / 7</b><span>Market monitoring</span></div><div><b>Multi-exchange</b><span>One workspace</span></div><div><b>Risk first</b><span>Visible controls</span></div></section>
+    <section className="trx-proof"><div><b>Spot Testnet</b><span>Test environment</span></div><div><b>1-minute</b><span>Worker interval</span></div><div><b>EMA 9 / 21</b><span>Demo strategy</span></div><div><b>Risk first</b><span>Visible limits</span></div></section>
 
     <section className="trx-feature-intro" id="features"><span className="trx-eyebrow">TOOLS FOR ACTIVE TRADERS</span><h2>Everything in its right place.</h2><p>One workspace to connect, monitor and manage your trading activity.</p></section>
     <section className="trx-feature-grid">{features.map(({icon:Icon,title,body})=><article key={title}><div className="trx-feature-icon"><Icon size={21}/></div><h3>{title}</h3><p>{body}</p></article>)}</section>
 
-    <section className="trx-exchanges" id="exchanges"><span className="trx-eyebrow">EXCHANGE CONNECTIONS</span><h2>Work with the exchanges you use.</h2><div className="trx-exchange-list"><b>BINANCE</b><b>BYBIT</b><b>HTX</b><b>OKX</b></div><p>Availability depends on the exchange, account type and enabled API permissions.</p></section>
+    <section className="trx-exchanges" id="exchanges"><span className="trx-eyebrow">EXCHANGE CONNECTIONS</span><h2>Work with the exchanges you use.</h2><div className="trx-exchange-list"><b>BINANCE SPOT TESTNET</b></div><p>Only Binance Spot Testnet is enabled in this release. Other exchanges and live-money trading are not enabled.</p></section>
 
     <section className="trx-how" id="how"><div><span className="trx-eyebrow">GET STARTED</span><h2>From setup to strategy in three steps.</h2><p>Take time to understand each permission and risk setting before enabling live trading.</p></div><div className="trx-steps">{steps.map(([n,title,body])=><article key={n}><b>{n}</b><div><h3>{title}</h3><p>{body}</p></div></article>)}</div></section>
 
