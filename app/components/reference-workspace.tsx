@@ -80,7 +80,7 @@ export default function ReferenceWorkspace({ activeTab, userName }: { activeTab:
   const pnlLabel = (pnl >= 0 ? "+" : "-") + "$" + Math.abs(pnl).toFixed(2);
   const tabTitle = nav.find((n) => n.id === activeTab)?.label ?? "Home";
   return <main className="rw-app">
-    <header className="rw-topbar"><Brand/><div className="rw-top-actions"><Exchange/><button className="rw-icon-btn" aria-label="Notifications"><Bell size={15}/></button><button className="rw-icon-btn" aria-label="Menu"><Menu size={15}/></button></div></header>
+    <header className="rw-topbar"><Brand/><div className="rw-top-actions"><button className="rw-ai-btn" onClick={()=>setNotice("AI assistant is not connected in this release.")}>♙ Ask AI</button><span className="rw-live-pill"><i/> Live</span><button className="rw-icon-btn" aria-label="Wallet" onClick={()=>setNotice("Only Paper Trading and Spot Testnet balances are available.")}><Wallet size={15}/></button><button className="rw-icon-btn" aria-label="Notifications" onClick={()=>setNotice("Notifications are not connected yet.")}><Bell size={15}/></button></div></header>
     <div className="rw-content">
       {activeTab === "home" && <>
         <div className="rw-alert"><span>◎</span><div><b>Binance Spot Testnet only</b><small>Use test funds only. Connect your test account in the Bots tab.</small></div><ChevronRight size={15}/></div>
@@ -91,7 +91,7 @@ export default function ReferenceWorkspace({ activeTab, userName }: { activeTab:
           <div className="rw-mini-stats"><span>Environment <b>Testnet</b></span><span>Strategy <b>EMA 9/21</b></span><span>Live funds <b>Off</b></span><span>Bot <b>{botSnapshot ? (botRunning ? "Running" : "Stopped") : "—"}</b></span></div>
         </section>
         <section className="rw-auto-card"><div><b>Binance Spot Testnet Bot</b><small>One-minute EMA strategy with configurable risk limits.</small></div><span className="rw-switch"/><small>{botSnapshot ? (botRunning ? "Running" : "Stopped") : "—"}</small></section>
-        <section className="rw-shortcuts"><Link href="/dashboard?tab=bots"><b>♙</b><span>Bot</span></Link><Link href="/dashboard?tab=trade"><b>◷</b><span>Orders</span></Link><Link href="/dashboard?tab=market"><b>⌗</b><span>Markets</span></Link><Link href="/dashboard?tab=profile"><b>♙</b><span>Profile</span></Link></section>
+        <section className="rw-shortcuts"><button onClick={()=>setNotice("Share offering is not enabled in GROEANRX.")}><b>♜</b><span>Shares</span></button><button onClick={()=>setNotice("Verified signal feed is not connected yet.")}><b>∿</b><span>Signals</span></button><button onClick={()=>setNotice("Earnings and referral payouts are not enabled.")}><b>↗</b><span>Earnings</span></button><Link href="/dashboard?tab=trade"><b>⇄</b><span>Orders</span></Link><button onClick={()=>setNotice("Wallet assets are limited to test balances.")}><b>▣</b><span>Assets</span></button><Link href="/dashboard?tab=profile"><b>♧</b><span>Invite</span></Link><Link href="/dashboard?tab=bots"><b>⌘</b><span>API Bind</span></Link><Link href="/dashboard?tab=profile"><b>···</b><span>More</span></Link></section>
         <div className="rw-section-head"><b>Market Movers</b><span>See all <ChevronRight size={12}/></span></div>
         <section className="rw-panel">
           <div className="rw-market-tabs"><button className="active">Spot Testnet market reference</button><Search size={14}/></div>
