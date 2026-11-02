@@ -1,3 +1,10 @@
+DO $$
+BEGIN
+  IF NOT EXISTS (SELECT 1 FROM vault.secrets WHERE name = 'groearnx_encryption_key') THEN
+    PERFORM vault.create_secret(encode(gen_random_bytes(32), 'hex'), 'groearnx_encryption_key', 'Server-side AES-256-GCM key for GROEANRX exchange credentials');
+  END IF;
+END $$;
+
 create or replace function public.groearnx_get_secret(p_name text)
 returns text language plpgsql security definer set search_path = '' as $$
 declare v_secret text;
