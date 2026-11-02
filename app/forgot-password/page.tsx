@@ -7,7 +7,7 @@ export default async function ForgotPassword({ searchParams }: { searchParams: P
   return <main className="auth">
     <Link className="back" href="/login"><ArrowLeft size={16}/> Back to login</Link>
     <section className="auth-card">
-      <Link href="/" className="brand"><span className="mark">G</span> GROEARN<span className="lime">X</span></Link>
+      <Link href="/" className="brand"><span className="mark">G</span> GROEANR<span className="lime">X</span></Link>
       <div className="eyebrow">ACCOUNT RECOVERY</div>
       <h1>Reset your password</h1>
       <p className="muted">Enter the email used for your account. If it exists, we’ll send a secure reset link.</p>
