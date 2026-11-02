@@ -1,52 +1,61 @@
 # GROEANRX
 
-A responsive Next.js application with Supabase server-side authentication and a clearly labeled crypto-trading product preview.
+GROEANRX is a responsive Next.js crypto-trading workspace with Supabase email/password authentication, a protected dashboard, live public market data, and a Binance Spot Testnet bot workflow.
 
 ## Local setup
 
 1. Install Node.js 20.9 or later.
 2. Copy `.env.example` to `.env.local`.
 3. Set `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, and `NEXT_PUBLIC_SITE_URL`.
-4. In Supabase Authentication → URL Configuration, set the Site URL to your app origin and allow `/auth/callback` on that origin.
-5. Configure production SMTP and email confirmation settings in Supabase Auth.
+4. In Supabase Authentication → URL Configuration, set the Site URL to your app origin and allow the `/auth/callback` path.
+5. Configure custom SMTP in Supabase Auth before enabling public registration and password recovery.
 6. Run `npm install`, then `npm run dev`, and open `http://localhost:3000`.
 
-## Authentication included
+## Authentication
 
-- Email/password sign-up and login
-- Server-side session refresh and authenticated dashboard routing
-- Logout
-- Password recovery email flow and reset form
-- Redirect destination validation
-- Generic password-reset responses to avoid revealing whether an email is registered
+- Email/password sign-up and login.
+- Server-side session refresh and protected dashboard routing.
+- Email confirmation resend, logout and password recovery.
+- Redirect destination validation and generic password-reset responses.
+- Public sign-up requires a verified custom SMTP provider. Supabase's built-in mailer only sends to project-team addresses and has a very low sending limit. Do not disable email confirmation as a workaround.
 
-Password reset and confirmation flows require the production URL and redirect allowlist to be configured in Supabase. Live end-to-end auth still needs to be verified using an actual account and a delivered email.
+## Trading runtime
 
-## Current product status
+- Binance Spot **Testnet only**; no live-money order endpoint is enabled.
+- Server-side trading operations run in the Supabase Edge Function `groearnx-trading`.
+- Supabase cron invokes the worker once per minute.
+- Exchange API credentials are encrypted with AES-256-GCM; the encryption key and worker authorization secret are stored in Supabase Vault.
+- EMA 9/21 crossover strategy on completed one-minute candles.
+- Configurable order size, stop-loss, take-profit and daily loss limit.
+- Order records include commission data; realized P/L accounts for quote-asset fees and base-asset commissions.
+- Worker locks, Binance client order IDs, post-order balance-delta checks and partial-fill pauses reduce execution/reconciliation risk.
+- Stop-loss and take-profit are checked by the recurring worker, not exchange-native stop orders; execution can slip between checks.
 
-Implemented: responsive public landing page, account forms, protected dashboard, password recovery UI/actions, user-scoped watchlist add/remove, and portfolio quantity create/update/remove using existing Supabase tables and RLS policies.
+## Required user setup for end-to-end trading tests
 
-Live market display: the dashboard requests 24-hour ticker data for BTC, ETH, SOL, BNB, and XRP from Binance's public market-data endpoint. The server route validates the response, times out after five seconds, and returns a clear unavailable response rather than presenting stale sample prices as live. The feed is cached briefly and still requires a production runtime smoke test.
+1. Create a Binance Spot Testnet account at https://testnet.binance.vision/.
+2. Generate a Testnet API key with Spot trading permission and withdrawals disabled.
+3. Sign in to GROEANRX and enter the Testnet key/secret only in the authenticated trading panel.
+4. Configure conservative limits and start the testnet bot.
+5. Verify a real testnet BUY and SELL, order history, balance reconciliation, fee-inclusive P/L, stop-loss, take-profit, daily loss pause, emergency stop and retry idempotency.
 
-Preview only: portfolio valuation, bot status, signal rows, strategy cards, and exchange/risk controls are illustrative or non-operational. The app does not place orders, execute trading bots, connect exchange accounts, generate actionable trading signals, or reconcile live positions. Do not enter exchange API keys into this preview.
-
-Not yet production trading software: persistent bot configuration, exchange adapters and encrypted secret storage, signal generation, order/position reconciliation, risk-limit enforcement, emergency-stop execution, financial audit operations, and independent security review require dedicated implementation and testing.
-
-## Production checklist
-
-- Configure Supabase Site URL, callback allowlist, SMTP, password policies, leaked-password protection, and rate limits.
-- Confirm RLS policies and table grants before adding user-owned records.
-- Configure the correct Vercel production/preview environment variables.
-- Run the GitHub Actions CI workflow and verify production deployment logs.
-- Perform end-to-end tests for signup, email confirmation, login, logout, password reset, and protected routes.
-- Do not enable real trading until exchange permissions, server-side secret encryption, rate limits, idempotent order submission, position reconciliation, loss limits, emergency stop, observability, and independent security review are complete.
+No Testnet API credentials were available during development, so those live exchange scenarios remain unverified. Real-money trading must remain disabled until all checks pass and an independent security review is complete.
 
 ## Deployment
 
-Vercel should use the Next.js framework with Output Directory set to Automatic (leave it blank). Configure the following variables in the Vercel environments you use:
+Vercel uses the Next.js framework with automatic output settings. Configure these public app variables for Production and Preview:
 
 - `NEXT_PUBLIC_SUPABASE_URL`
-- `NEXT_PUBLIC_SUPABASE_ANON_KEY` (Supabase publishable key or anon key)
-- `NEXT_PUBLIC_SITE_URL` (the canonical app origin)
+- `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+- `NEXT_PUBLIC_SITE_URL`
 
-In Supabase Authentication → URL Configuration, set Site URL to the canonical production origin and add `https://YOUR_DOMAIN/auth/callback` to Redirect URLs. Add `http://localhost:3000/auth/callback` for local development.
+The Supabase Edge Function receives its service-role credential from the Supabase runtime; do not put the service-role key or Vault secrets in GitHub or public environment variables.
+
+## Verification checklist
+
+- Configure a verified SMTP sender and Supabase redirect allowlist.
+- Run GitHub Actions type-check and production build.
+- Verify sign-up, email confirmation, login, logout, password reset and protected routes with a real mailbox.
+- Verify the Supabase worker cron returns successful responses.
+- Perform the Testnet trading checks above using a funded Testnet account.
+- Never enable live-money trading before exchange permissions, idempotency, fee accounting, balance reconciliation, loss limits, emergency stop, observability and independent security review have all passed.
