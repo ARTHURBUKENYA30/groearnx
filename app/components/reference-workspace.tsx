@@ -100,15 +100,24 @@ export default function ReferenceWorkspace({ activeTab, userName }: { activeTab:
         </section>
       </>}
       {activeTab === "trade" && <>
-        <div className="rw-page-title"><h1>Testnet Orders</h1><Link href="/dashboard?tab=bots" className="rw-gold-btn"><Plus size={13}/> Bot controls</Link></div>
-        <div className="rw-filter-pills"><button className="active">All</button><button>Spot Testnet</button></div>
-        <div className="rw-open-close"><button className="active">Recent orders <small>{botSnapshot?.orders?.length ?? 0}</small></button><button>Recent trades <small>{botSnapshot?.trades?.length ?? 0}</small></button></div>
-        {botSnapshot?.orders?.length ? <section className="rw-panel">{botSnapshot.orders.map(order=><div className="rw-market-row" key={order.id}><b>{order.side} · {order.symbol}</b><span>{Number(order.quantity).toFixed(6)}</span><span className="rw-change">{order.status}</span><small>{new Date(order.created_at).toLocaleString()}</small></div>)}</section> : <div className="rw-empty"><span>◷</span><b>No testnet orders recorded.</b><small>Connect Binance Spot Testnet and start the bot to test orders.</small><Link href="/dashboard?tab=bots">Open testnet bot controls</Link></div>}
+        <div className="rw-page-title"><h1>Trades <span className="rw-live-dot">●</span></h1><Link href="/dashboard?tab=manual" className="rw-gold-btn"><Plus size={13}/> New Trade</Link></div>
+        <div className="rw-filter-pills"><button className="active">All</button><button>Futures (disabled)</button><button>Spot Testnet</button></div>
+        <div className="rw-open-close"><button className="active">Open <small>{botSnapshot?.position ? 1 : 0}</small></button><button>Closed <small>{botSnapshot?.trades?.length ?? 0}</small></button></div>
+        {botSnapshot?.position ? <section className="rw-panel"><div className="rw-market-row"><b>{botSnapshot.position.symbol}</b><span>{Number(botSnapshot.position.quantity).toFixed(6)}</span><span className="rw-change up">Open</span><small>Test position</small></div></section> : <div className="rw-empty rw-trades-empty"><span>◷</span><b>No open positions.</b><Link href="/dashboard?tab=manual">Place a test trade</Link><small>Trade history and fills will appear here after a verified test execution.</small></div>}
+        <div className="rw-section-head"><b>Order history</b><span>{botSnapshot?.orders?.length ?? 0} orders</span></div>
+        {botSnapshot?.orders?.length ? <section className="rw-panel">{botSnapshot.orders.map(order=><div className="rw-market-row" key={order.id}><b>{order.side} · {order.symbol}</b><span>{Number(order.quantity).toFixed(6)}</span><span className="rw-change">{order.status}</span><small>{new Date(order.created_at).toLocaleString()}</small></div>)}</section> : <div className="rw-empty"><small>No test orders recorded yet.</small><Link href="/dashboard?tab=bots">Open bot controls</Link></div>}
       </>}
       {activeTab === "bots" && <>
-        <div className="rw-page-title"><div><h1>Testnet Trading Bot</h1><p>Connect Binance Spot Testnet and manage the real bot controls.</p></div></div>
-        <div className="rw-warning"><b>TESTNET SAFETY</b><p>This build can submit orders only to Binance Spot Testnet. Use test funds, disable withdrawals on the API key, and do not enter live exchange credentials.</p></div>
-        <TradingControlPanel/>
+        <div className="rw-page-title"><div><h1>Smart Bots</h1><p>Preset bots · activate to start trading</p></div></div>
+        <div className="rw-warning"><b>Disclaimer</b><p>Automated strategies can lose money. This workspace is restricted to Paper Trading and Binance Spot Testnet. No live-money orders are enabled.</p></div>
+        <div className="rw-step rw-step-warn"><span>◈</span><div><b>Paper or Spot Testnet environment</b><small>Choose a safe test environment before starting any strategy.</small></div><Link href="/dashboard?tab=bots#bot-controls">Configure</Link></div>
+        <div className="rw-step"><span>⌑</span><div><b>Connect a test API key (optional)</b><small>Only Binance Spot Testnet keys are accepted. Withdrawals must remain disabled.</small></div><Link href="/dashboard?tab=bots#bot-controls">Bind</Link></div>
+        <div className="rw-bot-tabs"><button className="active">All (3)</button><button>Spot (2)</button><button>Futures (disabled)</button></div>
+        <section className="rw-bot-card"><div className="rw-bot-card-head"><span className="rw-bot-avatar">♧</span><div><b>GROEANRX Spot Momentum</b><small>SPOT · EMA 9/21 · TEST ONLY</small><p>Momentum strategy with stop-loss, take-profit and daily loss protection</p></div></div><div className="rw-bot-state"><span>● {botRunning ? "Running" : "Stopped"}</span><small>{botSnapshot?.settings?.symbol ?? "BTCUSDT"}</small></div><Link className="rw-wide-gold rw-bot-link" href="/dashboard?tab=bots#bot-controls">Open bot controls</Link></section>
+        <section className="rw-bot-card"><div className="rw-bot-card-head"><span className="rw-bot-avatar">⌁</span><div><b>GROEANRX Grid Strategy</b><small>SPOT · PAPER MODE</small><p>Grid strategy preview. Live execution is not enabled.</p></div></div><span className="rw-bot-coming">Strategy preview · Not active</span></section>
+        <section className="rw-bot-card"><div className="rw-bot-card-head"><span className="rw-bot-avatar">✧</span><div><b>GROEANRX DCA Strategy</b><small>SPOT · PAPER MODE</small><p>Dollar-cost averaging strategy preview with configurable risk limits.</p></div></div><span className="rw-bot-coming">Strategy preview · Not active</span></section>
+        <div id="bot-controls" className="rw-bot-controls"><div className="rw-section-head"><b>Connection & strategy settings</b><span>Test only</span></div><TradingControlPanel/></div>
+        <div className="rw-note-grid"><span><b>Pause</b><br/>Stops new entries while retaining the saved test configuration.</span><span><b>Emergency stop</b><br/>Disables automated orders until you explicitly restart.</span></div>
       </>}
       {activeTab === "manual" && <>
         <div className="rw-page-title"><Link href="/dashboard?tab=trade"><ArrowLeft size={17}/></Link><h1>Manual Trade</h1><span className="rw-funds-pill">Disabled <small>Testnet bot only</small></span></div><div className="rw-warning"><b>Manual order entry is not enabled</b><p>To test automated orders, open the Bots tab and connect a Binance Spot Testnet account. No Futures or live-money manual order endpoint is available.</p><Link href="/dashboard?tab=bots">Open testnet bot controls →</Link></div>
@@ -134,11 +143,19 @@ export default function ReferenceWorkspace({ activeTab, userName }: { activeTab:
         <section className="rw-panel"><LiveMarketTable variant="dashboard"/></section>
       </>}
       {activeTab === "profile" && <>
-        <section className="rw-profile-card"><span className="rw-profile-avatar">{userName.slice(0,1).toUpperCase() || "T"}</span><div><b>{userName}</b><small>GROEANRX account</small></div><ChevronRight size={15}/></section>
-        <section className="rw-profile-section"><b>Trading environment</b><p>Binance Spot Testnet only</p><small>Live-money trading and withdrawals are disabled in this release.</small></section>
-        <section className="rw-profile-section"><b>Exchange API connection</b><p>Manage your encrypted Testnet API connection in the Bots tab.</p><Link href="/dashboard?tab=bots">Open bot settings →</Link></section>
-        <section className="rw-profile-section"><b>Account recovery</b><p>Reset your password securely using your verified email address.</p><Link href="/forgot-password">Reset password →</Link></section>
-        <section className="rw-profile-section"><b>Support</b><p>Support chat is not connected yet.</p></section>
+        <section className="rw-profile-card rw-profile-identity"><span className="rw-profile-avatar">{userName.slice(0,1).toUpperCase() || "T"}</span><div><b>{userName}</b><small>{userName.includes("@") ? userName.replace(/^(.).+(@.+)$/, "$1••••$2") : "GROEANRX account"}</small><span className="rw-account-tier">◈ Verified account · Test mode</span></div><ChevronRight size={15}/></section>
+        <section className="rw-profile-section rw-profile-phone"><b>Phone Number</b><div><input aria-label="Phone number" placeholder="Add phone number" disabled/><button disabled>Save</button></div><small>Phone number editing is not connected yet.</small></section>
+        <section className="rw-profile-section rw-profile-mentor"><small>YOUR ACCOUNT</small><b>{userName}</b><span>Member workspace</span></section>
+        <section className="rw-profile-section rw-referral"><div className="rw-profile-row"><b>Referral tools</b><span>Not enabled</span></div><p>Referral codes and team payouts are not configured in this release. No referral earnings are represented as available.</p></section>
+        <section className="rw-profile-section rw-wallet"><div><b>Test wallet</b><span>Paper Trading / Spot Testnet</span></div><strong>$0.00</strong><small>Simulated or exchange test funds only · Not withdrawable</small></section>
+        <section className="rw-profile-menu">
+          <Link href="/dashboard?tab=market"><span>⌁</span><div><b>Market</b><small>Browse public market data</small></div><ChevronRight/></Link>
+          <Link href="/dashboard?tab=bots"><span>⌑</span><div><b>API Binding</b><small>Connect Binance Spot Testnet</small></div><ChevronRight/></Link>
+          <Link href="/forgot-password"><span>♧</span><div><b>Change Password</b><small>Update your account password</small></div><ChevronRight/></Link>
+          <Link href="/dashboard?tab=bots"><span>◇</span><div><b>Security</b><small>Exchange keys and test environment controls</small></div><ChevronRight/></Link>
+          <Link href="/dashboard?tab=trade"><span>ⓘ</span><div><b>Orders & Trade History</b><small>Review recorded test orders</small></div><ChevronRight/></Link>
+          <Link href="/disclaimer"><span>ⓘ</span><div><b>About GROEANRX</b><small>Platform information and trading risk</small></div><ChevronRight/></Link>
+        </section>
         <form action="/auth/logout" method="post"><button className="rw-signout" type="submit">↗ Sign Out</button></form>
       </>}
       {notice && <div className="rw-toast" role="status">{notice}<button onClick={()=>setNotice("")}>×</button></div>}
