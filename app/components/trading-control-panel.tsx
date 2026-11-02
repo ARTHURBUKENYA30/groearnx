@@ -1,6 +1,24 @@
 "use client";
 import { useEffect, useState, type FormEvent } from "react";
 type State = { connected:boolean; enabled?:boolean; environment?:string; symbol?:string; quote_order_qty?:number; max_daily_loss_usdt?:number; stop_loss_pct?:number; take_profit_pct?:number; last_verified_at?:string|null; last_run_at?:string|null; last_signal?:string|null; paused_reason?:string|null };
+function explainConnectionError(value: unknown): string {
+  const raw = typeof value === "string" ? value.trim() : "";
+  const message = raw || "Connection failed. Please try again.";
+  const lower = message.toLowerCase();
+  if (lower.includes("restricted location") || lower.includes("eligibility") || lower.includes("service unavailable from a restricted")) {
+    return "Binance location eligibility restriction. Binance rejected the Spot Testnet request under its regional eligibility terms. This is not an API-key formatting error. GROEANRX cannot bypass Binance's restriction. The submitted credentials were not saved and the bot remains stopped. Contact Binance Support to confirm whether Spot Testnet access is permitted for your account and location.";
+  }
+  if (message.includes("-2015") || lower.includes("invalid api-key") || lower.includes("permissions for this request")) {
+    return "Binance rejected the API key. Confirm that it was created on Spot Testnet, has Spot trading permission, and has no incompatible IP restriction. Withdrawals must remain disabled.";
+  }
+  if (message.includes("-1022") || lower.includes("signature for this request is not valid")) {
+    return "Binance could not verify the request signature. Check that the API secret belongs to this exact Testnet API key, then try again.";
+  }
+  if (message.includes("-1021") || lower.includes("timestamp for this request")) {
+    return "The exchange rejected the request timestamp. Check the server clock and retry in a moment.";
+  }
+  return message.slice(0, 500);
+}
 export default function TradingControlPanel() {
   const [state,setState]=useState<State>({connected:false});
   const [apiKey,setApiKey]=useState(""); const [apiSecret,setApiSecret]=useState("");
@@ -9,7 +27,7 @@ export default function TradingControlPanel() {
   const [busy,setBusy]=useState(false); const [message,setMessage]=useState("");
   async function refresh(){try{const r=await fetch("/api/trading/connection",{cache:"no-store"});if(!r.ok)return;const d=await r.json();setState({connected:d.connected,environment:d.connection?.environment,last_verified_at:d.connection?.last_verified_at,...d.settings});if(d.settings){setSymbol(d.settings.symbol);setAmount(String(d.settings.quote_order_qty));setLoss(String(d.settings.max_daily_loss_usdt));setStop(String(d.settings.stop_loss_pct));setTake(String(d.settings.take_profit_pct));}}catch{}}
   useEffect(()=>{void refresh()},[]);
-  async function connect(e:FormEvent){e.preventDefault();setBusy(true);setMessage("");try{const r=await fetch("/api/trading/connection",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({apiKey,apiSecret})});const d=await r.json();if(!r.ok)throw new Error(d.error||"Connection failed.");setApiKey("");setApiSecret("");setMessage("Binance Spot Testnet connected. Your keys were encrypted on the server.");await refresh();}catch(err){setMessage(err instanceof Error?err.message:"Connection failed.");}finally{setBusy(false)}}
+  async function connect(e:FormEvent){e.preventDefault();setBusy(true);setMessage("");try{const r=await fetch("/api/trading/connection",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({apiKey,apiSecret})});const d=await r.json();if(!r.ok)throw new Error(explainConnectionError(d.error||"Connection failed."));setApiKey("");setApiSecret("");setMessage("Binance Spot Testnet connected. Your keys were encrypted on the server.");await refresh();}catch(err){setMessage(err instanceof Error?err.message:"Connection failed.");}finally{setBusy(false)}}
   async function save(){setBusy(true);setMessage("");try{const r=await fetch("/api/trading/bot",{method:"PUT",headers:{"Content-Type":"application/json"},body:JSON.stringify({symbol,quote_order_qty:Number(amount),max_daily_loss_usdt:Number(loss),stop_loss_pct:Number(stop),take_profit_pct:Number(take)})});const d=await r.json();if(!r.ok)throw new Error(d.error||"Could not save settings.");setMessage("Settings saved. Bot remains safely stopped.");await refresh();}catch(e){setMessage(e instanceof Error?e.message:"Could not save settings.");}finally{setBusy(false)}}
   async function startBot(){setBusy(true);setMessage("");try{const r=await fetch("/api/trading/bot",{method:"POST"});const d=await r.json();if(!r.ok)throw new Error(d.error||"Could not start bot.");setMessage(d.message||"Testnet bot started.");await refresh();}catch(e){setMessage(e instanceof Error?e.message:"Could not start bot.");}finally{setBusy(false)}}
   async function stopBot(){setBusy(true);try{const r=await fetch("/api/trading/bot",{method:"DELETE"});const d=await r.json();if(!r.ok)throw new Error(d.error||"Could not stop bot.");setMessage("Emergency stop confirmed. Bot is disabled.");await refresh();}catch(e){setMessage(e instanceof Error?e.message:"Could not confirm stop request.");}finally{setBusy(false)}}
@@ -32,7 +50,7 @@ export default function TradingControlPanel() {
       <label>Take-profit (%)<input type="number" min="0.1" max="30" step="0.1" value={take} onChange={e=>setTake(e.target.value)}/></label>
     </div>
     <div className="data-form-row"><button className="button small" type="button" onClick={save} disabled={busy}>Save risk settings</button><button className="button small" type="button" onClick={startBot} disabled={busy||!state.connected}>Start testnet bot</button><button className="remove-button" type="button" onClick={stopBot} disabled={busy}>Emergency stop</button></div>
-    {message&&<p className="hint" role="status">{message}</p>}
+    {message&&<div className="notice" role="status"><p>{message}</p>{message.startsWith("Binance location eligibility restriction.")&&<a href="https://www.binance.com/en/support" target="_blank" rel="noreferrer">Contact Binance Support →</a>}</div>}
     <p className="hint">The bot uses an EMA 9/21 moving-average crossover on completed one-minute candles. Only USDT-quoted Spot Testnet pairs are supported. Stop-loss and take-profit are checked by the worker and can slip between checks. Testnet results do not predict live performance.</p>
   </section>;
 }
