@@ -87,7 +87,7 @@ export default function ReferenceWorkspace({ activeTab, userName }: { activeTab:
         <section className="rw-balance-card">
           <div className="rw-card-head"><small>TESTNET OVERVIEW <span>⌄</span></small><div className="rw-tabs"><button className="active">Spot Testnet</button><button>◎</button></div></div>
           <div className="rw-balances"><div><small>◉ REALIZED P/L</small><b className="rw-green">{showBalance ? (botSnapshot ? pnlLabel : "—") : "••••"}</b><small>{botSnapshot?.trades?.length ? "Recent recorded testnet trades" : "No testnet trades recorded yet"}</small></div><div><small>◉ ACCOUNT</small><b>{showBalance ? (botRunning ? "Bot running" : botSnapshot?.settings ? "Bot stopped" : "Not configured") : "••••"}</b><small>Manage connection in Bots</small></div></div>
-          <div className="rw-money-actions"><Link href="/dashboard?tab=bots"><Plus size={14}/> Connect Testnet</Link><button disabled><LockKeyhole size={14}/> Withdrawals disabled</button></div>
+          <div className="rw-money-actions"><Link href="/dashboard/deposit"><Plus size={14}/> Deposit</Link><Link href="/dashboard/withdraw"><LockKeyhole size={14}/> Withdraw</Link></div>
           <div className="rw-mini-stats"><span>Environment <b>Testnet</b></span><span>Strategy <b>EMA 9/21</b></span><span>Live funds <b>Off</b></span><span>Bot <b>{botSnapshot ? (botRunning ? "Running" : "Stopped") : "—"}</b></span></div>
         </section>
         <section className="rw-auto-card"><div><b>Binance Spot Testnet Bot</b><small>One-minute EMA strategy with configurable risk limits.</small></div><span className="rw-switch"/><small>{botSnapshot ? (botRunning ? "Running" : "Stopped") : "—"}</small></section>
