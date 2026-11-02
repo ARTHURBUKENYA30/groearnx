@@ -135,7 +135,8 @@ export default function ReferenceWorkspace({ activeTab, userName }: { activeTab:
         <section className="rw-risk"><b>Risk Management</b><label><span>Take Profit</span><input type="checkbox" disabled/></label><label><span>Stop Loss</span><input type="checkbox" disabled/></label></section>
         <section className="rw-risk"><b>Pro Features</b><label><span>Smart Exit</span><input type="checkbox" disabled/></label><label><span>Smart DCA</span><input type="checkbox" disabled/></label></section>
         <div className="rw-warning">Select a trading pair to continue.</div><button className="rw-wide-gold" disabled>Place {side} Order</button>
-        <button className="rw-history"><History size={13}/> MANUAL TRADE HISTORY</button>\n        
+        <button className="rw-history"><History size={13}/> MANUAL TRADE HISTORY</button>
+        
       </>}
       {activeTab === "market" && <>
         <div className="rw-page-title"><h1>Markets</h1><Search size={16}/></div>
