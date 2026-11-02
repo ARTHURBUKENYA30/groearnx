@@ -16,7 +16,7 @@ export default async function Login({ searchParams }: { searchParams: Promise<{ 
         <form action={loginAction} className="trx-auth-form">
           <input type="hidden" name="next" value={next}/>
           <label htmlFor="email">EMAIL</label><div className="trx-input-wrap"><Mail/><input id="email" name="email" type="email" autoComplete="email" required placeholder="you@email.com"/></div>
-          <div className="trx-auth-row"><label htmlFor="password">PASSWORD</label><Link href="/forgot-password">Forgot password?</Link></div><PasswordField/>
+          <label htmlFor="password">PASSWORD</label><PasswordField/><p className="trx-auth-switch"><Link href="/forgot-password">Forgot password?</Link></p>
           <button className="trx-button trx-submit" type="submit">Sign In</button>
         </form>
         <form action={resendConfirmationAction} className="trx-auth-form trx-resend-form">
