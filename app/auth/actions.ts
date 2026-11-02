@@ -7,6 +7,34 @@ function safeNext(value: string) {
   return value.startsWith("/") && !value.startsWith("//") ? value : "/dashboard";
 }
 
+function siteUrl() {
+  const configured =
+    process.env.NEXT_PUBLIC_SITE_URL ||
+    process.env.VERCEL_PROJECT_PRODUCTION_URL ||
+    process.env.VERCEL_URL ||
+    "https://groearnx.vercel.app";
+  const withProtocol = configured.startsWith("http") ? configured : `https://${configured}`;
+  return withProtocol.replace(/\/$/, "");
+}
+
+function authError(error: { code?: string; status?: number }, context: "login" | "signup") {
+  if (error.code === "email_not_confirmed") {
+    return "Please confirm your email using the link we sent before signing in. If the link expired, create a fresh confirmation email.";
+  }
+  if (error.code === "over_email_send_rate_limit" || error.status === 429) {
+    return "Email confirmation is temporarily rate-limited. Wait at least 60 seconds before trying again. The site owner must configure a dedicated SMTP provider for reliable public registration.";
+  }
+  if (context === "login" && error.code === "invalid_credentials") {
+    return "The email or password is incorrect. If you just registered, confirm your email first.";
+  }
+  if (context === "signup" && error.code === "user_already_exists") {
+    return "An account already exists for this email. Sign in or use Forgot password.";
+  }
+  return context === "login"
+    ? "Sign-in could not be completed. Please try again."
+    : "Account creation could not be completed. Please check your details and try again.";
+}
+
 export async function loginAction(formData: FormData) {
   const email = String(formData.get("email") ?? "").trim().toLowerCase();
   const password = String(formData.get("password") ?? "");
@@ -14,7 +42,7 @@ export async function loginAction(formData: FormData) {
   if (!email || !password) redirect("/login?error=Enter%20email%20and%20password");
   const supabase = await createClient();
   const { error } = await supabase.auth.signInWithPassword({ email, password });
-  if (error) redirect("/login?error=Sign-in%20failed.%20Check%20your%20details");
+  if (error) redirect(`/login?error=${encodeURIComponent(authError(error, "login"))}`);
   redirect(safeNext(next));
 }
 
@@ -27,15 +55,15 @@ export async function signupAction(formData: FormData) {
     redirect("/signup?error=Enter%20a%20valid%20email%20and%20a%20password%20of%20at%20least%208%20characters");
   }
   const supabase = await createClient();
-  const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000").replace(/\/$/, "");
   const { data, error } = await supabase.auth.signUp({
-    email, password,
+    email,
+    password,
     options: {
       data: { full_name: name, referral_code: referral || null },
-      emailRedirectTo: `${siteUrl}/auth/callback?next=/dashboard`,
+      emailRedirectTo: `${siteUrl()}/auth/callback?next=/dashboard`,
     },
   });
-  if (error) redirect("/signup?error=Account%20creation%20failed.%20Check%20your%20details%20or%20try%20again");
+  if (error) redirect(`/signup?error=${encodeURIComponent(authError(error, "signup"))}`);
   if (data.session) redirect("/dashboard");
   redirect("/login?message=Account%20created.%20Check%20your%20email%20to%20confirm%20your%20account");
 }
@@ -44,8 +72,15 @@ export async function requestPasswordResetAction(formData: FormData) {
   const email = String(formData.get("email") ?? "").trim().toLowerCase();
   if (!/^\S+@\S+\.\S+$/.test(email)) redirect("/forgot-password?error=Enter%20a%20valid%20email%20address");
   const supabase = await createClient();
-  const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000").replace(/\/$/, "");
-  await supabase.auth.resetPasswordForEmail(email, { redirectTo: `${siteUrl}/auth/callback?next=/reset-password` });
+  const { error } = await supabase.auth.resetPasswordForEmail(email, {
+    redirectTo: `${siteUrl()}/auth/callback?next=/reset-password`,
+  });
+  if (error) {
+    const message = error.code === "over_email_send_rate_limit"
+      ? "Email sending is temporarily rate-limited. Wait at least 60 seconds and try again."
+      : "We could not send the reset email right now. Please try again later.";
+    redirect(`/forgot-password?error=${encodeURIComponent(message)}`);
+  }
   redirect("/forgot-password?message=If%20an%20account%20exists%20for%20that%20email%2C%20a%20reset%20link%20has%20been%20sent");
 }
 
