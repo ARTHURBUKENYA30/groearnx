@@ -293,3 +293,45 @@ body:has(.rw-app){background:#090a09;color:#f2f1ed}
 .extra-bottom{position:fixed;z-index:10;bottom:0;left:0;right:0;height:58px;display:flex;align-items:center;justify-content:center;gap:clamp(13px,5vw,27px);padding:0 10px;background:#0d0e0cf5;border-top:1px solid #ffffff12;backdrop-filter:blur(12px)}
 .extra-bottom a{font-size:8px;color:#bcb7aa}
 @media(min-width:700px){.extra-content{padding-top:24px}.extra-header{height:58px}}
+
+
+/* Reference-checked sign-in geometry: preserve auth behavior, correct the visible shape. */
+.trx-login-exact .trx-auth-card{
+  border-radius:16px;
+  border-color:#292929;
+  background:#141414;
+  padding:28px;
+  box-shadow:0 20px 60px #0005;
+}
+.trx-login-exact .trx-auth-brand{margin-bottom:22px}
+.trx-login-exact .trx-auth-logo-mark{
+  position:relative;
+  overflow:hidden;
+  border-radius:3px;
+  border:1px solid #51411f;
+  background:#10100e;
+  color:#d9b75e;
+  box-shadow:0 0 16px #d5ae4a30;
+}
+.trx-login-exact .trx-auth-logo-mark:before{
+  content:"";
+  position:absolute;
+  width:22px;height:22px;
+  border:1px solid #c9a64f;
+  border-radius:50%;
+  box-shadow:inset 0 0 0 2px #10100e,0 0 0 1px #8d6d2c;
+}
+.trx-login-exact .trx-auth-logo-mark{font-size:13px;z-index:0}
+.trx-login-exact .trx-auth-logo-mark:after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(135deg,transparent 45%,#d6b65d18 50%,transparent 55%);
+  pointer-events:none;
+}
+.trx-login-exact .trx-submit{border-radius:14px}
+.trx-login-exact .trx-input-wrap{border-radius:6px}
+.trx-login-exact .trx-auth-foot{margin-top:15px}
+@media(max-width:600px){
+  .trx-login-exact .trx-auth-card{border-radius:15px;padding:25px 20px}
+}
