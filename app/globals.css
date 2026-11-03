@@ -458,3 +458,41 @@ body:has(.rw-app){background:#090a09;color:#f2f1ed}
 .rw-filter-pills button:disabled,.rw-three-tabs button:disabled{opacity:.45;cursor:not-allowed;color:#77736a}
 .rw-three-tabs button.active{border-color:#b99543;color:#e0c36c}
 .rw-three-tabs button:disabled{background:#10110f;border-color:#292820}
+
+
+/* Reference screenshot alignment: home overview geometry and compact mobile dashboard rhythm */
+.rw-home-fuel{min-height:49px;height:auto;padding:8px 12px;background:linear-gradient(110deg,#211b10,#15140f);border-color:#514222}
+.rw-home-balance{padding:12px;margin-bottom:9px}
+.rw-home-money{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:14px 1px 12px}
+.rw-home-money>div{min-width:0}
+.rw-home-money>div+div{border-left:1px solid #292820;padding-left:14px}
+.rw-home-money small,.rw-home-money b,.rw-home-money span{display:block}
+.rw-home-money small{font-size:7px;color:#8c8a80;letter-spacing:.55px}
+.rw-home-money b{font-size:23px;line-height:1.15;letter-spacing:-.7px;margin:6px 0 4px;font-variant-numeric:tabular-nums}
+.rw-home-money span{font-size:7px;color:#918d82}
+.rw-home-money span strong{display:inline;font-size:inherit}
+.rw-home-wallet b{color:#f0eee8}
+.rw-home-wallet span a{color:#d8b65d;font-weight:700}
+.rw-home-withdraw{background:#171814!important;border:1px solid #343329!important;color:#c9c4b3!important}
+.rw-home-auto{height:53px;margin:9px 0 0;padding:0 12px}
+.rw-home-bot-icon{width:25px;height:25px;display:grid;place-items:center;border-radius:6px;background:#282316;color:#d7b65d;font-size:14px}
+.rw-home-auto div{flex:1}
+.rw-home-auto>small:last-child{color:#89877d}
+.rw-home-riskline{display:flex;justify-content:space-between;gap:8px;padding:7px 3px 10px;color:#89867c;font-size:7px}
+.rw-home-riskline a{color:#d4b45c;font-weight:750;white-space:nowrap}
+.rw-home-ticker{height:28px;display:flex;align-items:center;gap:18px;overflow:hidden;white-space:nowrap;border-block:1px solid #24241f;margin:0 -12px 13px;padding:0 12px;color:#e1ddd1;font-size:7px;font-weight:750}
+.rw-home-ticker span{display:flex;gap:4px}
+.rw-home-ticker b{color:#d2b15b}
+.rw-home-ticker span:nth-child(4) b{color:#28bd8b}
+.rw-home-balance .rw-mini-stats{padding-top:10px;border-top:1px solid #292820}
+.rw-home-balance .rw-money-actions{gap:7px}
+.rw-home-balance .rw-money-actions a{min-height:34px}
+.rw-home-balance .rw-card-head .rw-tabs button:disabled{opacity:.58;color:#17140b;background:#d7b65e}
+.rw-home-balance .rw-card-head .rw-tabs button:disabled:not(.active){background:#181916;color:#77736a}
+.rw-home-balance .rw-card-head .rw-tabs button.active{background:#d7b65e;color:#15130d}
+.rw-section-head>a{display:flex;align-items:center;gap:3px;color:#d5b45b;font-size:8px}
+@media(max-width:380px){
+ .rw-home-money b{font-size:20px}
+ .rw-home-ticker{gap:13px}
+ .rw-home-riskline{font-size:6px}
+}
