@@ -140,7 +140,7 @@ export default function ReferenceWorkspace({ activeTab, userName }: { activeTab:
       </>}
       {activeTab === "market" && <>
         <div className="rw-page-title"><h1>Markets</h1><Search size={16}/></div>
-        <div className="rw-filter-pills"><button className="active">Spot</button></div>
+        <div className="rw-filter-pills"><button className="active">Spot</button><button disabled title="Futures markets are not enabled in this release">Futures · unavailable</button></div>
         <section className="rw-panel"><LiveMarketTable variant="dashboard"/></section>
       </>}
       {activeTab === "profile" && <>
