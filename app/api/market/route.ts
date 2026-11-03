@@ -10,6 +10,9 @@ const marketPairs = [
   ["LINKUSDT","Chainlink"],["ENAUSDT","Ethena"],["AAVEUSDT","Aave"],["XAUTUSDT","Tether Gold"],["SUIUSDT","Sui"],
   ["GOOGLBUSDT","Google Token"],["MUBUSDT","Mub"],["NVDAXUSDT","Nvidia Token"],["CRCLUSDT","Circle"],["MSTRUSDT","MicroStrategy"],
   ["WLDUSDT","Worldcoin"],["AVAXUSDT","Avalanche"],["VETUSDT","VeChain"],["ALGOUSDT","Algorand"],["APTUSDT","Aptos"],
+  ["ADAUSDT","Cardano"],["BCHUSDT","Bitcoin Cash"],["LTCUSDT","Litecoin"],["XLMUSDT","Stellar"],
+  ["ATOMUSDT","Cosmos"],["ETCUSDT","Ethereum Classic"],["FILUSDT","Filecoin"],["SHIBUSDT","Shiba Inu"],
+  ["TONUSDT","Toncoin"],["DOTUSDT","Polkadot"],["ICPUSDT","Internet Computer"],
 ] as const;
 
 export const revalidate = 60;
