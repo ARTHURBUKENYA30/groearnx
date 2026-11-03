@@ -12,56 +12,69 @@ const marketPairs = [
   ["WLDUSDT","Worldcoin"],["AVAXUSDT","Avalanche"],["VETUSDT","VeChain"],["ALGOUSDT","Algorand"],["APTUSDT","Aptos"],
 ] as const;
 
-export const revalidate = 15;
+export const revalidate = 60;
 
 export async function GET() {
   try {
-    const symbols = encodeURIComponent(JSON.stringify(marketPairs.map(([symbol]) => symbol)));
-    const response = await fetch(`https://api.binance.com/api/v3/ticker/24hr?symbols=${symbols}`, {
+    // CoinPaprika provides global USD reference prices and is reachable from the
+    // Vercel production region where Binance's public API returns HTTP 451.
+    const response = await fetch("https://api.coinpaprika.com/v1/tickers?quotes=USD&limit=500", {
       headers: { Accept: "application/json" },
-      next: { revalidate: 15 },
-      signal: AbortSignal.timeout(7000),
+      next: { revalidate: 60 },
+      signal: AbortSignal.timeout(8000),
     });
     if (!response.ok) {
-      return Response.json({ error: "The public market feed is temporarily unavailable." }, { status: 503 });
+      return Response.json({ error: "The public market reference feed is temporarily unavailable." }, { status: 503 });
     }
 
     const payload: unknown = await response.json();
     if (!Array.isArray(payload)) {
-      return Response.json({ error: "Unexpected response from the public market feed." }, { status: 502 });
+      return Response.json({ error: "Unexpected response from the public market reference feed." }, { status: 502 });
     }
 
-    const bySymbol = new Map<string, { price: number; changePercent: number; quoteVolume: number }>();
+    const bySymbol = new Map<string, { name: string; rank: number; price: number; changePercent: number; quoteVolume: number }>();
     for (const row of payload) {
-      if (!row || typeof row.symbol !== "string") continue;
-      const price = Number(row.lastPrice);
-      const changePercent = Number(row.priceChangePercent);
-      const quoteVolume = Number(row.quoteVolume);
-      if (Number.isFinite(price) && Number.isFinite(changePercent) && Number.isFinite(quoteVolume)) {
-        bySymbol.set(row.symbol, { price, changePercent, quoteVolume });
+      if (!row || typeof row.symbol !== "string" || !row.quotes?.USD) continue;
+      const price = Number(row.quotes.USD.price);
+      const changePercent = Number(row.quotes.USD.percent_change_24h);
+      const quoteVolume = Number(row.quotes.USD.volume_24h);
+      if (!Number.isFinite(price) || !Number.isFinite(changePercent) || !Number.isFinite(quoteVolume)) continue;
+      const rank = Number(row.rank) || Number.MAX_SAFE_INTEGER;
+      const existing = bySymbol.get(row.symbol.toUpperCase());
+      // If a ticker symbol is reused, prefer the higher-ranked asset.
+      if (!existing || rank < existing.rank) {
+        bySymbol.set(row.symbol.toUpperCase(), { name: String(row.name ?? row.symbol), rank, price, changePercent, quoteVolume });
       }
     }
 
-    const markets = marketPairs.flatMap(([symbol, name]) => {
-      const quote = bySymbol.get(symbol);
+    const markets = marketPairs.flatMap(([pairSymbol, fallbackName]) => {
+      const assetSymbol = pairSymbol.replace(/USDT$/, "");
+      const quote = bySymbol.get(assetSymbol);
       if (!quote) return [];
       return [{
-        symbol,
-        name,
-        pair: `${symbol.replace("USDT", "")}/USDT`,
-        ...quote,
+        symbol: pairSymbol,
+        name: quote.name || fallbackName,
+        pair: `${assetSymbol}/USDT`,
+        price: quote.price,
+        changePercent: quote.changePercent,
+        quoteVolume: quote.quoteVolume,
       }];
     });
 
     if (markets.length < 5) {
-      return Response.json({ error: "The public market feed returned too few supported pairs." }, { status: 502 });
+      return Response.json({ error: "The public market reference feed returned too few supported assets." }, { status: 502 });
     }
 
     return Response.json(
-      { source: "Binance public market data", updatedAt: new Date().toISOString(), markets },
-      { headers: { "Cache-Control": "public, s-maxage=15, stale-while-revalidate=45" } },
+      {
+        source: "CoinPaprika global market reference data",
+        updatedAt: new Date().toISOString(),
+        markets,
+        note: "Indicative USD reference prices; not exchange order quotes or trade execution prices.",
+      },
+      { headers: { "Cache-Control": "public, s-maxage=60, stale-while-revalidate=120" } },
     );
   } catch {
-    return Response.json({ error: "The public market feed is temporarily unavailable." }, { status: 503 });
+    return Response.json({ error: "The public market reference feed is temporarily unavailable." }, { status: 503 });
   }
 }
