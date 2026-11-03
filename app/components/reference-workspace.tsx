@@ -86,16 +86,16 @@ export default function ReferenceWorkspace({ activeTab, userName }: { activeTab:
       {activeTab === "home" && <>
         <div className="rw-alert"><span>◎</span><div><b>Binance Spot Testnet only</b><small>Use test funds only. Connect your test account in the Bots tab.</small></div><ChevronRight size={15}/></div>
         <section className="rw-balance-card">
-          <div className="rw-card-head"><small>TESTNET OVERVIEW <span>⌄</span></small><div className="rw-tabs"><button className="active">Spot Testnet</button><button>◎</button></div></div>
-          <div className="rw-balances"><div><small>◉ REALIZED P/L</small><b className="rw-green">{showBalance ? (botSnapshot ? pnlLabel : "—") : "••••"}</b><small>{botSnapshot?.trades?.length ? "Recent recorded testnet trades" : "No testnet trades recorded yet"}</small></div><div><small>◉ ACCOUNT</small><b>{showBalance ? (botRunning ? "Bot running" : botSnapshot?.settings ? "Bot stopped" : "Not configured") : "••••"}</b><small>Manage connection in Bots</small></div></div>
-          <div className="rw-money-actions"><Link href="/dashboard/deposit"><Plus size={14}/> Deposit</Link><Link href="/dashboard/withdraw"><LockKeyhole size={14}/> Withdraw</Link></div>
-          <div className="rw-mini-stats"><span>Environment <b>Testnet</b></span><span>Strategy <b>EMA 9/21</b></span><span>Live funds <b>Off</b></span><span>Bot <b>{botSnapshot ? (botRunning ? "Running" : "Stopped") : "—"}</b></span></div>
+          <div className="rw-card-head"><small>LIFETIME TEST P/L <span>⌄</span></small><div className="rw-tabs"><button className="active">Spot</button><button disabled title="Futures trading is not enabled">Futures</button><button onClick={()=>setShowBalance((value)=>!value)} aria-label={showBalance?"Hide balance":"Show balance"}>{showBalance?"◉":"◎"}</button></div></div>
+          <div className="rw-balances"><div><small>◉ REALIZED P/L</small><b className="rw-green">{showBalance ? (botSnapshot ? pnlLabel : "$0.00") : "••••"}</b><small>{botSnapshot?.trades?.length ? "Recorded test-environment trades" : "No completed test trades yet"}</small></div><div><small>◉ BOT STATUS</small><b>{showBalance ? (botRunning ? "Running" : botSnapshot?.settings ? "Stopped" : "Not configured") : "••••"}</b><small>Paper / Spot Testnet only</small></div></div>
+          <div className="rw-money-actions"><Link href="/dashboard/deposit"><Plus size={14}/> Deposit info</Link><Link href="/dashboard/withdraw"><LockKeyhole size={14}/> Withdraw info</Link></div>
+          <div className="rw-mini-stats"><span>Win rate <b>—</b></span><span>Days <b>0</b></span><span>Active <b>{botRunning ? "1" : "0"}</b></span><span>Trades <b>{botSnapshot?.trades?.length ?? 0}</b></span></div>
         </section>
         <section className="rw-auto-card"><div><b>Binance Spot Testnet Bot</b><small>One-minute EMA strategy with configurable risk limits.</small></div><span className="rw-switch"/><small>{botSnapshot ? (botRunning ? "Running" : "Stopped") : "—"}</small></section>
         <section className="rw-shortcuts"><Link href="/dashboard/shares"><b>♜</b><span>Shares</span></Link><Link href="/dashboard/signals"><b>∿</b><span>Signals</span></Link><Link href="/dashboard/earnings"><b>↗</b><span>Earnings</span></Link><Link href="/dashboard/orders"><b>⇄</b><span>Orders</span></Link><Link href="/dashboard/assets"><b>▣</b><span>Assets</span></Link><Link href="/dashboard/referrals"><b>♧</b><span>Invite</span></Link><Link href="/dashboard?tab=bots#bot-controls"><b>⌘</b><span>API Bind</span></Link><Link href="/dashboard/settings"><b>···</b><span>More</span></Link></section>
         <div className="rw-section-head"><b>Market Movers</b><span>See all <ChevronRight size={12}/></span></div>
         <section className="rw-panel">
-          <div className="rw-market-tabs"><button className="active">Spot Testnet market reference</button><Search size={14}/></div>
+          <div className="rw-market-tabs"><button className="active">Spot market reference</button><button disabled title="Futures market data is not connected">Futures</button><Search size={14}/></div>
           <div className="rw-signal-banner"><span>◈</span><div><b>BINANCE PUBLIC MARKET DATA</b><small>Indicative prices; not trading signals</small></div></div>
           <LiveMarketTable variant="home"/>
         </section>
