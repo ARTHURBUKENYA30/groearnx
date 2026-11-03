@@ -96,10 +96,10 @@ export default function LiveMarketTable({ variant }: Props) {
       filter === "losers" ? a.changePercent - b.changePercent : 0), [markets, query, filter, favorites]);
 
   const statusText = status === "live"
-    ? `LIVE · Binance public data${updatedAt ? ` · Updated ${new Date(updatedAt).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}` : ""}`
+    ? `LIVE · CoinPaprika global prices · reference only${updatedAt ? ` · Updated ${new Date(updatedAt).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}` : ""}`
     : status === "unavailable"
-      ? "LIVE FEED UNAVAILABLE · Showing illustrative fallback values"
-      : "CONNECTING TO LIVE FEED · Illustrative values shown until connected";
+      ? "LIVE PRICE FEED UNAVAILABLE · Showing illustrative fallback values"
+      : "CONNECTING TO LIVE PRICE FEED · Illustrative values shown until connected";
 
   return <>
     <div className="market-toolbar">
