@@ -57,7 +57,7 @@ export default function ReferenceWorkspace({ activeTab, userName }: { activeTab:
   const [query, setQuery] = useState("");
   const [showBalance, setShowBalance] = useState(true);
   const [side, setSide] = useState<"Long" | "Short">("Long");
-  const [marketType, setMarketType] = useState<"Futures" | "Spot">("Futures");
+  const [marketType, setMarketType] = useState<"Futures" | "Spot">("Spot");
   const [orderType, setOrderType] = useState<"Market" | "Limit">("Market");
   const [leverage, setLeverage] = useState("20x");
   const [notice, setNotice] = useState("");
