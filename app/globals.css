@@ -454,3 +454,7 @@ body:has(.rw-app){background:#090a09;color:#f2f1ed}
   .rw-panel .market-row .asset{gap:3px}
   .rw-panel .market-row .asset b{font-size:7px}
 }
+
+.rw-filter-pills button:disabled,.rw-three-tabs button:disabled{opacity:.45;cursor:not-allowed;color:#77736a}
+.rw-three-tabs button.active{border-color:#b99543;color:#e0c36c}
+.rw-three-tabs button:disabled{background:#10110f;border-color:#292820}
