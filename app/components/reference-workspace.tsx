@@ -110,7 +110,7 @@ export default function ReferenceWorkspace({ activeTab, userName }: { activeTab:
       </>}
       {activeTab === "trade" && <>
         <div className="rw-page-title"><h1>Trades <span className="rw-live-dot">●</span></h1><Link href="/dashboard?tab=manual" className="rw-gold-btn"><Plus size={13}/> New Trade</Link></div>
-        <div className="rw-filter-pills"><button className="active">All</button><button>Futures (disabled)</button><button>Spot Testnet</button></div>
+        <div className="rw-filter-pills"><button className="active">All</button><button disabled title="Futures trading is unavailable in this test-only build">Futures</button><button title="Spot Testnet order history">Spot</button></div>
         <div className="rw-open-close"><button className="active">Open <small>{botSnapshot?.position ? 1 : 0}</small></button><button>Closed <small>{botSnapshot?.trades?.length ?? 0}</small></button></div>
         {botSnapshot?.position ? <section className="rw-panel"><div className="rw-market-row"><b>{botSnapshot.position.symbol}</b><span>{Number(botSnapshot.position.quantity).toFixed(6)}</span><span className="rw-change up">Open</span><small>Test position</small></div></section> : <div className="rw-empty rw-trades-empty"><span>◷</span><b>No open positions.</b><Link href="/dashboard?tab=manual">Place a test trade</Link><small>Trade history and fills will appear here after a verified test execution.</small></div>}
         <div className="rw-section-head"><b>Order history</b><span>{botSnapshot?.orders?.length ?? 0} orders</span></div>
@@ -139,7 +139,7 @@ export default function ReferenceWorkspace({ activeTab, userName }: { activeTab:
         <div className="rw-side-toggle"><button className={side==="Long"?"long active":""} onClick={()=>setSide("Long")}>↗ Long</button><button className={side==="Short"?"short active":""} onClick={()=>setSide("Short")}>↘ Short</button></div>
         <div className="rw-three-tabs">{(["Futures","Spot"] as const).map(x=><button key={x} disabled={x==="Futures"} className={marketType===x?"active":""} onClick={()=>setMarketType(x)}>{x==="Futures"?"Futures · unavailable":x}</button>)}</div>
         <div className="rw-three-tabs">{(["Market","Limit"] as const).map(x=><button key={x} className={orderType===x?"active":""} onClick={()=>setOrderType(x)}>{x}</button>)}</div>
-        <div className="rw-label">LEVERAGE</div><div className="rw-leverage"><input type="range" min="1" max="125" defaultValue="20"/><b>{leverage}</b></div>
+        <div className="rw-label">LEVERAGE</div><div className="rw-leverage"><input type="range" min="1" max="125" value={Number.parseInt(leverage, 10)} onChange={(event) => setLeverage(`${event.target.value}x`)}/><b>{leverage}</b></div>
         <div className="rw-leverage-pills">{["1x","5x","10x","20x","50x","75x","125x"].map(x=><button className={leverage===x?"active":""} key={x} onClick={()=>setLeverage(x)}>{x}</button>)}</div>
         <div className="rw-label">MARGIN MODE</div><div className="rw-three-tabs"><button className="active">Cross</button><button>Isolated</button></div>
         <Exchange/>
