@@ -58,6 +58,7 @@ export default function ReferenceWorkspace({ activeTab, userName }: { activeTab:
   const [showBalance, setShowBalance] = useState(true);
   const [side, setSide] = useState<"Long" | "Short">("Long");
   const [marketType, setMarketType] = useState<"Futures" | "Spot">("Futures");
+  const [orderType, setOrderType] = useState<"Market" | "Limit">("Market");
   const [leverage, setLeverage] = useState("20x");
   const [notice, setNotice] = useState("");
   const [botSnapshot, setBotSnapshot] = useState<BotSnapshot | null>(null);
@@ -120,13 +121,14 @@ export default function ReferenceWorkspace({ activeTab, userName }: { activeTab:
         <div className="rw-note-grid"><span><b>Pause</b><br/>Stops new entries while retaining the saved test configuration.</span><span><b>Emergency stop</b><br/>Disables automated orders until you explicitly restart.</span></div>
       </>}
       {activeTab === "manual" && <>
-        <div className="rw-page-title"><Link href="/dashboard?tab=trade"><ArrowLeft size={17}/></Link><h1>Manual Trade</h1><span className="rw-funds-pill">Disabled <small>Testnet bot only</small></span></div><div className="rw-warning"><b>Manual order entry is not enabled</b><p>To test automated orders, open the Bots tab and connect a Binance Spot Testnet account. No Futures or live-money manual order endpoint is available.</p><Link href="/dashboard?tab=bots">Open testnet bot controls →</Link></div>
-        <section className="rw-capital"><small>CAPITAL · FUTURES</small><h2>$0.00</h2><div><span>Max trades <b>$0.00</b></span><span>In use trades <b>$0.00</b></span><span>Available <b className="rw-green">$0.00</b></span></div></section>
-        <div className="rw-futures-note"><b>FUTURES ACCOUNT</b><span>No active Futures API key · Sign in to bind one.</span></div>
+        <div className="rw-page-title"><Link href="/dashboard?tab=trade"><ArrowLeft size={17}/></Link><h1>New Trade</h1><span className="rw-funds-pill">Test mode <small>Orders disabled</small></span></div>
+        <section className="rw-capital"><small>CAPITAL · TEST ENVIRONMENT</small><h2>$0.00</h2><div><span>In bot trades <b>$0.00</b></span><span>In your trades <b>$0.00</b></span><span>Available <b className="rw-green">$0.00</b></span></div></section>
+        <div className="rw-futures-note"><b>TRADING ACCOUNT · TEST MODE</b><span>Manual order submission is disabled. Configure a supported test connection in Bots.</span></div>
         <div className="rw-label">QUICK PRESETS</div><div className="rw-presets">{["Scalp","Swing","Safe","Degen"].map(x=><button key={x}>{x}<small>Set preset</small></button>)}</div>
         <button className="rw-select-row"><span>◉</span> Select Pair <ChevronRight size={15}/></button>
         <div className="rw-side-toggle"><button className={side==="Long"?"long active":""} onClick={()=>setSide("Long")}>↗ Long</button><button className={side==="Short"?"short active":""} onClick={()=>setSide("Short")}>↘ Short</button></div>
-        <div className="rw-three-tabs">{(["Futures","Spot","Market"] as const).map(x=><button key={x} className={marketType===x?"active":""} onClick={()=>setMarketType(x==="Market"?"Spot":x)}>{x}</button>)}</div>
+        <div className="rw-three-tabs">{(["Futures","Spot"] as const).map(x=><button key={x} disabled={x==="Futures"} className={marketType===x?"active":""} onClick={()=>setMarketType(x)}>{x==="Futures"?"Futures · unavailable":x}</button>)}</div>
+        <div className="rw-three-tabs">{(["Market","Limit"] as const).map(x=><button key={x} className={orderType===x?"active":""} onClick={()=>setOrderType(x)}>{x}</button>)}</div>
         <div className="rw-label">LEVERAGE</div><div className="rw-leverage"><input type="range" min="1" max="125" defaultValue="20"/><b>{leverage}</b></div>
         <div className="rw-leverage-pills">{["1x","5x","10x","20x","50x","75x","125x"].map(x=><button className={leverage===x?"active":""} key={x} onClick={()=>setLeverage(x)}>{x}</button>)}</div>
         <div className="rw-label">MARGIN MODE</div><div className="rw-three-tabs"><button className="active">Cross</button><button>Isolated</button></div>
