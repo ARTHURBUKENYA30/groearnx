@@ -496,3 +496,59 @@ body:has(.rw-app){background:#090a09;color:#f2f1ed}
  .rw-home-ticker{gap:13px}
  .rw-home-riskline{font-size:6px}
 }
+
+
+/* Fine alignment pass for the remaining supplied reference screens */
+.rw-step-alert{border-color:#5a302b;background:linear-gradient(100deg,#1e1311,#12110f)}
+.rw-step-alert>span{color:#df7767}
+.rw-step-alert b{color:#e58b7e}
+.rw-step-alert small{color:#b18b83}
+.rw-step-alert>a{border:1px solid #644037;border-radius:5px;padding:5px 8px;color:#e2b5a9;font-size:7px}
+.rw-bot-tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;padding:3px;border-radius:15px;background:#1a1a18}
+.rw-bot-tabs button{height:24px;border-radius:12px;text-align:center}
+.rw-bot-tabs button:disabled{opacity:.45}
+.rw-bot-card{border-radius:9px;background:linear-gradient(180deg,#121310,#0e0f0d);border-color:#292820;padding:11px 10px;margin-bottom:9px}
+.rw-bot-card-head{min-height:37px;align-items:center}
+.rw-bot-card-head p{line-height:1.45}
+.rw-bot-featured{border-color:#76602d;box-shadow:0 0 18px #c59b351b;background:linear-gradient(115deg,#1b190f,#10110f)}
+.rw-bot-featured .rw-bot-avatar{background:#2b2515;border:1px solid #6b5629}
+.rw-bot-coming{display:inline-flex;align-items:center;min-height:22px;padding:4px 8px;border:1px solid #393326;border-radius:5px;background:#17150f;color:#c7aa5d;font-size:7px}
+.rw-bot-controls{margin-top:13px}
+.rw-capital{border:1px solid #302f29;border-radius:10px;background:linear-gradient(120deg,#141411,#10110f);padding:13px;margin-bottom:10px}
+.rw-capital h2{font-size:24px;letter-spacing:-.7px}
+.rw-futures-note{border-style:dashed;padding:10px 11px}
+.rw-presets button{height:46px;border-radius:9px;font-weight:750}
+.rw-select-row{height:47px;border-radius:9px;font-weight:750}
+.rw-side-toggle button{height:47px;border-radius:10px;font-weight:750}
+.rw-three-tabs{padding:2px;border:1px solid #282820;border-radius:9px;background:#11120f}
+.rw-three-tabs button{height:31px;border:0}
+.rw-three-tabs button.active{background:#1c1b16;border:1px solid #9b7d38}
+.rw-leverage-pills button,.rw-amount-grid button{height:30px;border-radius:7px}
+.rw-risk{border:1px solid #292820;border-radius:9px;background:#11120f;padding:12px}
+.rw-risk label{min-height:31px}
+.rw-history{height:34px;border-radius:8px}
+.rw-open-close{padding:3px;border-radius:9px;background:#191917}
+.rw-open-close button{height:37px;border:0;border-radius:7px;background:transparent}
+.rw-open-close button.active{background:#10110f;border:1px solid #292820;color:#e0c36c}
+.rw-trades-empty{min-height:120px;border-style:dashed;background:#10110f}
+.rw-trades-empty>span{display:none}
+.rw-trades-empty small{display:none}
+.rw-profile-identity{border-radius:10px;background:linear-gradient(120deg,#1b190f,#11120f)}
+.rw-profile-phone{border-radius:9px}
+.rw-profile-menu a{min-height:51px}
+.rw-market-toolbar,.market-toolbar{gap:7px}
+.rw-panel .market-row{min-height:33px}
+.trx-login-exact .trx-auth-card{border-radius:15px;background:#11110f;border:1px solid #292929;padding:28px}
+.trx-login-exact .trx-auth-sub{margin-bottom:27px}
+.trx-login-exact .trx-auth-form label{font-size:11px;letter-spacing:.65px}
+.trx-login-exact .trx-input-wrap{height:44px;border-radius:6px}
+.trx-login-exact .trx-submit{height:42px;border-radius:14px}
+@media(max-width:520px){
+ .rw-content{padding-left:12px;padding-right:12px}
+ .rw-bot-card{padding:10px}
+ .rw-capital{padding:11px}
+ .rw-presets button{height:42px}
+ .rw-profile-menu a{min-height:48px}
+ .trx-login-exact{padding:35px 16px}
+ .trx-login-exact .trx-auth-card{padding:22px 18px}
+}
