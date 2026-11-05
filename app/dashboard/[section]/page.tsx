@@ -20,7 +20,7 @@ type PageConfig = {
 
 const pages: Record<string, PageConfig> = {
   assets: {
-    title: "Assets", eyebrow: "WALLET OVERVIEW", description: "View balances held in the GROEANRX test environment.",
+    title: "Assets", eyebrow: "WALLET OVERVIEW", description: "View balances held in the GROEARNX test environment.",
     icon: Wallet, status: "TEST FUNDS ONLY", notice: "Balances shown here are not real-money deposits and cannot be withdrawn.",
     sections: [
       { title: "Paper Trading", description: "Simulated USDT balance", detail: "Your paper account balance appears here after you initialize a simulation." },
@@ -29,7 +29,7 @@ const pages: Record<string, PageConfig> = {
   },
   deposit: {
     title: "Deposit", eyebrow: "FUNDING", description: "Funding controls are not enabled in this release.",
-    icon: Landmark, status: "DISABLED", notice: "GROEANRX does not accept cryptocurrency deposits or payments. Do not send funds to any address claiming to belong to this demo.",
+    icon: Landmark, status: "DISABLED", notice: "GROEARNX does not accept cryptocurrency deposits or payments. Do not send funds to any address claiming to belong to this demo.",
     sections: [{ title: "Deposit unavailable", description: "No deposit address has been generated.", detail: "This page is intentionally read-only until a legitimate, audited custody and payment system exists." }],
   },
   withdraw: {
@@ -39,7 +39,7 @@ const pages: Record<string, PageConfig> = {
   },
   signals: {
     title: "Signals", eyebrow: "MARKET RESEARCH", description: "A signal feed is not connected yet.",
-    icon: Signal, status: "NOT CONNECTED", notice: "No trade recommendations are being published by GROEANRX at this time.",
+    icon: Signal, status: "NOT CONNECTED", notice: "No trade recommendations are being published by GROEARNX at this time.",
     sections: [{ title: "Signal feed", description: "No verified provider configured.", detail: "When a provider is integrated, entries will include source, timestamp, market, risk and invalidation details." }],
   },
   earnings: {
@@ -53,14 +53,14 @@ const pages: Record<string, PageConfig> = {
     sections: [{ title: "Your referral link", description: "Unavailable", detail: "Referral links will only be issued after the referral rules, attribution and payout ledger are implemented and tested." }],
   },
   shares: {
-    title: "Shares", eyebrow: "INVESTMENT", description: "No share offering is available in GROEANRX.",
+    title: "Shares", eyebrow: "INVESTMENT", description: "No share offering is available in GROEARNX.",
     icon: BriefcaseBusiness, status: "NOT AVAILABLE", notice: "This platform does not currently sell securities, shares or investment packages.",
     sections: [{ title: "No active offerings", description: "There are no available share products.", detail: "Do not send money to anyone promising share allocations through this page." }],
   },
   invest: {
     title: "Investment information", eyebrow: "LEARN", description: "Understand the risks before using automated trading tools.",
     icon: TrendingUp, status: "INFORMATION ONLY", notice: "Trading involves risk, including the loss of capital. Past performance does not guarantee future results.",
-    sections: [{ title: "No guaranteed returns", description: "GROEANRX does not promise fixed or daily profits.", detail: "Automated strategies can lose money during volatile, illiquid or fast-moving markets." }],
+    sections: [{ title: "No guaranteed returns", description: "GROEARNX does not promise fixed or daily profits.", detail: "Automated strategies can lose money during volatile, illiquid or fast-moving markets." }],
   },
   convert: {
     title: "Convert", eyebrow: "ASSET TOOLS", description: "Asset conversion is not connected.",
@@ -68,7 +68,7 @@ const pages: Record<string, PageConfig> = {
     sections: [{ title: "Conversion unavailable", description: "No assets are eligible for conversion.", detail: "A verified exchange quote and transaction preview would be required before enabling conversion." }],
   },
   settings: {
-    title: "Settings", eyebrow: "ACCOUNT", description: "Manage your GROEANRX workspace preferences.",
+    title: "Settings", eyebrow: "ACCOUNT", description: "Manage your GROEARNX workspace preferences.",
     icon: Settings, status: "ACCOUNT SETTINGS", notice: "Some settings are managed by your account provider and may not be editable here.",
     sections: [
       { title: "Password", description: "Update your sign-in password", detail: "Use the secure password recovery flow if you need to change or reset it." },
@@ -80,7 +80,7 @@ const pages: Record<string, PageConfig> = {
     icon: ShieldCheck, status: "PROTECTION", notice: "Never share your password, API secret, recovery codes or seed phrase with anyone.",
     sections: [
       { title: "Exchange API permissions", description: "Spot Testnet only", detail: "Use testnet credentials only. Withdrawal permission must remain disabled." },
-      { title: "Password security", description: "Protect your GROEANRX login", detail: "Use a unique password and secure the email account used to sign in." },
+      { title: "Password security", description: "Protect your GROEARNX login", detail: "Use a unique password and secure the email account used to sign in." },
     ],
   },
   notifications: {
@@ -89,9 +89,9 @@ const pages: Record<string, PageConfig> = {
     sections: [{ title: "You're all caught up", description: "No notifications available.", detail: "Trading alerts and account notices will be shown here when generated by verified services." }],
   },
   announcements: {
-    title: "Announcements", eyebrow: "PLATFORM NEWS", description: "Official GROEANRX product updates.",
+    title: "Announcements", eyebrow: "PLATFORM NEWS", description: "Official GROEARNX product updates.",
     icon: Megaphone, status: "NO ANNOUNCEMENTS", notice: "No official announcements have been published in this release.",
-    sections: [{ title: "No updates yet", description: "Check back for product updates.", detail: "Only announcements published by the GROEANRX team should be trusted." }],
+    sections: [{ title: "No updates yet", description: "Check back for product updates.", detail: "Only announcements published by the GROEARNX team should be trusted." }],
   },
   support: {
     title: "Support", eyebrow: "HELP CENTRE", description: "Get help with your account and the test trading workspace.",
@@ -99,17 +99,17 @@ const pages: Record<string, PageConfig> = {
     sections: [{ title: "Account and technical help", description: "Support inbox unavailable", detail: "For now, review the FAQ and security information. A verified support channel will be added when configured." }],
   },
   faqs: {
-    title: "FAQs", eyebrow: "HELP CENTRE", description: "Answers to common questions about GROEANRX.",
+    title: "FAQs", eyebrow: "HELP CENTRE", description: "Answers to common questions about GROEARNX.",
     icon: CircleHelp, status: "HELP", notice: "This workspace is currently limited to simulated trading and eligible exchange testnet access.",
     sections: [
-      { title: "Does GROEANRX trade with real money?", description: "No. Real-money trading is disabled.", detail: "Paper Trading simulates orders. Spot Testnet uses exchange test funds only." },
+      { title: "Does GROEARNX trade with real money?", description: "No. Real-money trading is disabled.", detail: "Paper Trading simulates orders. Spot Testnet uses exchange test funds only." },
       { title: "Can I withdraw my test balance?", description: "No.", detail: "Paper and testnet balances are not real withdrawable assets." },
       { title: "Why is my bot stopped?", description: "A bot may be unconfigured, disconnected or blocked by exchange eligibility.", detail: "Check the Bots page for the exact connection and safety status. Do not attempt to bypass regional restrictions." },
     ],
   },
   about: {
-    title: "About GROEANRX", eyebrow: "PLATFORM", description: "A trading workspace for learning, strategy configuration and test execution.",
-    icon: FileText, status: "BETA WORKSPACE", notice: "GROEANRX is not an investment adviser, broker, custodian or guarantee of trading results.",
+    title: "About GROEARNX", eyebrow: "PLATFORM", description: "A trading workspace for learning, strategy configuration and test execution.",
+    icon: FileText, status: "BETA WORKSPACE", notice: "GROEARNX is not an investment adviser, broker, custodian or guarantee of trading results.",
     sections: [{ title: "Current capabilities", description: "Paper Trading and limited testnet workflows", detail: "Live-money trading, deposits, withdrawals, investment packages and referral payouts are not enabled." }],
   },
   academy: {
@@ -122,9 +122,9 @@ const pages: Record<string, PageConfig> = {
     ],
   },
   install: {
-    title: "Install GROEANRX", eyebrow: "APP EXPERIENCE", description: "Use the browser's install option when this website is eligible as an app.",
+    title: "Install GROEARNX", eyebrow: "APP EXPERIENCE", description: "Use the browser's install option when this website is eligible as an app.",
     icon: Download, status: "BROWSER INSTALL", notice: "Installation availability depends on your browser and device.",
-    sections: [{ title: "Install from your browser", description: "Open the browser menu and choose Install app or Add to Home Screen.", detail: "Only install the official GROEANRX domain. Check the address before signing in." }],
+    sections: [{ title: "Install from your browser", description: "Open the browser menu and choose Install app or Add to Home Screen.", detail: "Only install the official GROEARNX domain. Check the address before signing in." }],
   },
   orders: {
     title: "Orders", eyebrow: "TRADE ACTIVITY", description: "Review recorded test orders and positions.",
@@ -161,9 +161,9 @@ export default async function DashboardSectionPage({ params }: { params: Promise
   if (!page) return <main className="extra-shell"><div className="extra-card"><h1>Page not found</h1><Link href="/dashboard">Return to dashboard</Link></div></main>;
 
   return <main className="extra-shell">
-    <header className="extra-header"><Link href="/dashboard" aria-label="Back to dashboard"><ArrowLeft size={18}/></Link><span className="extra-brand"><span className="extra-mark">G</span> GROEANRX</span><Link href="/dashboard?tab=profile" aria-label="Profile"><Users size={17}/></Link></header>
+    <header className="extra-header"><Link href="/dashboard" aria-label="Back to dashboard"><ArrowLeft size={18}/></Link><span className="extra-brand"><span className="extra-mark">G</span> GROEARNX</span><Link href="/dashboard?tab=profile" aria-label="Profile"><Users size={17}/></Link></header>
     <div className="extra-content">
-      <div className="extra-breadcrumb">GROEANRX <ArrowRight size={11}/> {page.title.toUpperCase()}</div>
+      <div className="extra-breadcrumb">GROEARNX <ArrowRight size={11}/> {page.title.toUpperCase()}</div>
       <section className="extra-hero">
         <div className="extra-icon"><Icon size={21}/></div>
         <div className="extra-heading"><small>{page.eyebrow}</small><h1>{page.title}</h1><p>{page.description}</p></div>
@@ -182,7 +182,7 @@ export default async function DashboardSectionPage({ params }: { params: Promise
       {section === "settings" && <Link className="extra-primary" href="/dashboard?tab=bots">Open trading settings <ArrowRight size={15}/></Link>}
       {section === "security" && <Link className="extra-primary" href="/dashboard?tab=bots#bot-controls">Review API connection <ArrowRight size={15}/></Link>}
       <section className="extra-quicklinks"><h2>Workspace</h2>{links.map((item) => <Link href={item.href} key={item.href}>{item.label}<ArrowRight size={14}/></Link>)}</section>
-      <p className="extra-foot">GROEANRX · Test environment only · Real-money trading disabled</p>
+      <p className="extra-foot">GROEARNX · Test environment only · Real-money trading disabled</p>
     </div>
     <nav className="extra-bottom">{links.map((item) => <Link href={item.href} key={item.href}>{item.label}</Link>)}</nav>
   </main>;
