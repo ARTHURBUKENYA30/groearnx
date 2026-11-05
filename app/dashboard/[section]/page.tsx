@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import {
   ArrowLeft, ArrowRight, Bell, BookOpen, CircleHelp, Copy, FileText,
@@ -144,9 +143,6 @@ const pages: Record<string, PageConfig> = {
 };
 
 export default async function DashboardSectionPage({ params }: { params: Promise<{ section: string }> }) {
-  const supabase = await createClient();
-  const { data: { user } } = await supabase.auth.getUser();
-  if (!user) redirect("/login");
   const { section: rawSection } = await params;
   const section = String(rawSection || "").toLowerCase();
   const page = pages[section];
