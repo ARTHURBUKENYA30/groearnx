@@ -112,7 +112,14 @@ export async function requestPasswordResetAction(formData: FormData) {
 export async function updatePasswordAction(formData: FormData) {
   const password = String(formData.get("password") ?? "");
   const confirmPassword = String(formData.get("confirmPassword") ?? "");
-  if (password.length < 10) redirect("/reset-password?error=Use%20at%20least%2010%20characters");
+  const strongPassword =
+    password.length >= 10 &&
+    /[a-z]/.test(password) &&
+    /[A-Z]/.test(password) &&
+    /[^A-Za-z0-9]/.test(password);
+  if (!strongPassword) {
+    redirect("/reset-password?error=Use%20at%20least%2010%20characters%20with%20lowercase%2C%20uppercase%20and%20a%20symbol");
+  }
   if (password !== confirmPassword) redirect("/reset-password?error=Passwords%20do%20not%20match");
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
