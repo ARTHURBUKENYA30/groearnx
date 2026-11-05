@@ -30,7 +30,7 @@ export default function Home() {
         <span className="trx-eyebrow"><span className="trx-pulse"/> AUTOMATED CRYPTO TRADING WORKSPACE</span>
         <h1>Trade easily.<br/><span className="trx-gold">The smart way.</span></h1>
         <p>GROEARNX brings automated trading tools, liquid-market data and trade monitoring into one dashboard. Test strategies in Paper Trading or connect Binance Spot Testnet before considering any live trading.</p>
-        <div className="trx-hero-actions"><Link className="trx-button" href="/signup">Get Started <ArrowRight size={17}/></Link><Link className="trx-outline-button" href="/login">Open Trading Dashboard</Link></div>
+        <div className="trx-hero-actions"><Link className="trx-button" href="/signup">Get Started <ArrowRight size={17}/></Link><Link className="trx-outline-button" href="/dashboard">Open Trading Dashboard</Link></div>
         <div className="trx-trust"><ShieldCheck size={15}/> Test environments only · Live-money trading disabled</div>
       </div>
       <div className="trx-preview">
