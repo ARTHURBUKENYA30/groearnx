@@ -19,7 +19,7 @@ const steps = [
 export default function Home() {
   return <main className="trx-home">
     <header className="trx-nav">
-      <Link href="/" className="trx-brand"><span className="trx-mark">G</span><span>GROEANR<span className="trx-gold">X</span></span></Link>
+      <Link href="/" className="trx-brand"><span className="trx-mark">G</span><span>GROEARN<span className="trx-gold">X</span></span></Link>
       <nav><a href="#features">Platform</a><a href="#exchanges">Environments</a><a href="#how">How it works</a></nav>
       <div className="trx-nav-actions"><Link href="/login">Log In</Link><Link className="trx-button trx-button-small" href="/signup">Launch App <ArrowUpRight size={15}/></Link></div>
     </header>
@@ -57,6 +57,6 @@ export default function Home() {
     <section className="trx-how" id="how"><div><span className="trx-eyebrow">START TRADING IN THREE STEPS</span><h2>From setup to strategy.</h2><p>Check every permission and risk setting before starting the test bot.</p></div><div className="trx-steps">{steps.map(([n,title,body])=><article key={n}><b>{n}</b><div><h3>{title}</h3><p>{body}</p></div></article>)}</div></section>
 
     <section className="trx-cta"><div className="trx-cta-icon"><Landmark size={26}/></div><span className="trx-eyebrow">YOUR TRADING WORKSPACE</span><h2>Your trading engine starts here.</h2><p>Explore GROEARNX with simulated funds or Binance Spot Testnet. No live-money trading or withdrawal access is enabled.</p><Link className="trx-button" href="/signup">Create Account <ArrowRight size={17}/></Link></section>
-    <footer className="trx-footer"><Link href="/" className="trx-brand"><span className="trx-mark">G</span><span>GROEANR<span className="trx-gold">X</span></span></Link><span>© {new Date().getFullYear()} GROEARNX</span><span>Crypto trading involves risk. No returns are guaranteed.</span><span><Link href="/disclaimer">Disclaimer</Link> · <Link href="/privacy">Privacy Policy</Link></span></footer>
+    <footer className="trx-footer"><Link href="/" className="trx-brand"><span className="trx-mark">G</span><span>GROEARN<span className="trx-gold">X</span></span></Link><span>© {new Date().getFullYear()} GROEARNX</span><span>Crypto trading involves risk. No returns are guaranteed.</span><span><Link href="/disclaimer">Disclaimer</Link> · <Link href="/privacy">Privacy Policy</Link></span></footer>
   </main>;
 }
