@@ -60,6 +60,12 @@ export default function ReferenceWorkspace({ activeTab, userName }: { activeTab:
   const [marketType, setMarketType] = useState<"Futures" | "Spot">("Spot");
   const [orderType, setOrderType] = useState<"Market" | "Limit">("Market");
   const [leverage, setLeverage] = useState("20x");
+  const [selectedPair, setSelectedPair] = useState("BTCUSDT");
+  const [marginMode, setMarginMode] = useState<"Cross" | "Isolated">("Cross");
+  const [allocation, setAllocation] = useState("25%");
+  const [positionView, setPositionView] = useState<"open" | "closed">("open");
+  const [tradeScope, setTradeScope] = useState<"all" | "spot">("all");
+  const [botScope, setBotScope] = useState<"all" | "spot">("all");
   const [notice, setNotice] = useState("");
   const [botSnapshot, setBotSnapshot] = useState<BotSnapshot | null>(null);
   useEffect(() => {
@@ -110,9 +116,9 @@ export default function ReferenceWorkspace({ activeTab, userName }: { activeTab:
       </>}
       {activeTab === "trade" && <>
         <div className="rw-page-title"><h1>Trades <span className="rw-live-dot">●</span></h1><Link href="/dashboard?tab=manual" className="rw-gold-btn"><Plus size={13}/> New Trade</Link></div>
-        <div className="rw-filter-pills"><button className="active">All</button><button disabled title="Futures trading is unavailable in this test-only build">Futures</button><button title="Spot Testnet order history">Spot</button></div>
-        <div className="rw-open-close"><button className="active">Open <small>{botSnapshot?.position ? 1 : 0}</small></button><button>Closed <small>{botSnapshot?.trades?.length ?? 0}</small></button></div>
-        {botSnapshot?.position ? <section className="rw-panel"><div className="rw-market-row"><b>{botSnapshot.position.symbol}</b><span>{Number(botSnapshot.position.quantity).toFixed(6)}</span><span className="rw-change up">Open</span><small>Test position</small></div></section> : <div className="rw-empty rw-trades-empty"><span>◷</span><b>No open positions.</b><Link href="/dashboard?tab=manual">Place a test trade</Link><small>Trade history and fills will appear here after a verified test execution.</small></div>}
+        <div className="rw-filter-pills"><button className={tradeScope==="all"?"active":""} onClick={()=>setTradeScope("all")}>All</button><button disabled title="Futures trading is unavailable in this test-only build">Futures</button><button className={tradeScope==="spot"?"active":""} onClick={()=>setTradeScope("spot")} title="Spot Testnet order history">Spot</button></div>
+        <div className="rw-open-close"><button className={positionView==="open"?"active":""} onClick={()=>setPositionView("open")}>Open <small>{botSnapshot?.position ? 1 : 0}</small></button><button className={positionView==="closed"?"active":""} onClick={()=>setPositionView("closed")}>Closed <small>{botSnapshot?.trades?.length ?? 0}</small></button></div>
+        {positionView==="open" ? (botSnapshot?.position ? <section className="rw-panel"><div className="rw-market-row"><b>{botSnapshot.position.symbol}</b><span>{Number(botSnapshot.position.quantity).toFixed(6)}</span><span className="rw-change up">Open</span><small>Test position</small></div></section> : <div className="rw-empty rw-trades-empty"><span>◷</span><b>No open positions.</b><Link href="/dashboard?tab=manual">Place a test trade</Link><small>Trade history and fills will appear here after a verified test execution.</small></div>) : <div className="rw-empty rw-trades-empty"><b>{botSnapshot?.trades?.length ? `${botSnapshot.trades.length} closed test trade(s) recorded.` : "No closed trades yet."}</b><small>Closed trade details are available after the trading ledger records a completed test trade.</small></div>}
         <div className="rw-section-head"><b>Order history</b><span>{botSnapshot?.orders?.length ?? 0} orders</span></div>
         {botSnapshot?.orders?.length ? <section className="rw-panel">{botSnapshot.orders.map(order=><div className="rw-market-row" key={order.id}><b>{order.side} · {order.symbol}</b><span>{Number(order.quantity).toFixed(6)}</span><span className="rw-change">{order.status}</span><small>{new Date(order.created_at).toLocaleString()}</small></div>)}</section> : <div className="rw-empty"><small>No test orders recorded yet.</small><Link href="/dashboard?tab=bots">Open bot controls</Link></div>}
       </>}
@@ -122,7 +128,7 @@ export default function ReferenceWorkspace({ activeTab, userName }: { activeTab:
         <div className="rw-step rw-step-warn"><span>◈</span><div><b>Paper or Spot Testnet environment</b><small>Choose a safe test environment before starting any strategy.</small></div><Link href="/dashboard?tab=bots#bot-controls">Configure</Link></div>
         <div className="rw-step rw-step-alert"><span>▣</span><div><b>Test wallet · $0.00</b><small>Fund a paper wallet or use Spot Testnet. Real deposits are unavailable.</small></div><Link href="/dashboard/assets">View</Link></div>
         <div className="rw-step"><span>⌑</span><div><b>Bind a test API key</b><small>Binance Spot Testnet only · withdrawal permission must stay disabled.</small></div><Link href="/dashboard?tab=bots#bot-controls">Bind</Link></div>
-        <div className="rw-bot-tabs"><button className="active">All (4)</button><button>Spot (3)</button><button disabled>Futures (0)</button></div>
+        <div className="rw-bot-tabs"><button className={botScope==="all"?"active":""} onClick={()=>setBotScope("all")}>All (4)</button><button className={botScope==="spot"?"active":""} onClick={()=>setBotScope("spot")}>Spot (4)</button><button disabled title="Futures strategies are not enabled">Futures (0)</button></div>
         <section className="rw-bot-card"><div className="rw-bot-card-head"><span className="rw-bot-avatar">♧</span><div><b>GROEANRX Spot Momentum</b><small>SPOT · EMA 9/21 · TEST ONLY</small><p>Momentum strategy with stop-loss, take-profit and daily loss protection</p></div></div><div className="rw-bot-state"><span>● {botRunning ? "Running" : "Stopped"}</span><small>{botSnapshot?.settings?.symbol ?? "BTCUSDT"}</small></div><Link className="rw-wide-gold rw-bot-link" href="/dashboard?tab=bots#bot-controls">Open bot controls</Link></section>
         <section className="rw-bot-card"><div className="rw-bot-card-head"><span className="rw-bot-avatar">⌁</span><div><b>GROEANRX Grid Strategy</b><small>SPOT · PAPER MODE</small><p>Grid strategy preview. Live execution is not enabled.</p></div></div><span className="rw-bot-coming">Strategy preview · Not active</span></section>
         <section className="rw-bot-card"><div className="rw-bot-card-head"><span className="rw-bot-avatar">✧</span><div><b>GROEANRX DCA Strategy</b><small>SPOT · PAPER MODE</small><p>Dollar-cost averaging strategy preview with configurable risk limits.</p></div></div><span className="rw-bot-coming">Strategy preview · Not active</span></section>
@@ -134,19 +140,19 @@ export default function ReferenceWorkspace({ activeTab, userName }: { activeTab:
         <div className="rw-page-title"><Link href="/dashboard?tab=trade"><ArrowLeft size={17}/></Link><h1>New Trade</h1><span className="rw-funds-pill">Test mode <small>Orders disabled</small></span></div>
         <section className="rw-capital"><small>CAPITAL · TEST ENVIRONMENT</small><h2>$0.00</h2><div><span>In bot trades <b>$0.00</b></span><span>In your trades <b>$0.00</b></span><span>Available <b className="rw-green">$0.00</b></span></div></section>
         <div className="rw-futures-note"><b>TRADING ACCOUNT · TEST MODE</b><span>Manual order submission is disabled. Configure a supported test connection in Bots.</span></div>
-        <div className="rw-label">QUICK PRESETS</div><div className="rw-presets">{["Scalp","Swing","Safe","Degen"].map(x=><button key={x}>{x}<small>Set preset</small></button>)}</div>
-        <button className="rw-select-row"><span>◉</span> Select Pair <ChevronRight size={15}/></button>
+        <div className="rw-label">QUICK PRESETS</div><div className="rw-presets">{["Scalp","Swing","Safe","Degen"].map(x=><button key={x} type="button" onClick={()=>{setOrderType(x==="Swing"?"Limit":"Market");setLeverage(x==="Safe"?"5x":x==="Degen"?"50x":x==="Swing"?"10x":"20x");setAllocation(x==="Safe"?"10%":x==="Degen"?"50%":x==="Swing"?"25%":"25%");setNotice(`${x} preset selected. These are form preferences only; no order was placed.`);}}>{x}<small>{x==="Safe"?"Lower exposure":x==="Degen"?"Higher exposure":x==="Swing"?"Limit style":"Market style"}</small></button>)}</div>
+        <label className="rw-select-row"><span>◉</span><select aria-label="Select trading pair" value={selectedPair} onChange={event=>setSelectedPair(event.target.value)}><option value="BTCUSDT">BTC/USDT</option><option value="ETHUSDT">ETH/USDT</option><option value="BNBUSDT">BNB/USDT</option><option value="SOLUSDT">SOL/USDT</option><option value="XRPUSDT">XRP/USDT</option></select><ChevronRight size={15}/></label>
         <div className="rw-side-toggle"><button className={side==="Long"?"long active":""} onClick={()=>setSide("Long")}>↗ Long</button><button className={side==="Short"?"short active":""} onClick={()=>setSide("Short")}>↘ Short</button></div>
         <div className="rw-three-tabs">{(["Futures","Spot"] as const).map(x=><button key={x} disabled={x==="Futures"} className={marketType===x?"active":""} onClick={()=>setMarketType(x)}>{x==="Futures"?"Futures · unavailable":x}</button>)}</div>
         <div className="rw-three-tabs">{(["Market","Limit"] as const).map(x=><button key={x} className={orderType===x?"active":""} onClick={()=>setOrderType(x)}>{x}</button>)}</div>
         <div className="rw-label">LEVERAGE</div><div className="rw-leverage"><input type="range" min="1" max="125" value={Number.parseInt(leverage, 10)} onChange={(event) => setLeverage(`${event.target.value}x`)}/><b>{leverage}</b></div>
         <div className="rw-leverage-pills">{["1x","5x","10x","20x","50x","75x","125x"].map(x=><button className={leverage===x?"active":""} key={x} onClick={()=>setLeverage(x)}>{x}</button>)}</div>
-        <div className="rw-label">MARGIN MODE</div><div className="rw-three-tabs"><button className="active">Cross</button><button>Isolated</button></div>
+        <div className="rw-label">MARGIN MODE</div><div className="rw-three-tabs"><button className={marginMode==="Cross"?"active":""} onClick={()=>setMarginMode("Cross")}>Cross</button><button className={marginMode==="Isolated"?"active":""} onClick={()=>setMarginMode("Isolated")}>Isolated</button></div>
         <Exchange/>
-        <div className="rw-amount-grid">{["10%","25%","50%","75%","100%"].map(x=><button key={x}>{x}</button>)}</div>
+        <div className="rw-amount-grid">{["10%","25%","50%","75%","100%"].map(x=><button key={x} className={allocation===x?"active":""} onClick={()=>setAllocation(x)}>{x}</button>)}</div>
         <section className="rw-risk"><b>Risk Management</b><label><span>Take Profit</span><input type="checkbox" disabled/></label><label><span>Stop Loss</span><input type="checkbox" disabled/></label></section>
         <section className="rw-risk"><b>Pro Features</b><label><span>Smart Exit</span><input type="checkbox" disabled/></label><label><span>Smart DCA</span><input type="checkbox" disabled/></label></section>
-        <div className="rw-warning">Select a trading pair to continue.</div><button className="rw-wide-gold" disabled>Place {side} Order</button>
+        <div className="rw-warning">Selected: {selectedPair} · {side} · {orderType} · {allocation} allocation · {marginMode} margin. Manual order submission remains disabled until a verified paper/test order flow and funded test balance are available.</div><button className="rw-wide-gold" disabled title="Manual test order execution is not implemented yet">Place {side} Order · Unavailable</button>
         <button className="rw-history"><History size={13}/> MANUAL TRADE HISTORY</button>
         
       </>}
