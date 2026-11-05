@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { createClient } from "@/lib/supabase/server";
 import {
   ArrowLeft, ArrowRight, Bell, BookOpen, CircleHelp, Copy, FileText,
   Gift, Headphones, Landmark, LockKeyhole, Megaphone, RefreshCw,
