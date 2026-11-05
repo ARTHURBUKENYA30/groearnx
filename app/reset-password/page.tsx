@@ -16,11 +16,11 @@ export default async function ResetPassword({ searchParams }: { searchParams: Pr
       <Link href="/" className="brand"><span className="mark">G</span> GROEANR<span className="lime">X</span></Link>
       <div className="eyebrow">SECURE YOUR ACCOUNT</div>
       <h1>Choose a new password</h1>
-      <p className="muted">Use at least 10 characters. Don’t reuse a password from another site.</p>
+      <p className="muted">Use at least 10 characters, including lowercase, uppercase and a symbol. Don’t reuse a password from another site.</p>
       {params.error && <p className="notice error" role="alert">{params.error}</p>}
       <form action={updatePasswordAction}>
         <label htmlFor="password">New password</label>
-        <input id="password" name="password" type="password" autoComplete="new-password" minLength={10} required placeholder="At least 10 characters" />
+        <input id="password" name="password" type="password" autoComplete="new-password" minLength={10} pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*[^A-Za-z0-9]).{10,}" required placeholder="At least 10 characters" />
         <label htmlFor="confirmPassword">Confirm new password</label>
         <input id="confirmPassword" name="confirmPassword" type="password" autoComplete="new-password" minLength={10} required placeholder="Enter it again" />
         <button className="button submit" type="submit">Update password →</button>
