@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title">
+<title id="title">GROEARNX rising chart logo</title>
+<defs>
+  <linearGradient id="g" x1="12" y1="108" x2="108" y2="18" gradientUnits="userSpaceOnUse">
+    <stop stop-color="#00C853"/><stop offset=".55" stop-color="#20F078"/><stop offset="1" stop-color="#B5FF42"/>
+  </linearGradient>
+  <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
+    <feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+  </filter>
+</defs>
+<path d="M15 103h98" fill="none" stroke="#163B2A" stroke-width="5" stroke-linecap="round"/>
+<g fill="url(#g)" filter="url(#glow)">
+  <rect x="23" y="72" width="15" height="31" rx="4"/>
+  <rect x="48" y="53" width="15" height="50" rx="4"/>
+  <rect x="73" y="34" width="15" height="69" rx="4"/>
+</g>
+<path d="M17 65 42 49 61 55 99 18" fill="none" stroke="url(#g)" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="m83 17 19-2-2 19" fill="none" stroke="url(#g)" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
