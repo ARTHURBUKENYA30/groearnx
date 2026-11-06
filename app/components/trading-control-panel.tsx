@@ -6,7 +6,7 @@ function explainConnectionError(value: unknown): string {
   const message = raw || "Connection failed. Please try again.";
   const lower = message.toLowerCase();
   if (lower.includes("restricted location") || lower.includes("eligibility") || lower.includes("service unavailable from a restricted")) {
-    return "Binance location eligibility restriction. Binance rejected the Spot Testnet request under its regional eligibility terms. This is not an API-key formatting error. GROEANRX cannot bypass Binance's restriction. The submitted credentials were not saved and the bot remains stopped. Contact Binance Support to confirm whether Spot Testnet access is permitted for your account and location.";
+    return "Binance location eligibility restriction. Binance rejected the Spot Testnet request under its regional eligibility terms. This is not an API-key formatting error. GROERNX cannot bypass Binance's restriction. The submitted credentials were not saved and the bot remains stopped. Contact Binance Support to confirm whether Spot Testnet access is permitted for your account and location.";
   }
   if (message.includes("-2015") || lower.includes("invalid api-key") || lower.includes("permissions for this request")) {
     return "Binance rejected the API key. Confirm that it was created on Spot Testnet, has Spot trading permission, and has no incompatible IP restriction. Withdrawals must remain disabled.";
