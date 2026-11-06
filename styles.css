@@ -135,3 +135,61 @@ body{background:radial-gradient(ellipse at 50% 100%,#0b2117 0,transparent 42%),#
 .bot-gate.gold .runtime-status{color:#d8bc72;border-color:#51452a}
 @media(max-width:760px){.overview-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.overview-metrics>div{padding:11px}.overview-metrics b{font-size:14px}}
 @media(max-width:420px){.workspace-alert{align-items:flex-start;flex-wrap:wrap}.workspace-alert button{margin-left:34px}.overview-metrics{gap:7px}}
+
+
+/* GROEarnX refreshed mint-and-forest brand system, inspired by the Lovable reference */
+:root{
+  --bg:#ECF4EF;--panel:#FFFFFF;--line:#D8E6DD;--muted:#607268;--text:#071A13;
+  --gold:#31D78C;--green:#159B65;--red:#D94F55;
+  --brand:#31D78C;--forest:#071A13;--mint:#E2F8EC;--surface:#F7FBF8;
+}
+html,body{background:var(--bg)!important;color:var(--text)!important}
+body{background:radial-gradient(ellipse at 85% 0%,#D8F6E5 0,transparent 34%),#ECF4EF!important}
+.sidebar,.mobile-top,.bottom-nav,.mobilebar{background:#071A13!important;border-color:#17382A!important}
+.sidebar .brand,.mobile-top .brand{color:#ECF4EF!important}
+.sidebar .nav button{color:#B8CFC2!important}
+.sidebar .nav button.active,.sidebar .nav button:hover{background:#123B29!important;color:#31D78C!important}
+.navlabel{color:#86A494!important}
+.main{color:#071A13!important}
+.top h1,.dashboard-welcome h2,.page-intro h2,.sectionhead h3,.market-title h2,.main h2,.section-kicker,.panel-title b{color:#071A13!important}
+.eyebrow,.welcome-kicker,.label,.sub,.dashboard-welcome p,.page-intro p{color:#607268!important}
+.card,.contentcard,.panel,.chart-panel,.performance-panel,.activity-panel,.market-card,.capital-card,.bot-card,.balance-card,.authbox,.profile-card,.wallet-card,.ref-wallet,.empty-panel,.mini-balance>div{
+  background:#FFFFFF!important;border:1px solid #D8E6DD!important;color:#071A13!important;
+  box-shadow:0 8px 28px rgba(7,26,19,.045)!important
+}
+.overview-metrics>div,.dashboard-shortcuts>button,.quick-actions>button,.market-row,.activity-row,.settings-list button{
+  background:#FFFFFF!important;border-color:#D8E6DD!important;color:#071A13!important
+}
+.overview-metrics small,.overview-metrics em,.market-row small,.activity-row small,.data-note,.chart-axis,.wallet-head,.wallet-foot,.balance-card p,.bot-card small,.sectionhead span{color:#607268!important}
+.overview-metrics b,.metric,.wallet-total strong,.wallet-side b,.performance-metrics b,.mini-balance b{color:#071A13!important}
+.btn,.btn:not(.ghost):not(.outline){background:#31D78C!important;color:#031B10!important;border:1px solid #25C77D!important;box-shadow:0 6px 18px rgba(49,215,140,.18)!important}
+.btn:hover{filter:brightness(.96)}
+.btn.ghost,.btn.outline,.tabs button,.segmented button,.preset-grid button,.leverage-grid button,.history-button{
+  background:#F1F8F3!important;color:#173D2A!important;border:1px solid #CFE2D5!important
+}
+.tabs button.selected,.segmented button.selected,.market-filter button.selected,.market-tabs button.selected,.bottom-nav button.active,.mobilebar button.active{background:#DDF8E9!important;color:#087C4C!important}
+.market-filter button,.market-tabs button,.market-title button,.panel-title button{color:#138657!important}
+.badge,.account-status,.wallet-total .up,.up,.coin-row em.up{color:#128653!important}
+.down,.coin-row em.down{color:#D94F55!important}
+.field input,.field select,.inline-field input,.market-searchbox input,.api-binding input{
+  background:#F7FBF8!important;border:1px solid #CFE0D5!important;color:#071A13!important
+}
+.field label,.api-binding,.settings-list button small,.sub-label{color:#607268!important}
+.workspace-alert,.home-alert{background:#E1F8EB!important;border:1px solid #A8E9C4!important;color:#075B37!important}
+.workspace-alert small,.workspace-alert b{color:#075B37!important}
+.notice,.warning-panel,.risk-banner,.status-panel,.danger-strip{background:#FFF8E8!important;border-color:#EAD7A6!important;color:#765516!important}
+.auth{background:radial-gradient(circle at top,#D8F6E5,#ECF4EF 60%)!important}
+.authbox{border-radius:20px!important}
+.authbox h1{color:#071A13!important}
+.authbox>p,.authfoot{color:#607268!important}
+.authfoot a{color:#07834F!important}
+.coinicon,.coin-name i,.avatar,.profile-avatar{background:#DDF8E9!important;color:#087C4C!important}
+.ticker-strip{background:#F7FBF8!important;border:1px solid #D8E6DD!important;color:#355846!important}
+.chart-empty,.empty-state{color:#607268!important}
+.price-chart{filter:saturate(.9)}
+.toast{background:#071A13!important;color:#ECF4EF!important;border-color:#31D78C!important}
+@media(max-width:700px){
+  .main{background:transparent!important}
+  .bottom-nav button,.mobilebar button{color:#B8CFC2!important}
+  .bottom-nav button.active,.mobilebar button.active{color:#31D78C!important;background:transparent!important}
+}
