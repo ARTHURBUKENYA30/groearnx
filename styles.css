@@ -371,3 +371,59 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,su
 .macd-bars{height:76px;display:flex;align-items:flex-end;gap:3px;padding:8px 4px 0;border-bottom:1px solid #dce9df}
 .macd-bars i{flex:1;min-width:2px;border-radius:3px 3px 0 0;opacity:.85}
 .macd-bars i.positive{background:#35b978}.macd-bars i.negative{background:#d97970}
+
+/* FUTUREFORGE · GROEARNX neon trading terminal theme */
+:root{
+ --bg:#070b16;--panel:#0d1628;--line:#1d3150;--muted:#91a6c4;--text:#edf6ff;
+ --gold:#9cecff;--green:#35f0bd;--red:#ff668c;
+ --gx-cyan:#42e8ff;--gx-blue:#5687ff;--gx-violet:#a77bff;--gx-pink:#ff69c8;
+}
+html{color-scheme:dark}
+body{background:radial-gradient(ellipse at 12% 0%,rgba(37,111,190,.2),transparent 38%),radial-gradient(ellipse at 88% 10%,rgba(120,62,220,.16),transparent 34%),linear-gradient(145deg,#070b16,#091326 55%,#080d1b)!important;color:var(--text)}
+.app-shell{background:transparent}
+.desktop-sidebar,.sidebar{background:linear-gradient(180deg,#0b1426 0%,#080f1e 100%)!important;border-color:#1b3453!important;box-shadow:12px 0 40px #02081766}
+.brand,.mobile-top .brand{color:#eaf8ff!important;letter-spacing:.045em;text-shadow:0 0 22px #42e8ff38}
+.mark{background:linear-gradient(135deg,#42e8ff,#6e83ff 58%,#b17aff)!important;color:#06111f!important;box-shadow:0 0 24px #42e8ff55,0 0 3px #fff inset}
+.nav button{color:#9db2d0!important;transition:all .2s ease}
+.nav button.active,.nav button:hover{background:linear-gradient(100deg,#123451,#19254a)!important;color:#70efff!important;box-shadow:inset 3px 0 #42e8ff,0 0 22px #2876c522}
+.main{color:var(--text)}
+.top h1,.welcome h2,.sectionhead h3,.page h2{color:#f0f8ff;text-shadow:0 0 24px #6bdfff18}
+.eyebrow,.label,.sub,.sectionhead span,.data-note{color:#91a6c4!important}
+.pill,.tabs button,.chart-pair-select{background:#101e35!important;border-color:#27466d!important;color:#b9d9f5!important}
+.avatar{background:linear-gradient(135deg,#173c5b,#33245f)!important;border:1px solid #3d8db7!important;color:#8cf2ff!important;box-shadow:0 0 18px #42e8ff22}
+.btn{background:linear-gradient(105deg,#42e8ff,#4f9cff 52%,#9a79ff)!important;color:#061222!important;border:1px solid #8beaff66!important;box-shadow:0 5px 22px #328de544,0 0 16px #42e8ff22;transition:transform .18s,filter .18s,box-shadow .18s}
+.btn:hover{filter:brightness(1.12);transform:translateY(-1px);box-shadow:0 8px 28px #328de566,0 0 22px #42e8ff44}
+.btn.ghost,.btn.outline{background:linear-gradient(120deg,#14243b,#151c38)!important;border:1px solid #31527a!important;color:#aeefff!important;box-shadow:none}
+.card,.contentcard,.panel,.analytics-panel,.chart-panel,.market-card{background:linear-gradient(145deg,rgba(17,34,58,.96),rgba(10,20,38,.98))!important;border:1px solid #244267!important;box-shadow:0 12px 35px #02081755,inset 0 1px #ffffff08;border-radius:15px}
+.card:hover,.contentcard:hover{border-color:#3974a8!important;box-shadow:0 14px 36px #02081788,0 0 22px #42e8ff12}
+.balance-card{background:radial-gradient(ellipse at 90% 0%,#234c78 0,transparent 48%),linear-gradient(130deg,#102944,#111b36 65%,#201a43)!important;border:1px solid #3679a5!important;box-shadow:0 12px 35px #02081788,0 0 28px #42e8ff1b}
+.balance-top,.balance-card p{color:#a8c9e9!important}
+.balance-value{color:#f3fbff;text-shadow:0 0 24px #42e8ff35}
+.notice,.risk-banner{background:linear-gradient(105deg,#18263a,#1b203a)!important;border:1px solid #42628a!important;color:#b9e8ff!important}
+.field input,.field select,input,select,textarea{background:#091426!important;border-color:#294364!important;color:#edf7ff!important}
+.field input:focus,.field select:focus,input:focus,select:focus,textarea:focus{border-color:#42e8ff!important;box-shadow:0 0 0 3px #42e8ff20!important}
+.tabs button.selected{background:linear-gradient(110deg,#12465a,#26346c)!important;color:#8ff3ff!important;border-color:#42cce8!important;box-shadow:0 0 16px #42e8ff22}
+.tabs button.sell.selected{background:linear-gradient(110deg,#51233f,#482a59)!important;color:#ffb1d9!important;border-color:#ed78b7!important}
+.badge,.success{background:#103a3a!important;border-color:#237a75!important;color:#68f4d1!important}
+.error{background:#401d36!important;border-color:#9c3f75!important;color:#ff9acb!important}
+.table th{color:#9bb8d8!important;border-color:#27405f!important}
+.table td{border-color:#1b304c!important;color:#dcecff}
+.coinicon{background:linear-gradient(135deg,#153a59,#28275a)!important;color:#8df0ff!important}
+.up{color:#35f0bd!important}.down{color:#ff668c!important}
+.price-chart{filter:drop-shadow(0 0 5px #42e8ff66)}
+.chart-ranges button,.chart-range{background:#101f38!important;color:#a8c2df!important;border-color:#2c4b70!important}
+.chart-ranges button.selected{background:linear-gradient(100deg,#164a62,#29376b)!important;color:#a4f5ff!important;border-color:#42dff4!important;box-shadow:0 0 16px #42e8ff25}
+.volume-bar-row>span{background:#182d49!important}.volume-bar-row>span>i{background:linear-gradient(90deg,#42e8ff,#5d9bff,#a77bff)!important;box-shadow:0 0 12px #42e8ff55}
+.rsi-track{background:linear-gradient(90deg,#123d43 0 30%,#1a3151 30% 70%,#482542 70% 100%)!important}
+.rsi-track>span{background:linear-gradient(90deg,#35f0bd,#42e8ff,#a77bff)!important}
+.macd-bars i.positive{background:linear-gradient(180deg,#42e8ff,#35c99b)!important}.macd-bars i.negative{background:linear-gradient(180deg,#ff7cb1,#a94e86)!important}
+.macd-values b,.rsi-readout>b{color:#eaf8ff!important}
+.quick-grid button,.mini-balance>div,.ticker-strip{background:linear-gradient(145deg,#11233c,#0d172b)!important;border-color:#254467!important;color:#d9edff!important}
+.mobile-top,.mobilebar,.bottom-nav{background:rgba(8,17,32,.96)!important;border-color:#244061!important;backdrop-filter:blur(18px)}
+.mobilebar button.active,.bottom-nav button.active{color:#68eaff!important;text-shadow:0 0 12px #42e8ff88}
+.auth{background:radial-gradient(ellipse at 50% 12%,#1c3d67 0,transparent 48%),linear-gradient(145deg,#070b16,#0c1630 60%,#17102e)!important}
+.authbox{background:linear-gradient(145deg,#132440,#0b1529)!important;border-color:#31557d!important;box-shadow:0 25px 100px #000b,0 0 55px #368ce522!important}
+.authbox h1{color:#f1f9ff!important}.authfoot a{color:#65eaff!important}
+.toast{background:#132743!important;border-color:#3974a5!important;color:#e8f7ff!important;box-shadow:0 10px 35px #0008}
+.chat-fab{background:linear-gradient(135deg,#42e8ff,#6687ff)!important;color:#071326!important;box-shadow:0 0 25px #42e8ff66!important}
+@media(max-width:700px){.main{background:transparent}.mobilebar{box-shadow:0 -8px 30px #02081788}.balance-card{box-shadow:0 10px 30px #02081788,0 0 24px #42e8ff19}}
