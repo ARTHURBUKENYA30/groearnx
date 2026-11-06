@@ -1,6 +1,6 @@
 const SUPABASE_URL="https://dxpprprcmgjvjpvyorbm.supabase.co",SUPABASE_KEY="sb_publishable_eo1Lz-MlKxu9_bLdMnefaQ_mO5jo2hn";
 const sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});
-const $=s=>document.querySelector(s),app=$("#app");let currentUser=null,page="home",side="buy",marketData=[],marketFilter="All";
+const $=s=>document.querySelector(s),app=$("#app");app.addEventListener("click",e=>{const b=e.target.closest("[data-favorite]");if(b){e.preventDefault();toggleFavorite(b.dataset.favorite)}});let currentUser=null,page="home",side="buy",marketData=[],marketFilter="All";
 const nav=[["home","⌂","Home"],["trade","▤","Trade"],["bots","♙","Bots"],["manual","☝","Manual"],["market","⌁","Market"],["profile","♙","Profile"]];
 const money=n=>new Intl.NumberFormat("en-US",{style:"currency",currency:"USD"}).format(Number(n||0));
 function notify(m){let n=document.createElement("div");n.className="toast";n.textContent=m;document.body.append(n);setTimeout(()=>n.remove(),3500)}
