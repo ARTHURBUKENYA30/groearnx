@@ -1,0 +1,20 @@
+{
+  "name": "GROEARNX",
+  "short_name": "GROEARNX",
+  "description": "GROEARNX automated crypto trading platform.",
+  "start_url": "/dashboard",
+  "display": "standalone",
+  "background_color": "#0a0f0a",
+  "theme_color": "#0a0f0a",
+  "lang": "en",
+  "scope": "/",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/images/groearnx-logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
