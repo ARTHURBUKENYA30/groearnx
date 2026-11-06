@@ -487,3 +487,45 @@ body,.app-shell{font-size:15px!important;line-height:1.55}
 .forex-panel{margin:18px 0!important;border-color:#34729b!important;background:radial-gradient(ellipse at 100% 0%,#183b61 0,transparent 42%),linear-gradient(145deg,#10223b,#0a1528)!important}
 @media(max-width:900px){.fx-rate-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.dashboard-welcome h2{font-size:25px!important}.price-chart{height:190px!important}}
 @media(max-width:600px){.top h1{font-size:25px!important}.overview-metrics>div{padding:14px!important;min-height:100px}.overview-metrics b{font-size:20px!important}.wallet-total strong{font-size:30px!important}.panel,.chart-panel,.performance-panel,.activity-panel,.market-card,.analytics-panel{padding:15px!important}.panel-title>b,.market-title h2,.main h2,.page h2{font-size:18px!important}.fx-rate{padding:13px}.fx-rate b{font-size:20px}.quick-actions button{padding:12px 7px!important}.quick-actions b{font-size:12px!important}}
+
+
+/* DESKTOP-FIRST LAYOUT REPAIR — actual shell selectors */
+@media (min-width: 701px){
+  .app-shell{min-height:100vh;padding-bottom:0;display:block}
+  .desktop-sidebar{display:flex!important;position:fixed!important;inset:0 auto 0 0!important;width:248px!important;flex-direction:column!important;padding:28px 18px!important;background:linear-gradient(180deg,#09162a,#08101f)!important;border-right:1px solid #1c3a5c!important;z-index:15!important}
+  .desktop-sidebar .brand{font-size:22px!important;padding:4px 10px 38px!important;color:#effaff!important}
+  .desktop-sidebar .mark{width:42px!important;height:42px!important;font-size:25px!important;background:linear-gradient(135deg,#42e8ff,#5687ff)!important;color:#07111f!important;box-shadow:0 0 24px #42e8ff55!important}
+  .sidebar-caption{font-size:12px!important;letter-spacing:1.8px!important;color:#7190b5!important;padding:10px 12px 14px!important}
+  .desktop-nav{display:grid!important;gap:8px!important}
+  .desktop-nav button{width:100%!important;min-height:50px!important;border:1px solid transparent!important;border-radius:11px!important;background:transparent!important;color:#a9bdd7!important;text-align:left!important;padding:13px 15px!important;display:flex!important;align-items:center!important;gap:13px!important;font-size:15px!important;font-weight:650!important}
+  .desktop-nav button span{width:23px!important;font-size:20px!important;color:#58dfff!important}
+  .desktop-nav button.active,.desktop-nav button:hover{background:linear-gradient(100deg,#12375a,#18254a)!important;border-color:#28618b!important;color:#f5fcff!important;box-shadow:inset 3px 0 #42e8ff,0 8px 24px #020b19!important}
+  .sidebar-bottom{margin-top:auto!important;display:grid!important;gap:10px!important;padding:18px 10px!important;border-top:1px solid #1b3855!important;color:#8ca8c8!important}
+  .sidebar-bottom small{font-size:12px!important;line-height:1.5!important}
+  .sidebar-live{font-size:13px!important;color:#43e8b8!important}
+  .mobile-top,.bottom-nav{display:none!important}
+  .main{width:auto!important;max-width:none!important;margin:0 0 0 248px!important;padding:32px clamp(24px,3vw,52px) 70px!important}
+  .top{margin-bottom:25px!important}
+  .top h1{font-size:32px!important}
+  .notice{font-size:14px!important;padding:15px 18px!important}
+  .dashboard-welcome h2{font-size:32px!important}
+  .overview-metrics{grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:18px!important}
+  .overview-metrics>div{min-height:132px!important;padding:22px!important}
+  .overview-metrics b{font-size:27px!important}
+  .dashboard-grid{grid-template-columns:minmax(0,1.55fr) minmax(330px,1fr)!important;gap:18px!important}
+  .analytics-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:18px!important}
+  .dashboard-learning-grid{grid-template-columns:1.2fr 1fr!important;gap:18px!important}
+  .dashboard-shortcuts{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:15px!important}
+  .quick-actions{grid-template-columns:repeat(8,minmax(0,1fr))!important}
+  .price-chart,.chart-svg{min-height:280px!important}
+}
+@media (max-width:700px){
+  .desktop-sidebar{display:none!important}
+  .mobile-top{display:flex!important}
+  .bottom-nav{display:flex!important}
+  .main{width:100%!important;max-width:none!important;margin:0!important;padding:18px 14px 105px!important}
+  .overview-metrics{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  .dashboard-grid,.analytics-grid,.dashboard-learning-grid{grid-template-columns:1fr!important}
+  .dashboard-shortcuts{grid-template-columns:1fr!important}
+  .quick-actions{grid-template-columns:repeat(4,minmax(0,1fr))!important}
+}
