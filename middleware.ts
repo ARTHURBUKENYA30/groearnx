@@ -1,8 +1,13 @@
-import type {NextRequest} from "next/server";
-import {updateSession} from "@/lib/supabase/proxy";
+import { NextResponse, type NextRequest } from "next/server";
 
-export async function middleware(request:NextRequest) {
-  return updateSession(request);
+/**
+ * Availability hotfix:
+ * Keep requests flowing while Supabase session refresh in middleware is
+ * investigated. Protected routes must continue to enforce authorization
+ * in their server components/actions.
+ */
+export function middleware(_request: NextRequest) {
+  return NextResponse.next();
 }
 
 export const config = {
