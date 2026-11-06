@@ -56,3 +56,9 @@ body{background:radial-gradient(ellipse at 50% 100%,#0b2117 0,transparent 42%),#
 .connection-meta{display:grid;gap:6px;font-size:9px}
 .connection-meta small{color:#9a998f}
 @media(max-width:380px){.bot-config{grid-template-columns:1fr}.bot-actions{grid-template-columns:1fr}}
+
+.api-binding>summary,.bot-runtime>summary{cursor:pointer;list-style:none;display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:10px;font-weight:700;color:#e4d7a5}
+.api-binding>summary::-webkit-details-marker,.bot-runtime>summary::-webkit-details-marker{display:none}
+.api-binding>summary:after,.bot-runtime>summary:after{content:"＋";color:#d9bd6a;font-size:13px}
+.api-binding[open]>summary:after,.bot-runtime[open]>summary:after{content:"−"}
+.api-binding>summary span,.bot-runtime>summary span{font-size:8px;color:#d7c477;font-weight:500}
