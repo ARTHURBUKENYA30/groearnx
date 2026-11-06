@@ -44,7 +44,7 @@ const bots = [
   ["TRX Sniper Bot", "FUTURES · 15 MIN · AUTO", "Trend and breakout monitoring"],
   ["TRX SmartFlow", "SPOT + FUTURES · MULTI SIGNAL", "Multi-signal strategy with risk controls"],
 ];
-function Brand() { return <span className="rw-brand"><span className="rw-mark">G</span><b>GROEARNX</b></span>; }
+function Brand() { return <span className="rw-brand"><span className="rw-mark">G</span><b>GROERNX</b></span>; }
 function Exchange() { return <div className="rw-exchange"><button className="selected">◈ Binance</button><button>Spot Testnet</button><button aria-label="Trading settings"><Settings size={13}/></button></div>; }
 function MarketRows({ query = "" }: { query?: string }) {
   const filtered = markets.filter((m) => m[0].toLowerCase().includes(query.toLowerCase()));
@@ -129,10 +129,10 @@ export default function ReferenceWorkspace({ activeTab, userName }: { activeTab:
         <div className="rw-step rw-step-alert"><span>▣</span><div><b>Test wallet · $0.00</b><small>Fund a paper wallet or use Spot Testnet. Real deposits are unavailable.</small></div><Link href="/dashboard/assets">View</Link></div>
         <div className="rw-step"><span>⌑</span><div><b>Bind a test API key</b><small>Binance Spot Testnet only · withdrawal permission must stay disabled.</small></div><Link href="/dashboard?tab=bots#bot-controls">Bind</Link></div>
         <div className="rw-bot-tabs"><button className={botScope==="all"?"active":""} onClick={()=>setBotScope("all")}>All (4)</button><button className={botScope==="spot"?"active":""} onClick={()=>setBotScope("spot")}>Spot (4)</button><button disabled title="Futures strategies are not enabled">Futures (0)</button></div>
-        <section className="rw-bot-card"><div className="rw-bot-card-head"><span className="rw-bot-avatar">♧</span><div><b>GROEARNX Spot Momentum</b><small>SPOT · EMA 9/21 · TEST ONLY</small><p>Momentum strategy with stop-loss, take-profit and daily loss protection</p></div></div><div className="rw-bot-state"><span>● {botRunning ? "Running" : "Stopped"}</span><small>{botSnapshot?.settings?.symbol ?? "BTCUSDT"}</small></div><Link className="rw-wide-gold rw-bot-link" href="/dashboard?tab=bots#bot-controls">Open bot controls</Link></section>
-        <section className="rw-bot-card"><div className="rw-bot-card-head"><span className="rw-bot-avatar">⌁</span><div><b>GROEARNX Grid Strategy</b><small>SPOT · PAPER MODE</small><p>Grid strategy preview. Live execution is not enabled.</p></div></div><span className="rw-bot-coming">Strategy preview · Not active</span></section>
-        <section className="rw-bot-card"><div className="rw-bot-card-head"><span className="rw-bot-avatar">✧</span><div><b>GROEARNX DCA Strategy</b><small>SPOT · PAPER MODE</small><p>Dollar-cost averaging strategy preview with configurable risk limits.</p></div></div><span className="rw-bot-coming">Strategy preview · Not active</span></section>
-        <section className="rw-bot-card rw-bot-featured"><div className="rw-bot-card-head"><span className="rw-bot-avatar">✺</span><div><b>GROEARNX SmartFlow</b><small>SPOT · MULTI-SIGNAL · TEST PREVIEW</small><p>Multi-signal strategy preview with simulated risk controls. No live orders.</p></div></div><span className="rw-bot-coming">Preview only · Test execution required</span></section>
+        <section className="rw-bot-card"><div className="rw-bot-card-head"><span className="rw-bot-avatar">♧</span><div><b>GROERNX Spot Momentum</b><small>SPOT · EMA 9/21 · TEST ONLY</small><p>Momentum strategy with stop-loss, take-profit and daily loss protection</p></div></div><div className="rw-bot-state"><span>● {botRunning ? "Running" : "Stopped"}</span><small>{botSnapshot?.settings?.symbol ?? "BTCUSDT"}</small></div><Link className="rw-wide-gold rw-bot-link" href="/dashboard?tab=bots#bot-controls">Open bot controls</Link></section>
+        <section className="rw-bot-card"><div className="rw-bot-card-head"><span className="rw-bot-avatar">⌁</span><div><b>GROERNX Grid Strategy</b><small>SPOT · PAPER MODE</small><p>Grid strategy preview. Live execution is not enabled.</p></div></div><span className="rw-bot-coming">Strategy preview · Not active</span></section>
+        <section className="rw-bot-card"><div className="rw-bot-card-head"><span className="rw-bot-avatar">✧</span><div><b>GROERNX DCA Strategy</b><small>SPOT · PAPER MODE</small><p>Dollar-cost averaging strategy preview with configurable risk limits.</p></div></div><span className="rw-bot-coming">Strategy preview · Not active</span></section>
+        <section className="rw-bot-card rw-bot-featured"><div className="rw-bot-card-head"><span className="rw-bot-avatar">✺</span><div><b>GROERNX SmartFlow</b><small>SPOT · MULTI-SIGNAL · TEST PREVIEW</small><p>Multi-signal strategy preview with simulated risk controls. No live orders.</p></div></div><span className="rw-bot-coming">Preview only · Test execution required</span></section>
         <div id="bot-controls" className="rw-bot-controls"><div className="rw-section-head"><b>Connection & strategy settings</b><span>Test only</span></div><TradingControlPanel/></div>
         <div className="rw-note-grid"><span><b>Pause</b><br/>Stops new entries while retaining the saved test configuration.</span><span><b>Emergency stop</b><br/>Disables automated orders until you explicitly restart.</span></div>
       </>}
@@ -162,7 +162,7 @@ export default function ReferenceWorkspace({ activeTab, userName }: { activeTab:
         <section className="rw-panel"><LiveMarketTable variant="dashboard"/></section>
       </>}
       {activeTab === "profile" && <>
-        <section className="rw-profile-card rw-profile-identity"><span className="rw-profile-avatar">{userName.slice(0,1).toUpperCase() || "T"}</span><div><b>{userName}</b><small>{userName.includes("@") ? userName.replace(/^(.).+(@.+)$/, "$1••••$2") : "GROEARNX account"}</small><span className="rw-account-tier">◈ Verified account · Test mode</span></div><ChevronRight size={15}/></section>
+        <section className="rw-profile-card rw-profile-identity"><span className="rw-profile-avatar">{userName.slice(0,1).toUpperCase() || "T"}</span><div><b>{userName}</b><small>{userName.includes("@") ? userName.replace(/^(.).+(@.+)$/, "$1••••$2") : "GROERNX account"}</small><span className="rw-account-tier">◈ Verified account · Test mode</span></div><ChevronRight size={15}/></section>
         <section className="rw-profile-section rw-profile-phone"><b>Phone Number</b><div><input aria-label="Phone number" placeholder="Add phone number" disabled/><button disabled>Save</button></div><small>Phone number editing is not connected yet.</small></section>
         <section className="rw-profile-section rw-profile-mentor"><small>YOUR ACCOUNT</small><b>{userName}</b><span>Member workspace</span></section>
         <section className="rw-profile-section rw-referral"><div className="rw-profile-row"><b>Referral tools</b><span>Not enabled</span></div><p>Referral codes and team payouts are not configured in this release. No referral earnings are represented as available.</p></section>
@@ -177,7 +177,7 @@ export default function ReferenceWorkspace({ activeTab, userName }: { activeTab:
           <Link href="/dashboard/notifications"><span>♢</span><div><b>Notifications</b><small>Account and trading updates</small></div><ChevronRight/></Link>
           <Link href="/dashboard/support"><span>ⓘ</span><div><b>Support</b><small>Help and technical information</small></div><ChevronRight/></Link>
           <Link href="/dashboard/faqs"><span>?</span><div><b>FAQs</b><small>Common questions</small></div><ChevronRight/></Link>
-          <Link href="/dashboard/about"><span>ⓘ</span><div><b>About GROEARNX</b><small>Platform information and trading risk</small></div><ChevronRight/></Link>
+          <Link href="/dashboard/about"><span>ⓘ</span><div><b>About GROERNX</b><small>Platform information and trading risk</small></div><ChevronRight/></Link>
           <Link href="/dashboard/change-password"><span>♧</span><div><b>Change Password</b><small>Update your account password</small></div><ChevronRight/></Link>
         </section>
         <form action="/auth/logout" method="post"><button className="rw-signout" type="submit">↗ Sign Out</button></form>
