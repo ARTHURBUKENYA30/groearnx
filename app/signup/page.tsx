@@ -8,7 +8,7 @@ export default async function Signup({ searchParams }: { searchParams: Promise<{
   return <main className="trx-auth">
     <div className="trx-auth-glow"/>
     <section className="trx-auth-wrap">
-      <Link href="/" className="trx-brand trx-auth-brand"><span className="trx-auth-logo-mark" aria-hidden="true">G</span><span>GROEARNX</span></Link>
+      <Link href="/" className="trx-brand trx-auth-brand"><span className="trx-auth-logo-mark" aria-hidden="true">G</span><span>GROERNX</span></Link>
       <div className="trx-auth-card">
         <h1>Create account</h1>
         <p className="trx-auth-sub">Start automating your trades in 60 seconds</p>
@@ -28,7 +28,7 @@ export default async function Signup({ searchParams }: { searchParams: Promise<{
         <p className="trx-auth-switch">Already a trader? <Link href="/login">Sign in</Link></p>
       </div>
       <p className="trx-auth-foot"><ShieldCheck size={14}/> Encrypted at rest · No withdrawal access · Audit trail</p>
-      <Link href="/" className="trx-auth-back"><ArrowLeft size={14}/> Back to GROEARNX</Link>
+      <Link href="/" className="trx-auth-back"><ArrowLeft size={14}/> Back to GROERNX</Link>
     </section>
   </main>;
 }
