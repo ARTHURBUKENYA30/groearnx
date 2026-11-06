@@ -564,3 +564,40 @@ body,.app-shell{font-size:15px!important;line-height:1.55}
 .gx-page-analytics .rsi-readout b{font-size:36px;color:#f2fbff}
 @media(max-width:900px){.gx-analytics-columns{grid-template-columns:1fr}.gx-insight-chart svg{min-height:125px}}
 @media(max-width:600px){.gx-page-analytics{padding:15px;margin-bottom:16px}.gx-analytics-title h3{font-size:18px}.gx-insight-stats{grid-template-columns:1fr;gap:8px}.gx-insight-stats>div{padding:11px 13px}.gx-insight-stats b{font-size:19px}.gx-card-heading{align-items:flex-start;flex-direction:column}.gx-card-heading span{text-align:left}.gx-insight-chart-head b{font-size:19px}}
+
+
+/* GROEARNX RAINBOW NIGHT THEME — NO WHITE SURFACES */
+:root{--bg:#080817;--panel:#11112b;--line:#30265b;--muted:#a69acb;--text:#eee7ff;--gold:#ffcf5a;--green:#43e6b2;--red:#ff668f;--gx-pink:#ff4fa3;--gx-orange:#ff9b45;--gx-yellow:#ffe36e;--gx-green:#54e59a;--gx-cyan:#43e7ed;--gx-blue:#568bff;--gx-violet:#a879ff}
+html{background:#080817!important;color-scheme:dark}
+body,.app-shell,.main,.page{background-color:#080817!important;color:#eee7ff}
+body{background-image:radial-gradient(ellipse at 8% 0%,#35134b66,transparent 32%),radial-gradient(ellipse at 92% 8%,#122d6866,transparent 35%),radial-gradient(ellipse at 55% 100%,#124b4260,transparent 42%),linear-gradient(145deg,#080817,#0d1027 55%,#130d29)!important}
+.desktop-sidebar,.mobile-top,.bottom-nav,.utility-bar{background:linear-gradient(180deg,#11112c,#0b0b20)!important;border-color:#38285f!important}
+.brand,.top h1,.dashboard-welcome h2,.page-intro h2,.sectionhead h3,.panel-title,.card b,.contentcard b{color:#eee7ff!important}
+.mark,.avatar,.profile-avatar,.coinicon{background:linear-gradient(135deg,#ff4fa3,#ff9b45,#ffe36e,#54e59a,#43e7ed,#568bff,#a879ff)!important;color:#100d26!important;box-shadow:0 0 20px #a879ff33}
+.card,.contentcard,.panel,.market-card,.bot-card,.chart-card,.trade-card,.profile-card,.capital-card,.empty-panel,.ref-wallet,.settings-list,.bot-gate,.section-card,.analytics-card,.dashboard-panel{background:linear-gradient(145deg,#171536f5,#10132bf5 60%,#17112ff5)!important;border:1px solid #382b65!important;box-shadow:0 12px 32px #03031166!important;color:#eee7ff!important}
+.notice,.warning-panel,.danger-strip,.home-alert{background:linear-gradient(100deg,#28163c,#20204a,#15343b)!important;border-color:#7850a0!important;color:#f1dcff!important}
+.btn,.btn:not(.ghost),button.primary,.auth-submit{background:linear-gradient(100deg,#ff4fa3 0%,#ff944b 17%,#ffe36e 33%,#54e59a 50%,#43e7ed 67%,#568bff 83%,#a879ff 100%)!important;color:#100d26!important;border:1px solid #b99bff66!important;font-weight:800!important;box-shadow:0 5px 20px #7654d944!important}
+.btn.ghost,.history-button,.pair-select,.quick-actions button,.dashboard-shortcuts button{background:linear-gradient(120deg,#21183f,#162449)!important;border:1px solid #514078!important;color:#e9e0ff!important}
+.tabs button,.market-tabs button,.market-filter button,.bot-tabs button,.segmented button,.trade-filter button,.side-select button,.leverage-grid button,.preset-grid button{background:#171631!important;border:1px solid #3d326b!important;color:#c8bce8!important}
+.tabs button.selected,.market-tabs button.selected,.market-filter button.selected,.bot-tabs button.selected,.segmented button.selected,.trade-filter button.selected,.side-select button.selected,.leverage-grid button.selected,.preset-grid button.selected{background:linear-gradient(100deg,#5c286e,#244c72,#17645c)!important;border-color:#8d72df!important;color:#fff0ff!important;box-shadow:0 0 16px #8a63e933!important}
+input,select,textarea,.field input,.field select,.market-searchbox input,.inline-field input{background:#0b0b20!important;color:#eee7ff!important;border:1px solid #493a78!important}
+input::placeholder,textarea::placeholder{color:#8278a7!important}
+input:focus,select:focus,textarea:focus{border-color:#43e7ed!important;box-shadow:0 0 0 3px #43e7ed20!important;outline:none!important}
+label,.field label,.sub-label,.label,.sectionhead span,.eyebrow,.sub,.data-note,.chart-axis,.fx-footnote{color:#b2a7d2!important}
+a{color:#64dff2}.up,.positive{color:#54e59a!important}.down,.negative{color:#ff668f!important}
+.badge,.status-badge{background:linear-gradient(100deg,#173b42,#34204b)!important;color:#72f0ce!important;border:1px solid #3d7778!important}
+.market-row,.activity-row,.botrow,.table td,.table th{border-color:#302650!important;color:#e8defb}.market-row:hover,.activity-row:hover{background:#262044!important}
+.coin-name i{background:linear-gradient(135deg,#ff4fa3,#a879ff,#43e7ed)!important;color:#100d26!important}
+.volume-bar-row span,.rsi-track{background:#272044!important}.volume-bar-row i,.rsi-track span,.progress-bar,.progress-fill{background:linear-gradient(90deg,#ff4fa3,#ff9b45,#ffe36e,#54e59a,#43e7ed,#568bff,#a879ff)!important}
+.chart-empty,.empty-state,.fx-empty,.empty-panel small{background:linear-gradient(135deg,#171536,#111b35)!important;color:#b9add8!important;border-color:#44366f!important}
+.gx-page-analytics{background:radial-gradient(ellipse at 90% 0%,#3a1b5b 0,transparent 48%),linear-gradient(145deg,#171536,#10132b)!important;border-color:#5a3d85!important}
+.gx-insight-stats>div,.gx-chart-card{background:linear-gradient(145deg,#1d1942,#101b36)!important;border-color:#43366f!important}
+.gx-insight-stats b,.gx-chart-card b,.gx-analytics-title h3{color:#f0e7ff!important}.gx-insight-stats small,.gx-card-heading span,.gx-analytics-note{color:#b8acd9!important}
+.gx-account-bars i{background:linear-gradient(90deg,#ff4fa3,#ff9b45,#ffe36e,#54e59a,#43e7ed,#568bff,#a879ff)!important}
+.desktop-nav button.active,.desktop-nav button:hover{background:linear-gradient(100deg,#3c1748,#1b3760,#164c49)!important;border-color:#8b61ce!important;box-shadow:inset 3px 0 #ff4fa3,0 8px 24px #020b19!important;color:#f6eaff!important}
+.desktop-nav button span{color:#69e5ed!important}.sidebar-live{color:#54e59a!important}
+.notice,.pill,.workspace-freshness{color:#d9cff5!important}.profile-avatar{border:2px solid #ff9b45!important}
+hr,.divider{border-color:#34295c!important}*{scrollbar-color:#684b9a #101027}::selection{background:#a879ff;color:#100d26}
+option{background:#11112b!important;color:#eee7ff!important}
+dialog,.modal,.popover,.dropdown-menu{background:#171536!important;color:#eee7ff!important;border:1px solid #59417e!important}
+@media(max-width:700px){.mobile-top,.bottom-nav{background:linear-gradient(90deg,#17112e,#10233e,#142e36)!important;border-color:#49366e!important}.bottom-nav button.active{color:#ff9bca!important}}
