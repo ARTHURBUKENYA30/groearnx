@@ -121,3 +121,17 @@ body{background:radial-gradient(ellipse at 50% 100%,#0b2117 0,transparent 42%),#
  .dashboard-shortcuts em{margin:0}
 }
 @media(max-width:420px){.account-status{font-size:7px}.dashboard-welcome h2{font-size:17px}.dashboard-shortcuts button{padding:11px}}
+
+/* Dashboard overview cards and clearer safe-mode messaging */
+.workspace-alert{border-color:#3a3522;background:linear-gradient(100deg,#1c1b12,#151710)}
+.workspace-alert>span{color:#e5c76e;font-size:20px}
+.workspace-alert button{white-space:nowrap}
+.overview-metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;margin:12px 0 15px}
+.overview-metrics>div{display:flex;flex-direction:column;gap:6px;min-width:0;padding:13px;border:1px solid #2d3028;border-radius:10px;background:linear-gradient(145deg,#191b15,#11130f)}
+.overview-metrics small{font-size:8px;letter-spacing:.08em;color:#99998d}
+.overview-metrics b{font-size:16px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#eeeade}
+.overview-metrics em{font-size:8px;font-style:normal;color:#929388}
+.bot-gate .runtime-status{white-space:nowrap;align-self:center;padding:6px 8px;border:1px solid #3b4936;border-radius:20px;color:#9bc99f;font-size:8px}
+.bot-gate.gold .runtime-status{color:#d8bc72;border-color:#51452a}
+@media(max-width:760px){.overview-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.overview-metrics>div{padding:11px}.overview-metrics b{font-size:14px}}
+@media(max-width:420px){.workspace-alert{align-items:flex-start;flex-wrap:wrap}.workspace-alert button{margin-left:34px}.overview-metrics{gap:7px}}
