@@ -427,3 +427,63 @@ body{background:radial-gradient(ellipse at 12% 0%,rgba(37,111,190,.2),transparen
 .toast{background:#132743!important;border-color:#3974a5!important;color:#e8f7ff!important;box-shadow:0 10px 35px #0008}
 .chat-fab{background:linear-gradient(135deg,#42e8ff,#6687ff)!important;color:#071326!important;box-shadow:0 0 25px #42e8ff66!important}
 @media(max-width:700px){.main{background:transparent}.mobilebar{box-shadow:0 -8px 30px #02081788}.balance-card{box-shadow:0 10px 30px #02081788,0 0 24px #42e8ff19}}
+
+ 
+/* GROEARNX READABILITY + EXPANDED TRADING TERMINAL */
+:root{--gx-font:15px}
+body,.app-shell{font-size:15px!important;line-height:1.55}
+.desktop-nav button,.bottom-nav button{font-size:14px!important;font-weight:650}
+.sidebar-caption,.sidebar-bottom small,.sidebar-live{font-size:12px!important}
+.top h1{font-size:30px!important}
+.eyebrow{font-size:12px!important}
+.notice,.home-alert,.workspace-alert{font-size:14px!important;padding:15px 18px!important;line-height:1.6!important}
+.dashboard-welcome{padding:28px!important}
+.dashboard-welcome h2{font-size:30px!important}
+.dashboard-welcome p,.dashboard-welcome small{font-size:15px!important}
+.overview-metrics{gap:15px!important}
+.overview-metrics>div{padding:20px!important;min-height:112px}
+.overview-metrics small{font-size:12px!important;letter-spacing:.08em}
+.overview-metrics b{font-size:25px!important;line-height:1.25}
+.overview-metrics em{font-size:13px!important}
+.wallet-card{padding:24px!important}
+.wallet-head,.wallet-total small,.wallet-foot{font-size:13px!important}
+.wallet-total strong{font-size:38px!important}
+.quick-actions{gap:13px!important}
+.quick-actions button,.dashboard-shortcuts button{min-height:88px!important;padding:16px!important}
+.quick-actions b,.dashboard-shortcuts b{font-size:14px!important}
+.quick-actions i,.dashboard-shortcuts button>span{font-size:21px!important}
+.quick-actions small,.dashboard-shortcuts small,.dashboard-shortcuts em{font-size:12px!important}
+.ticker-strip{padding:15px!important;font-size:14px!important}
+.panel,.chart-panel,.performance-panel,.activity-panel,.market-card,.analytics-panel{padding:21px!important}
+.panel-title>b,.market-title h2,.main h2,.page h2{font-size:20px!important}
+.panel-title span,.panel-title button,.data-note{font-size:13px!important}
+.chart-summary small{font-size:12px!important}
+.chart-summary b{font-size:27px!important}
+.price-chart{width:100%;height:220px!important;display:block}
+.chart-axis{font-size:12px!important}
+.chart-ranges button{font-size:13px!important;padding:9px 13px!important}
+.chart-pair-select{font-size:13px!important;padding:9px 28px 9px 12px!important}
+.performance-metrics small{font-size:12px!important}
+.performance-metrics b{font-size:22px!important}
+.market-row{min-height:55px!important;font-size:14px!important}
+.market-row small,.coin-volume{font-size:12px!important}
+.market-head{font-size:12px!important}
+.market-filter button,.trade-filter button,.market-tabs button{font-size:13px!important;padding:9px 13px!important}
+.market-searchbox input{font-size:15px!important;min-height:46px}
+.page-intro h2{font-size:25px!important}
+.page-intro p,.page-intro small,.bot-card p,.bot-card small,.api-explainer{font-size:14px!important;line-height:1.65!important}
+.bot-card,.bot-gate,.profile-card,.capital-card{padding:21px!important}
+.bot-card b,.bot-gate b{font-size:17px!important}
+.bot-card button,.bot-gate button,.btn{font-size:14px!important;padding:13px 18px!important}
+.field label,.field input,.field select,.inline-field input{font-size:14px!important}
+.activity-row b{font-size:14px!important}.activity-row small{font-size:12px!important}
+.fx-intro{color:#a9bfdc;font-size:14px;margin:10px 0 16px}
+.fx-rate-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.fx-rate{padding:16px;border:1px solid #29496e;border-radius:12px;background:linear-gradient(145deg,#122844,#0b172c);display:grid;gap:5px;min-width:0}
+.fx-rate span{font-size:13px;color:#a9c7e7;font-weight:700;letter-spacing:.04em}
+.fx-rate b{font-size:23px;color:#effaff;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.fx-rate small{font-size:11px;color:#819dbd}
+.fx-footnote,.fx-empty{font-size:12px;color:#91a6c4;margin-top:14px;line-height:1.6}
+.forex-panel{margin:18px 0!important;border-color:#34729b!important;background:radial-gradient(ellipse at 100% 0%,#183b61 0,transparent 42%),linear-gradient(145deg,#10223b,#0a1528)!important}
+@media(max-width:900px){.fx-rate-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.dashboard-welcome h2{font-size:25px!important}.price-chart{height:190px!important}}
+@media(max-width:600px){.top h1{font-size:25px!important}.overview-metrics>div{padding:14px!important;min-height:100px}.overview-metrics b{font-size:20px!important}.wallet-total strong{font-size:30px!important}.panel,.chart-panel,.performance-panel,.activity-panel,.market-card,.analytics-panel{padding:15px!important}.panel-title>b,.market-title h2,.main h2,.page h2{font-size:18px!important}.fx-rate{padding:13px}.fx-rate b{font-size:20px}.quick-actions button{padding:12px 7px!important}.quick-actions b{font-size:12px!important}}
