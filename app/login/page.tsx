@@ -8,7 +8,7 @@ export default async function Login({ searchParams }: { searchParams: Promise<{ 
   const next = params.next?.startsWith("/") && !params.next.startsWith("//") ? params.next : "/dashboard";
   return <main className="trx-auth trx-login-exact">
     <section className="trx-auth-wrap">
-      <Link href="/" className="trx-brand trx-auth-brand"><span className="trx-auth-logo-mark" aria-hidden="true">G</span><span>GROEARNX</span></Link>
+      <Link href="/" className="trx-brand trx-auth-brand"><span className="trx-auth-logo-mark" aria-hidden="true">G</span><span>GROERNX</span></Link>
       <div className="trx-auth-card">
         <h1>Welcome back</h1>
         <p className="trx-auth-sub">Sign in to your trading dashboard</p>
@@ -22,7 +22,7 @@ export default async function Login({ searchParams }: { searchParams: Promise<{ 
           <PasswordField/>
           <button className="trx-button trx-submit" type="submit">Sign In</button>
         </form>
-        <p className="trx-auth-switch">New to GROEARNX? <Link href="/signup">Create account</Link></p>
+        <p className="trx-auth-switch">New to GROERNX? <Link href="/signup">Create account</Link></p>
         <p className="trx-auth-switch"><Link href="/dashboard">Explore dashboard preview</Link></p>
       </div>
       <p className="trx-auth-foot"><ShieldCheck size={14}/> Encrypted at rest · No withdrawal access · Audit trail</p>
