@@ -349,3 +349,17 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,su
 .analytics-panel .data-note{display:block;padding:0 4px 12px}
 .chart-panel .panel-title{display:flex;align-items:center;justify-content:space-between;gap:10px}
 @media(max-width:760px){.analytics-grid{grid-template-columns:1fr;gap:12px}.analytics-panel{padding:14px!important}.chart-ranges button{padding:6px 7px}}
+
+/* Multi-asset chart controls and RSI momentum panel */
+.chart-pair-select{min-width:74px;padding:6px 24px 6px 9px;border:1px solid #dce9df;border-radius:8px;background:#f5faf6;color:#17613c;font-size:11px;font-weight:800}
+.chart-panel .panel-title{flex-wrap:wrap}
+.chart-panel .panel-title>b{margin-right:auto}
+.rsi-readout{display:flex;align-items:baseline;gap:10px;padding:22px 6px 15px}
+.rsi-readout>b{font:700 34px 'Space Grotesk',sans-serif;color:#123522}
+.rsi-readout>span{font-size:11px;font-weight:700}
+.rsi-readout .overbought{color:#c35b4d}.rsi-readout .oversold{color:#168653}.rsi-readout .neutral{color:#718478}
+.rsi-track{height:12px;position:relative;margin:0 6px 10px;border-radius:20px;background:linear-gradient(90deg,#d9f2e2 0 30%,#e9f2ec 30% 70%,#f8e5df 70% 100%);overflow:hidden}
+.rsi-track>span{display:block;height:100%;border-radius:20px;background:linear-gradient(90deg,#49bf83,#159b65);opacity:.85}
+.rsi-track>i{position:absolute;z-index:2;top:0;bottom:0;width:2px;background:#60786a}
+.rsi-scale{display:flex;justify-content:space-between;gap:5px;padding:0 6px 16px;color:#718478;font-size:9px}
+@media(max-width:760px){.chart-pair-select{padding:6px 20px 6px 7px}.rsi-scale{font-size:8px}}
