@@ -363,3 +363,11 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,su
 .rsi-track>i{position:absolute;z-index:2;top:0;bottom:0;width:2px;background:#60786a}
 .rsi-scale{display:flex;justify-content:space-between;gap:5px;padding:0 6px 16px;color:#718478;font-size:9px}
 @media(max-width:760px){.chart-pair-select{padding:6px 20px 6px 7px}.rsi-scale{font-size:8px}}
+
+.macd-values{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;padding:18px 4px 12px}
+.macd-values>div{display:grid;gap:5px;min-width:0}
+.macd-values small{font-size:9px;color:#718478;letter-spacing:.06em}
+.macd-values b{font-size:12px;color:#173b28;overflow:hidden;text-overflow:ellipsis}
+.macd-bars{height:76px;display:flex;align-items:flex-end;gap:3px;padding:8px 4px 0;border-bottom:1px solid #dce9df}
+.macd-bars i{flex:1;min-width:2px;border-radius:3px 3px 0 0;opacity:.85}
+.macd-bars i.positive{background:#35b978}.macd-bars i.negative{background:#d97970}
