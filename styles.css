@@ -38,3 +38,21 @@ body{background:radial-gradient(ellipse at 50% 100%,#0b2117 0,transparent 42%),#
 .password-wrap{display:flex;align-items:center;gap:8px;background:#0d0e0c;border:1px solid #303128;border-radius:8px;padding:0 10px}.password-wrap:focus-within{border-color:#c5a34d}.password-wrap>span{color:#a5a394;font-size:13px}.password-wrap input{flex:1;min-width:0;border:0!important;background:transparent!important;padding:12px 0!important;color:#f2f0e8;outline:0}.password-wrap button{border:0;background:transparent;color:#a7a498;padding:8px;font-size:13px}.password-rules{display:grid;gap:6px;background:#151612;border:1px solid #282a24;border-radius:10px;padding:12px;margin:10px 0 15px}.password-rules b{font-size:9px;color:#b5b2a6}.password-rules small{font-size:8px;color:#8c8c82}
 .authbox .field>input{background:#0d0e0c;border:1px solid #303128;border-radius:8px;color:#eee;padding:12px;width:100%}.authbox .authbrand{justify-content:flex-start}.authbox h1{text-align:left}.authbox>p{text-align:left}.authbox .authfoot{text-align:center}
 @media(max-width:420px){.utility-bar{bottom:76px;gap:4px;padding:5px}.utility-bar button{padding:6px 7px}.chat-fab{right:10px;bottom:84px}}
+
+
+/* Connected testnet and paper-mode controls */
+.bot-runtime,.api-binding{border-color:#4b4024;background:linear-gradient(145deg,#171710,#11120f);margin:12px 0}
+.api-explainer,.runtime-note{font-size:9px;line-height:1.55;color:#aaa694;margin:8px 0 12px}
+.api-binding label,.bot-config label{display:grid;gap:6px;color:#bdb7a4;font-size:9px;margin:9px 0}
+.api-binding input,.bot-config input,.bot-config select{width:100%;min-width:0;background:#0b0c0a;border:1px solid #36372e;border-radius:7px;color:#f0eee6;padding:10px;font-size:10px}
+.api-warning{font-size:8px;line-height:1.5;color:#d8ad69}
+.bot-config{display:grid;grid-template-columns:1fr 1fr;gap:4px 9px}
+.bot-actions{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:10px}
+.bot-actions .history-button{grid-column:1/-1;margin:0}
+.runtime-status{font-size:9px;color:#d8c477}
+.runtime-foot{font-size:8px;line-height:1.5;color:#98978b;margin-top:10px}
+.favorite-star{border:0;background:transparent;color:#77766d;font-size:14px;padding:0 3px}
+.favorite-star.active{color:#e4c66f}
+.connection-meta{display:grid;gap:6px;font-size:9px}
+.connection-meta small{color:#9a998f}
+@media(max-width:380px){.bot-config{grid-template-columns:1fr}.bot-actions{grid-template-columns:1fr}}
