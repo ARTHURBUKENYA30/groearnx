@@ -13,7 +13,7 @@ export default async function ResetPassword({ searchParams }: { searchParams: Pr
   return <main className="auth">
     <Link className="back" href="/login"><ArrowLeft size={16}/> Back to login</Link>
     <section className="auth-card">
-      <Link href="/" className="brand"><span className="mark">G</span> GROEANR<span className="lime">X</span></Link>
+      <Link href="/" className="brand"><span className="mark">G</span> GROERN<span className="lime">X</span></Link>
       <div className="eyebrow">SECURE YOUR ACCOUNT</div>
       <h1>Choose a new password</h1>
       <p className="muted">Use at least 10 characters, including lowercase, uppercase and a symbol. Don’t reuse a password from another site.</p>
