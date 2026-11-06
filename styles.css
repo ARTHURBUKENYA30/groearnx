@@ -193,3 +193,13 @@ body{background:radial-gradient(ellipse at 85% 0%,#D8F6E5 0,transparent 34%),#EC
   .bottom-nav button,.mobilebar button{color:#B8CFC2!important}
   .bottom-nav button.active,.mobilebar button.active{color:#31D78C!important;background:transparent!important}
 }
+
+.dashboard-learning-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:14px;margin:16px 0}
+.dashboard-learning-grid .panel{margin:0;padding:16px}
+.learning-copy,.learning-panel p{font-size:11px;line-height:1.55;color:#607268;margin:6px 0 12px}
+.tracked-market-list .market-row{border-top:1px solid #D8E6DD}
+.learning-panel{display:flex;flex-direction:column;align-items:flex-start;justify-content:space-between;gap:10px;background:linear-gradient(145deg,#F0FCF5,#FFFFFF)!important}
+.learning-panel b{font:600 15px 'Space Grotesk';color:#071A13}
+.learning-icon{width:34px;height:34px;border-radius:11px;background:#DDF8E9;color:#07834F;display:grid;place-items:center;font-size:19px}
+.learning-panel .btn{margin-top:auto}
+@media(max-width:700px){.dashboard-learning-grid{grid-template-columns:1fr;gap:10px}.dashboard-learning-grid .panel{padding:13px}}
