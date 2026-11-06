@@ -20,5 +20,6 @@ if(page==="profile")el.innerHTML=`<div class="welcome"><div><h2>Profile & settin
 document.querySelectorAll("[data-goto]").forEach(b=>b.onclick=()=>showPage(b.dataset.goto));const so=$("#signout");if(so)so.onclick=signOut}
 function safe(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
 async function signOut(){const {error}=await sb.auth.signOut();if(error){notify(error.message);return}currentUser=null;history.replaceState({},"","/");authView("signin","You have been signed out.","success")}
-window.addEventListener("popstate",()=>{if(currentUser){const p=location.pathname.slice(1)||"overview";showPage(nav.some(n=>n[0]===p)?p:"overview")}else authView("signin")});\nsb.auth.onAuthStateChange((event,session)=>{if(event==="SIGNED_OUT"){currentUser=null;authView()}else if(session?.user){currentUser=session.user;if(!document.querySelector(".sidebar"))openApp()}});
+window.addEventListener("popstate",()=>{if(currentUser){const p=location.pathname.slice(1)||"overview";showPage(nav.some(n=>n[0]===p)?p:"overview")}else authView("signin")});
+sb.auth.onAuthStateChange((event,session)=>{if(event==="SIGNED_OUT"){currentUser=null;authView()}else if(session?.user){currentUser=session.user;if(!document.querySelector(".sidebar"))openApp()}});
 (async()=>{let {data:{session}}=await sb.auth.getSession();if(session?.user){currentUser=session.user;await openApp()}else authView("signin")})();
