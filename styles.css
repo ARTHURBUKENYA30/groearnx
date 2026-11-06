@@ -331,3 +331,21 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,su
  .quick-actions{grid-template-columns:repeat(4,minmax(0,1fr))!important}
 }
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+
+/* Trading analytics and chart controls */
+.chart-ranges{display:flex;gap:5px;align-items:center}
+.chart-ranges button{border:1px solid #dce9df;background:#f5faf6;color:#60786a;border-radius:7px;padding:6px 9px;font-size:11px;font-weight:800;cursor:pointer}
+.chart-ranges button.selected{background:#e1f7e9;border-color:#9bdab4;color:#087847}
+.analytics-grid{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(260px,.8fr);gap:16px;margin:16px 0}
+.analytics-panel{min-width:0;overflow:hidden}
+.analytics-panel .panel-title{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.analytics-panel .panel-title span{font-size:11px;color:#7a8e81}
+.volume-bars{display:grid;gap:13px;padding:18px 4px 12px}
+.volume-bar-row{display:grid;grid-template-columns:42px minmax(50px,1fr) 58px;align-items:center;gap:9px;font-size:12px}
+.volume-bar-row>b{color:#315640}
+.volume-bar-row>span{height:9px;background:#edf4ef;border-radius:20px;overflow:hidden}
+.volume-bar-row>span>i{display:block;height:100%;border-radius:20px;background:linear-gradient(90deg,#7be0a5,#159b65)}
+.volume-bar-row>small{text-align:right;color:#708477;font-variant-numeric:tabular-nums}
+.analytics-panel .data-note{display:block;padding:0 4px 12px}
+.chart-panel .panel-title{display:flex;align-items:center;justify-content:space-between;gap:10px}
+@media(max-width:760px){.analytics-grid{grid-template-columns:1fr;gap:12px}.analytics-panel{padding:14px!important}.chart-ranges button{padding:6px 7px}}
