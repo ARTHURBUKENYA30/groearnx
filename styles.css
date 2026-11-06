@@ -203,3 +203,26 @@ body{background:radial-gradient(ellipse at 85% 0%,#D8F6E5 0,transparent 34%),#EC
 .learning-icon{width:34px;height:34px;border-radius:11px;background:#DDF8E9;color:#07834F;display:grid;place-items:center;font-size:19px}
 .learning-panel .btn{margin-top:auto}
 @media(max-width:700px){.dashboard-learning-grid{grid-template-columns:1fr;gap:10px}.dashboard-learning-grid .panel{padding:13px}}
+
+
+/* Dashboard polish: visible refresh controls, clearer data status and responsive header */
+.workspace-refresh{display:inline-flex;align-items:center;gap:7px;min-height:36px;padding:9px 13px;font-size:11px}
+.workspace-refresh:disabled{opacity:.65;cursor:wait}
+.workspace-freshness{font-size:10px;white-space:nowrap}
+.top{gap:14px}
+.topright{flex-wrap:wrap;justify-content:flex-end}
+.tracked-market-list .empty-state{padding:18px 10px;text-align:center;line-height:1.5}
+.market-card #home-market-list{display:block}
+.market-card #home-market-list .market-row:last-child{border-bottom:0}
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:2px solid #159B65;outline-offset:3px}
+button:disabled{cursor:not-allowed}
+@media(max-width:760px){
+  .top{align-items:flex-start}
+  .topright{gap:7px}
+  .workspace-freshness{display:none}
+  .workspace-refresh{min-height:34px;padding:8px 10px}
+}
+@media(max-width:420px){
+  .top{gap:8px}
+  .workspace-refresh{font-size:10px}
+}
