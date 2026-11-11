@@ -682,3 +682,66 @@ dialog,.modal,.popover,.dropdown-menu{background:#171536!important;color:#eee7ff
   .main { padding-left: 48px; padding-right: 48px; }
   .dashboard-grid { grid-template-columns: minmax(0,1.6fr) minmax(360px,.9fr); }
 }
+
+
+/* GROEARNX readability and visual hierarchy pass — 2026-11 */
+:root{
+  --gx-bg:#080817;--gx-surface:#15142f;--gx-surface-2:#1c1a3d;
+  --gx-border:#49366f;--gx-copy:#f3edff;--gx-muted:#c0b5df;
+}
+body{font-size:15px;line-height:1.55;color:var(--gx-copy)}
+.main{color:var(--gx-copy)}
+.main h1,.main h2,.main h3,.main h4{line-height:1.2;letter-spacing:-.02em}
+.top h1{font-size:clamp(28px,2.2vw,36px)!important;font-weight:800!important}
+.dashboard-welcome h2,.page-intro h2{font-size:clamp(25px,2vw,34px)!important}
+.page-intro p,.dashboard-welcome p,.sub,.data-note{font-size:14px!important;line-height:1.65!important;color:var(--gx-muted)!important}
+.panel,.chart-panel,.performance-panel,.activity-panel,.market-card,.analytics-panel,.gx-chart-card,.gx-page-analytics{
+  border-radius:18px!important;border-color:#49366f!important;
+  box-shadow:0 16px 42px #03031180, inset 0 1px #ffffff0b!important;
+}
+.panel,.chart-panel,.performance-panel,.activity-panel,.market-card{padding:22px!important}
+.panel-title>b,.market-title h2,.main h2,.page h2,.sectionhead h3{font-size:20px!important;font-weight:800!important}
+.panel-title small,.panel small,.market-row small,.coin-row small,.bot-card small,.profile-card small{font-size:12px!important;color:#c0b5df!important}
+.overview-metrics>div{min-height:145px!important;padding:23px!important;border-radius:17px!important}
+.overview-metrics>div>small,.overview-metrics small{font-size:12px!important;letter-spacing:.07em!important;color:#c0b5df!important}
+.overview-metrics b{font-size:clamp(24px,2vw,31px)!important;font-weight:800!important}
+.quick-actions button,.dashboard-shortcuts button,.desktop-nav button,.bottom-nav button{font-size:14px!important}
+.desktop-nav button{min-height:54px!important;padding:14px 15px!important}
+.desktop-nav button span{font-size:22px!important}
+.market-row,.coin-row,.activity-row{min-height:58px!important;font-size:14px!important}
+.market-row b,.coin-row b{font-size:14px!important}
+.market-row small,.coin-row small{font-size:12px!important}
+.btn,button.primary,.auth-submit{min-height:44px}
+input,select,textarea{font-size:15px!important;min-height:42px}
+label,.field label,.sub-label{font-size:13px!important}
+.notice{font-size:14px!important;line-height:1.6!important;border-radius:14px!important}
+.gx-insight-stats>div{padding:17px!important}
+.gx-insight-stats small{font-size:12px!important}
+.gx-insight-stats b{font-size:clamp(20px,1.7vw,26px)!important}
+.gx-card-heading b{font-size:17px!important}
+.gx-card-heading span,.gx-analytics-note{font-size:12px!important}
+.gx-insight-chart svg{min-height:190px}
+.chart-empty,.empty-state,.fx-empty{font-size:14px!important;line-height:1.6!important;padding:22px!important}
+.workspace-progress-step b{font-size:14px!important}
+.workspace-progress-step small{font-size:12px!important}
+.utility-bar button{font-size:13px!important}
+@media(min-width:1000px){
+  .main{max-width:none!important;padding:34px clamp(30px,3.2vw,58px) 100px!important}
+  .desktop-sidebar{background:linear-gradient(180deg,#15112f,#0d1028 58%,#101b32)!important;border-right:1px solid #49366f!important}
+  .desktop-sidebar .brand{font-size:23px!important;color:#f3edff!important}
+  .desktop-sidebar .mark{background:linear-gradient(135deg,#ff4fa3,#ff9b45,#ffe36e,#54e59a,#43e7ed,#568bff,#a879ff)!important}
+  .sidebar-caption{font-size:11px!important;color:#b7a9dc!important}
+  .sidebar-bottom small{font-size:12px!important;color:#b7a9dc!important}
+  .sidebar-live{font-size:13px!important}
+  .top h1{font-size:34px!important}
+  .dashboard-grid{grid-template-columns:minmax(0,1.55fr) minmax(340px,1fr)!important}
+}
+@media(max-width:700px){
+  .main{padding:18px 14px 110px!important}
+  .top h1{font-size:27px!important}
+  .panel,.chart-panel,.performance-panel,.activity-panel,.market-card{padding:16px!important}
+  .overview-metrics>div{min-height:116px!important;padding:15px!important}
+  .overview-metrics b{font-size:23px!important}
+  .market-row,.coin-row{min-height:54px!important}
+  .gx-page-analytics{padding:16px!important}
+}
